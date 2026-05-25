@@ -1,0 +1,78 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://app.nanonets.com/api/v2/OCR/Model/abc123-model-id/LabelFile/",
+    "auth": { "type": "basic", "username": "YOUR_API_KEY", "password": "" },
+    "multipart": {
+      "file": ["@./invoice-001.pdf"],
+      "request_metadata": "invoice-001"
+    }
+  },
+  "response": {
+    "message": "Success",
+    "result": [
+      {
+        "message": "Success",
+        "input": "invoice-001.pdf",
+        "page": 0,
+        "request_file_id": "f0d2a410-3b8f-11ef-9e2a-1a2b3c4d5e6f",
+        "id": "e23d1f9c-3b8f-11ef-9e2a-1a2b3c4d5e6f",
+        "request_metadata": "invoice-001",
+        "processing_type": "",
+        "size": { "width": 1700, "height": 2200 },
+        "prediction": [
+          {
+            "id": "p1",
+            "label": "invoice_number",
+            "label_id": "lbl_inv_no",
+            "type": "field",
+            "xmin": 1245.0,
+            "ymin": 120.5,
+            "xmax": 1620.0,
+            "ymax": 152.0,
+            "score": 0.987,
+            "ocr_text": "INV-2026-04219",
+            "status": "correctly_predicted",
+            "page_no": 0
+          },
+          {
+            "id": "p2",
+            "label": "total_amount",
+            "label_id": "lbl_total",
+            "type": "field",
+            "xmin": 1390.0,
+            "ymin": 2010.0,
+            "xmax": 1620.0,
+            "ymax": 2055.0,
+            "score": 0.962,
+            "ocr_text": "$12,489.30",
+            "status": "correctly_predicted",
+            "page_no": 0
+          },
+          {
+            "id": "t1",
+            "label": "line_items",
+            "label_id": "tbl_line_items",
+            "type": "table",
+            "xmin": 80,
+            "ymin": 800,
+            "xmax": 1620,
+            "ymax": 1700,
+            "score": 0.94,
+            "page_no": 0,
+            "cells": [
+              { "id": "c1", "row": 0, "col": 0, "label": "description", "text": "Naftiko Fleet — annual", "score": 0.95 },
+              { "id": "c2", "row": 0, "col": 1, "label": "qty",         "text": "1",                       "score": 0.99 },
+              { "id": "c3", "row": 0, "col": 2, "label": "unit_price",  "text": "9,990.00",                "score": 0.96 },
+              { "id": "c4", "row": 0, "col": 3, "label": "amount",      "text": "9,990.00",                "score": 0.96 }
+            ]
+          }
+        ]
+      }
+    ],
+    "signed_urls": {
+      "original": "https://files.nanonets.com/.../invoice-001.pdf?sig=...",
+      "original_long_expiry": "https://files.nanonets.com/.../invoice-001.pdf?sig=..."
+    }
+  }
+}

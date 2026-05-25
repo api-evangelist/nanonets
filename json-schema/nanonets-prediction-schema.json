@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/nanonets/refs/heads/main/json-schema/nanonets-prediction-schema.json",
+  "title": "Nanonets Prediction",
+  "description": "Top-level prediction object returned by the Nanonets OCR API.",
+  "type": "object",
+  "required": ["id", "label"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the prediction."
+    },
+    "label": {
+      "type": "string",
+      "description": "Label name corresponding to a field or table header configured in the model."
+    },
+    "label_id": {
+      "type": "string",
+      "description": "Unique identifier for the label as defined in the model."
+    },
+    "type": {
+      "type": "string",
+      "enum": ["field", "table"],
+      "description": "Indicates whether the prediction is a field or a table header."
+    },
+    "xmin": { "type": "number", "description": "Left edge of the bounding box." },
+    "ymin": { "type": "number", "description": "Top edge of the bounding box." },
+    "xmax": { "type": "number", "description": "Right edge of the bounding box." },
+    "ymax": { "type": "number", "description": "Bottom edge of the bounding box." },
+    "score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Confidence score from the model."
+    },
+    "ocr_text": {
+      "type": "string",
+      "description": "Predicted value associated with the label."
+    },
+    "status": {
+      "type": "string",
+      "description": "Status of the predicted label (typically 'correctly_predicted')."
+    },
+    "validation_status": {
+      "type": "string",
+      "enum": ["failed"],
+      "description": "Present and equal to 'failed' when an approval rule did not pass; absent on success."
+    },
+    "validation_message": {
+      "type": "string",
+      "description": "Reason a label-level validation rule failed."
+    },
+    "page_no": {
+      "type": "integer",
+      "description": "Zero-indexed page number in the document."
+    },
+    "cells": {
+      "type": "array",
+      "description": "Cell predictions when this prediction is a table.",
+      "items": {
+        "type": "object",
+        "required": ["id", "row", "col"],
+        "properties": {
+          "id": { "type": "string" },
+          "row": { "type": "integer" },
+          "col": { "type": "integer" },
+          "label": { "type": "string" },
+          "label_id": { "type": "string" },
+          "xmin": { "type": "number" },
+          "ymin": { "type": "number" },
+          "xmax": { "type": "number" },
+          "ymax": { "type": "number" },
+          "score": { "type": "number", "minimum": 0, "maximum": 1 },
+          "text": { "type": "string" },
+          "verification_status": { "type": "string" },
+          "status": { "type": "string" },
+          "failed_validation": { "type": "string" }
+        }
+      }
+    }
+  }
+}

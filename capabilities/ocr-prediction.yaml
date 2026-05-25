@@ -1,0 +1,159 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Nanonets OCR API — Prediction
+  description: 'Nanonets OCR API — Prediction. Sync and async prediction over files and URLs against a custom
+    Nanonets OCR model, plus retrieval of prior predictions by file or page.'
+  tags:
+  - Nanonets
+  - OCR
+  - Prediction
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    NANONETS_API_KEY: NANONETS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ocr-prediction
+    baseUri: https://app.nanonets.com/api/v2
+    description: Nanonets OCR prediction surface — sync and async endpoints plus retrieval.
+    resources:
+    - name: label-file
+      path: /OCR/Model/{model_id}/LabelFile/
+      operations:
+      - name: predictFile
+        method: POST
+        description: Sync OCR prediction over uploaded file(s).
+        outputRawFormat: json
+        outputParameters:
+        - { name: result, type: object, value: $. }
+        inputParameters:
+        - { name: model_id, in: path, type: string, required: true }
+        - { name: file, in: body, type: object, required: true, description: 'Multipart file payload.' }
+    - name: label-file-async
+      path: /OCR/Model/{model_id}/LabelFile/Async/
+      operations:
+      - name: predictFileAsync
+        method: POST
+        description: Async OCR prediction over uploaded file(s).
+        outputRawFormat: json
+        outputParameters:
+        - { name: result, type: object, value: $. }
+        inputParameters:
+        - { name: model_id, in: path, type: string, required: true }
+        - { name: file, in: body, type: object, required: true }
+    - name: label-urls
+      path: /OCR/Model/{model_id}/LabelUrls/
+      operations:
+      - name: predictUrls
+        method: POST
+        description: Sync OCR prediction over publicly accessible URLs.
+        outputRawFormat: json
+        outputParameters:
+        - { name: result, type: object, value: $. }
+        inputParameters:
+        - { name: model_id, in: path, type: string, required: true }
+        - { name: body, in: body, type: object, required: true }
+    - name: label-urls-async
+      path: /OCR/Model/{model_id}/LabelUrls/Async/
+      operations:
+      - name: predictUrlsAsync
+        method: POST
+        description: Async OCR prediction over publicly accessible URLs.
+        outputRawFormat: json
+        outputParameters:
+        - { name: result, type: object, value: $. }
+        inputParameters:
+        - { name: model_id, in: path, type: string, required: true }
+        - { name: body, in: body, type: object, required: true }
+    - name: inference-by-file
+      path: /Inferences/Model/{model_id}/InferenceRequest/{request_file_id}
+      operations:
+      - name: getPredictionByFileId
+        method: GET
+        description: Retrieve prediction for a single file.
+        outputRawFormat: json
+        outputParameters:
+        - { name: result, type: object, value: $. }
+        inputParameters:
+        - { name: model_id, in: path, type: string, required: true }
+        - { name: request_file_id, in: path, type: string, required: true }
+    - name: inference-by-page
+      path: /Inferences/Model/{model_id}/InferenceRequest/{request_file_id}/page/{page_id}
+      operations:
+      - name: getPredictionByPageId
+        method: GET
+        description: Retrieve prediction for a single page.
+        outputRawFormat: json
+        outputParameters:
+        - { name: result, type: object, value: $. }
+        inputParameters:
+        - { name: model_id, in: path, type: string, required: true }
+        - { name: request_file_id, in: path, type: string, required: true }
+        - { name: page_id, in: path, type: string, required: true }
+    - name: inference-list
+      path: /Inferences/Model/{model_id}/InferenceRequest/
+      operations:
+      - name: listPredictionFiles
+        method: GET
+        description: Retrieve all predictions within a day-since-epoch window.
+        outputRawFormat: json
+        outputParameters:
+        - { name: result, type: object, value: $. }
+        inputParameters:
+        - { name: model_id, in: path, type: string, required: true }
+        - { name: start_day_interval, in: query, type: integer, required: true }
+        - { name: current_batch_day, in: query, type: integer, required: true }
+    authentication:
+      type: basic
+      username: '{{env.NANONETS_API_KEY}}'
+      password: ''
+  exposes:
+  - type: rest
+    namespace: ocr-prediction-rest
+    port: 8080
+    description: REST adapter for the Nanonets OCR prediction surface.
+    resources:
+    - path: /v1/ocr/predict-file
+      name: predict-file
+      operations:
+      - { method: POST, name: predictFile, description: 'Sync OCR prediction over uploaded file(s).', call: ocr-prediction.predictFile,
+          with: { model_id: rest.body.model_id, file: rest.body.file } }
+    - path: /v1/ocr/predict-file-async
+      name: predict-file-async
+      operations:
+      - { method: POST, name: predictFileAsync, description: 'Async OCR prediction over uploaded file(s).',
+          call: ocr-prediction.predictFileAsync, with: { model_id: rest.body.model_id, file: rest.body.file } }
+    - path: /v1/ocr/predict-urls
+      name: predict-urls
+      operations:
+      - { method: POST, name: predictUrls, description: 'Sync OCR prediction over URLs.', call: ocr-prediction.predictUrls,
+          with: { model_id: rest.body.model_id, body: rest.body.body } }
+    - path: /v1/ocr/predict-urls-async
+      name: predict-urls-async
+      operations:
+      - { method: POST, name: predictUrlsAsync, description: 'Async OCR prediction over URLs.', call: ocr-prediction.predictUrlsAsync,
+          with: { model_id: rest.body.model_id, body: rest.body.body } }
+  - type: mcp
+    namespace: ocr-prediction-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter exposing Nanonets OCR prediction as tools.
+    tools:
+    - { name: nanonets-predict-file, description: 'Sync OCR prediction over uploaded file(s).', hints: { readOnly: false,
+          destructive: false, idempotent: false }, call: ocr-prediction.predictFile, with: { model_id: tools.model_id,
+          file: tools.file } }
+    - { name: nanonets-predict-file-async, description: 'Async OCR prediction over uploaded file(s).', hints: {
+          readOnly: false, destructive: false, idempotent: false }, call: ocr-prediction.predictFileAsync,
+        with: { model_id: tools.model_id, file: tools.file } }
+    - { name: nanonets-predict-urls, description: 'Sync OCR prediction over URLs.', hints: { readOnly: false,
+          destructive: false, idempotent: false }, call: ocr-prediction.predictUrls, with: { model_id: tools.model_id,
+          body: tools.body } }
+    - { name: nanonets-get-prediction-by-file, description: 'Retrieve prediction for a single file.', hints: {
+          readOnly: true, destructive: false, idempotent: true }, call: ocr-prediction.getPredictionByFileId,
+        with: { model_id: tools.model_id, request_file_id: tools.request_file_id } }
+    - { name: nanonets-list-prediction-files, description: 'Retrieve all predictions within a window.', hints: {
+          readOnly: true, destructive: false, idempotent: true }, call: ocr-prediction.listPredictionFiles,
+        with: { model_id: tools.model_id, start_day_interval: tools.start_day_interval, current_batch_day: tools.current_batch_day } }

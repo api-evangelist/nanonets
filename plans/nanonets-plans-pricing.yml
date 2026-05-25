@@ -1,0 +1,123 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Nanonets
+providerId: nanonets
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - Document AI
+  - OCR
+  - IDP
+description: |
+  Reconciled plans and per-block consumption pricing for Nanonets. Source: nanonets.com/pricing.
+  Every account starts with $200 in non-expiring credits shared across team members.
+sources:
+  - https://nanonets.com/pricing
+plans:
+  - id: nanonets-starter
+    name: Starter
+    type: freemium
+    description: Free tier with $200 in credits, no platform fees or commitments.
+    entries:
+      - label: Account credit
+        name: starter_credit
+        type: included
+        metric: credit
+        limit: 200
+        timeFrame: lifetime
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Seats
+        name: seats
+        type: included
+        metric: user
+        limit: 3
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - Data extraction AI
+      - API access
+      - Email integration
+      - Cloud storage connectors
+      - Up to 3 users
+      - Community support
+  - id: nanonets-growth
+    name: Growth
+    type: volume
+    description: Volume-discount tier (custom quote) adding classification AI, generative AI blocks, custom Python blocks, ERP and database integrations, AI reporting, and team-wide credit sharing.
+    entries:
+      - label: Volume discount
+        name: volume_discount
+        type: discount
+        metric: percent
+        limit: 40
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: 'Call'
+        userMultiplied: false
+    elements:
+      - Everything in Starter
+      - Classification AI
+      - Barcode and signature detection
+      - Generative AI blocks
+      - Custom Python blocks
+      - ERP and database integrations
+      - Custom integrations
+      - AI reporting and analytics
+      - Team-wide credit sharing
+  - id: nanonets-enterprise
+    name: Enterprise
+    type: contract
+    description: Tailored pricing with SAML SSO, SCIM, RBAC, HIPAA and SOC 2 compliance, private cloud or on-prem deployment, data residency, enterprise connectors, SLAs, audit logs, SIEM integration, and whitelabel UI.
+    entries:
+      - label: Contract
+        name: contract
+        type: contract
+        metric: contract
+        limit: -1
+        timeFrame: contract
+        geo: global
+        unit: 1
+        price: 'Call'
+        userMultiplied: false
+    elements:
+      - Everything in Growth
+      - SAML SSO and SCIM
+      - Role-based access control
+      - HIPAA and SOC 2 compliance
+      - Private cloud or on-prem deployment
+      - Data residency (US / EU / APAC)
+      - Enterprise connectors (Salesforce, SAP, Oracle)
+      - Dedicated support and SLAs
+      - Audit logs and SIEM integration
+      - Whitelabel UI
+consumption:
+  - id: simple-block
+    name: Simple operations
+    description: Formatting, routing, and export workflow blocks.
+    metric: run
+    unit: 1
+    price: '0.02'
+    timeFrame: usage
+  - id: standard-ai-block
+    name: Standard AI
+    description: Classification and validation workflow blocks.
+    metric: run
+    unit: 1
+    price: '0.10'
+    timeFrame: usage
+  - id: complex-ai-block
+    name: Complex AI
+    description: Data extraction and generative AI workflow blocks.
+    metric: run
+    unit: 1
+    price: '0.30'
+    timeFrame: usage

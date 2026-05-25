@@ -1,0 +1,154 @@
+openapi: 3.0.3
+info:
+  title: Nanonets File Management API
+  description: |
+    Approve, unapprove, assign, update fields on, delete, and re-export files
+    within a Nanonets model. These endpoints drive the human-in-the-loop review
+    workflow and downstream export retries.
+  version: 2.0.0
+  contact:
+    name: Nanonets
+    url: https://nanonets.com
+    email: support@nanonets.com
+servers:
+  - url: https://app.nanonets.com
+security:
+  - BasicAuth: []
+tags:
+  - name: File Review
+    description: Approve and unapprove files post-extraction.
+  - name: File Assignment
+    description: Assign files to reviewers.
+  - name: File Update
+    description: Update or add extracted field values on a file.
+  - name: File Delete
+    description: Delete a processed file.
+  - name: File Export
+    description: Retry exports to configured downstream destinations.
+paths:
+  /api/v2/ImageLevelInferences/Model/{model_id}/Verify/{request_file_id}:
+    post:
+      tags: [File Review]
+      summary: Approve File
+      description: Mark a processed file as approved (moderated).
+      operationId: verifyFile
+      parameters:
+        - $ref: '#/components/parameters/ModelId'
+        - $ref: '#/components/parameters/RequestFileId'
+      responses:
+        '200':
+          description: File approved.
+  /api/v2/ImageLevelInferences/Model/{model_id}/UnVerify/{request_file_id}:
+    post:
+      tags: [File Review]
+      summary: Unapprove File
+      description: Revert an approved file back to unapproved state.
+      operationId: unverifyFile
+      parameters:
+        - $ref: '#/components/parameters/ModelId'
+        - $ref: '#/components/parameters/RequestFileId'
+      responses:
+        '200':
+          description: File unapproved.
+  /api/v2/team/members/model/{model_id}/assign/files:
+    post:
+      tags: [File Assignment]
+      summary: Assign Files To A Team Member
+      description: Assign one or more files in a model to a specific reviewer by email.
+      operationId: assignFiles
+      parameters:
+        - $ref: '#/components/parameters/ModelId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [member, file_ids]
+              properties:
+                member: { type: string, format: email }
+                file_ids:
+                  type: array
+                  items: { type: string }
+      responses:
+        '200':
+          description: Files assigned.
+  /api/v2/Inferences/Model/{model_id}/ImageLevelInference:
+    patch:
+      tags: [File Update]
+      summary: Update Fields On A File
+      description: |
+        Update existing fields or add new fields on a file. Payload is derived
+        from the prior GET prediction response; `use_ui_version=true` is required.
+      operationId: updateFileFields
+      parameters:
+        - $ref: '#/components/parameters/ModelId'
+        - name: use_ui_version
+          in: query
+          required: true
+          schema:
+            type: boolean
+            default: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Body must mirror the structure returned by Get Prediction File By File ID.
+      responses:
+        '200':
+          description: Field update applied.
+  /api/v2/Inferences/Model/{model_id}/InferenceRequestFiles/{file_id}:
+    delete:
+      tags: [File Delete]
+      summary: Delete A File
+      description: Permanently delete a processed file from a model.
+      operationId: deleteFile
+      parameters:
+        - $ref: '#/components/parameters/ModelId'
+        - name: file_id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: File deleted.
+  /api/v2/Inferences/Model/{model_id}/ImageLevelInferences/retryallexports:
+    post:
+      tags: [File Export]
+      summary: Retry All Exports
+      description: Re-trigger downstream export for one or more files whose initial export failed.
+      operationId: retryAllExports
+      parameters:
+        - $ref: '#/components/parameters/ModelId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [file_ids]
+              properties:
+                file_ids:
+                  type: array
+                  items: { type: string }
+      responses:
+        '200':
+          description: Export retried.
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+  parameters:
+    ModelId:
+      name: model_id
+      in: path
+      required: true
+      schema: { type: string }
+    RequestFileId:
+      name: request_file_id
+      in: path
+      required: true
+      schema: { type: string }

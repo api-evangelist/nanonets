@@ -1,0 +1,83 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Nanonets
+providerId: nanonets
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - FinOps
+  - Cost Management
+  - FOCUS
+  - Document AI
+  - OCR
+description: |
+  FOCUS-aligned FinOps definition for Nanonets. Consumption is metered per workflow-block
+  run with three price points (simple $0.02, standard AI $0.10, complex AI $0.30) drawn
+  down against a credit balance. Plans are usage-based for Starter, volume-based for
+  Growth, and contract-based for Enterprise.
+sources:
+  - https://nanonets.com/pricing
+  - https://docs.nanonets.com/docs/base-price-per-unit
+  - https://docs.nanonets.com/docs/consumption-based-billing
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Nanonets
+serviceCategory: AI and Machine Learning
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+    - Usage
+    - Purchase
+    - Credit
+    - Adjustment
+  primaryUnit: run
+  secondaryUnits:
+    - page
+    - file
+    - credit
+focusColumns:
+  ServiceName: Nanonets Platform
+  ServiceCategory: AI and Machine Learning
+  ProviderName: Nanonets
+  PublisherName: Nanonets
+  InvoiceIssuerName: Nanonets
+  PricingCategory: Usage-Based
+  PricingUnit: run
+  BillingCurrency: USD
+meters:
+  - name: simple_block_runs
+    unit: run
+    aggregation: sum
+    dimensions: [workflow, block_type, model_id]
+  - name: standard_ai_block_runs
+    unit: run
+    aggregation: sum
+    dimensions: [workflow, block_type, model_id]
+  - name: complex_ai_block_runs
+    unit: run
+    aggregation: sum
+    dimensions: [workflow, block_type, model_id]
+  - name: pages_processed
+    unit: page
+    aggregation: sum
+    dimensions: [model_id, sync_async]
+  - name: credits_consumed
+    unit: credit
+    aggregation: sum
+    dimensions: [team, workflow]
+domains:
+  - Cloud Usage and Cost
+  - Rate Optimization
+  - Workload Optimization
+allocation:
+  byTeam: true
+  byWorkflow: true
+  byModel: true

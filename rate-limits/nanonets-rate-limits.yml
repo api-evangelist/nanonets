@@ -1,0 +1,43 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Nanonets
+providerId: nanonets
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - Rate Limiting
+  - OCR
+  - Document AI
+description: |
+  Nanonets returns HTTP 429 when an account exceeds its allowed concurrent request
+  count. The platform documents Retry-After-style backoff handling on the
+  "How to handle 429 Error?" reference page; specific per-tier quantitative
+  limits are not publicly published and are governed by the consumption-based
+  credit model (see plans).
+sources:
+  - https://docs.nanonets.com/reference/how-to-handle-429-error
+  - https://docs.nanonets.com/reference/response-code-error
+responseCodes:
+  throttled: 429
+  quotaExceeded: 429
+algorithm: concurrency-and-credit
+backoff:
+  strategy: exponential
+  initialDelaySeconds: 1
+  maxDelaySeconds: 60
+  description: Documented client-side handling is exponential backoff with retries on 429.
+limits:
+  - tier: Starter
+    surface: OCR sync prediction (≤3 pages)
+    credit: $200 lifetime
+    notes: Throttled by credit balance and per-account concurrency.
+  - tier: Growth
+    surface: OCR sync and async prediction
+    credit: Volume contract
+    notes: Up to 40% volume discount; team-shared credit pool.
+  - tier: Enterprise
+    surface: All APIs
+    credit: Contract
+    notes: SLAs negotiated per agreement.

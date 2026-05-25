@@ -1,0 +1,98 @@
+vocabulary: Nanonets
+version: '0.1'
+provider: Nanonets
+providerId: nanonets
+created: '2026-05-25'
+modified: '2026-05-25'
+description: |
+  Controlled vocabulary mapping Nanonets product concepts to API operations,
+  capabilities, and business outcomes. Used to drive consistent tagging across
+  apis.yml, OpenAPI specs, capabilities, and search.
+domains:
+  - id: ocr
+    name: OCR
+    description: Optical character recognition and field extraction.
+  - id: idp
+    name: Intelligent Document Processing
+    description: End-to-end document capture, classification, extraction, validation, and routing.
+  - id: classification
+    name: Image Classification
+    description: Whole-image classification into one of N categories.
+  - id: workflow
+    name: Workflow
+    description: No-code workflow of imports, transformations, lookups, approvals, and exports.
+  - id: review
+    name: Review and Approval
+    description: Human-in-the-loop review of extracted data prior to export.
+  - id: integration
+    name: Integration
+    description: Connectors to ERPs, accounting systems, CRMs, cloud storage, and databases.
+terms:
+  - term: Model
+    synonyms: [extractor]
+    definition: A trained Nanonets OCR or classification model identified by `model_id`.
+    relatedOperations:
+      - ocrModelTrainByModelIdPost
+      - ocrModelLabelFileByModelIdPost
+      - imageCategorizationLabelFilePost
+  - term: Field
+    definition: A named scalar value extracted from a document.
+    relatedTypes: [Prediction]
+  - term: Table
+    definition: A 2-D grid of cells extracted from a document.
+    relatedTypes: [Prediction, TableCell]
+  - term: Cell
+    definition: A single value within an extracted table identified by row and column.
+    relatedTypes: [TableCell]
+  - term: Bounding box
+    synonyms: [bbox]
+    definition: Rectangular region described by xmin, ymin, xmax, ymax in pixel coordinates.
+  - term: Confidence score
+    synonyms: [score]
+    definition: Model certainty for a prediction in [0, 1].
+  - term: Moderation
+    synonyms: [approval]
+    definition: Human review status of a file; "moderated" = approved.
+    relatedOperations: [verifyFile, unverifyFile]
+  - term: Async processing
+    definition: Long-running prediction for files larger than 3 pages; results retrieved by `request_file_id`.
+    relatedOperations: [ocrModelLabelFileAsyncByModelIdPost, ocrModelLabelUrlsAsyncByModelIdPost]
+  - term: Sync processing
+    definition: Inline prediction returned in the response; optimized for ≤3 pages.
+    relatedOperations: [ocrModelLabelFileByModelIdPost, ocrModelLabelUrlsByModelIdPost]
+  - term: Workflow block
+    definition: A single step in a Nanonets workflow (simple, standard AI, or complex AI).
+  - term: Lookup
+    definition: A workflow block that resolves a field value against an external data source.
+    relatedIntegrations: [Google Sheets, NetSuite, Xero, PostgreSQL]
+  - term: Export
+    definition: A workflow block that pushes final data to a downstream system.
+    relatedOperations: [retryAllExports]
+modelTypes:
+  - id: ocr
+    name: OCR
+    description: Custom, pre-built, or instant-learning model that extracts fields and tables.
+  - id: classification
+    name: Image Classification
+    description: Model that returns one or more category labels per image.
+prebuiltModels:
+  - invoice
+  - receipt
+  - purchase-order
+  - bank-statement
+  - bill-of-lading
+  - passport
+  - drivers-license
+modelTiers:
+  - zero-shot / instant-learning
+  - custom
+  - pre-trained
+states:
+  - { code: -1, label: error }
+  - { code: 0, label: created }
+  - { code: 1, label: data-uploaded }
+  - { code: 2, label: data-annotated }
+  - { code: 3, label: queued }
+  - { code: 4, label: training }
+  - { code: 5, label: hosted }
+  - { code: 6, label: retraining }

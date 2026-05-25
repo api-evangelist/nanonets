@@ -1,0 +1,36 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://app.nanonets.com/api/v2/ImageCategorization/LabelUrls/",
+    "auth": { "type": "basic", "username": "YOUR_API_KEY", "password": "" },
+    "form": {
+      "modelId": "xyz789-classification-model",
+      "urls": [
+        "https://example.com/img1.jpg",
+        "https://example.com/img2.jpg"
+      ]
+    }
+  },
+  "response": {
+    "message": "Success",
+    "result": [
+      {
+        "input": "https://example.com/img1.jpg",
+        "message": "Success",
+        "prediction": [
+          { "label": "invoice",  "probability": 0.972 },
+          { "label": "receipt",  "probability": 0.018 },
+          { "label": "contract", "probability": 0.010 }
+        ]
+      },
+      {
+        "input": "https://example.com/img2.jpg",
+        "message": "Success",
+        "prediction": [
+          { "label": "receipt",  "probability": 0.881 },
+          { "label": "invoice",  "probability": 0.092 }
+        ]
+      }
+    ]
+  }
+}

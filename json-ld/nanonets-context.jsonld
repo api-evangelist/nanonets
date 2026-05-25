@@ -1,0 +1,49 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "nanonets": "https://docs.nanonets.com/schema/",
+    "Model": "nanonets:Model",
+    "Prediction": "nanonets:Prediction",
+    "Page": "nanonets:Page",
+    "File": "nanonets:File",
+    "Workflow": "nanonets:Workflow",
+    "Approval": "nanonets:Approval",
+    "Integration": "nanonets:Integration",
+    "model_id": "nanonets:modelId",
+    "model_type": {
+      "@id": "nanonets:modelType",
+      "@type": "@vocab",
+      "@context": {
+        "ocr": "nanonets:modelType/ocr",
+        "classification": "nanonets:modelType/classification"
+      }
+    },
+    "state": "nanonets:state",
+    "request_file_id": "nanonets:requestFileId",
+    "page_no": "nanonets:pageNumber",
+    "label": "nanonets:label",
+    "label_id": "nanonets:labelId",
+    "ocr_text": "nanonets:ocrText",
+    "score": "nanonets:confidenceScore",
+    "type": "nanonets:predictionType",
+    "xmin": "nanonets:bboxXMin",
+    "ymin": "nanonets:bboxYMin",
+    "xmax": "nanonets:bboxXMax",
+    "ymax": "nanonets:bboxYMax",
+    "validation_status": "nanonets:validationStatus",
+    "validation_message": "nanonets:validationMessage",
+    "is_moderated": "nanonets:isApproved",
+    "moderated_images": "nanonets:approvedPages",
+    "unmoderated_images": "nanonets:unapprovedPages",
+    "signed_urls": "nanonets:signedUrls",
+    "processing_type": "nanonets:processingMode",
+    "request_metadata": "schema:identifier",
+    "row": "nanonets:tableRow",
+    "col": "nanonets:tableCol",
+    "text": "nanonets:cellText",
+    "name": "schema:name",
+    "email": "schema:email",
+    "url": "schema:url"
+  }
+}

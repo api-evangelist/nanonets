@@ -1,0 +1,65 @@
+extends:
+  - spectral:oas
+rules:
+  nanonets-info-contact:
+    description: Every Nanonets OpenAPI must include the canonical contact block.
+    severity: warn
+    given: $.info.contact
+    then:
+      - field: name
+        function: pattern
+        functionOptions:
+          match: '^Nanonets$'
+      - field: email
+        function: pattern
+        functionOptions:
+          match: '^support@nanonets\.com$'
+  nanonets-server-base:
+    description: All Nanonets servers must point at app.nanonets.com.
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: '^https://app\.nanonets\.com'
+  nanonets-basic-auth:
+    description: Nanonets APIs authenticate with HTTP Basic.
+    severity: warn
+    given: $.components.securitySchemes[*]
+    then:
+      - field: type
+        function: pattern
+        functionOptions: { match: '^http$' }
+      - field: scheme
+        function: pattern
+        functionOptions: { match: '^basic$' }
+  nanonets-operation-summary:
+    description: Every operation must have a Title Case summary.
+    severity: warn
+    given: $.paths.*[get,post,put,patch,delete].summary
+    then:
+      function: pattern
+      functionOptions:
+        match: '^([A-Z][a-zA-Z0-9]*)(\s[A-Z][a-zA-Z0-9]*)*'
+  nanonets-operation-id-required:
+    description: Every operation must have an operationId.
+    severity: error
+    given: $.paths.*[get,post,put,patch,delete]
+    then:
+      field: operationId
+      function: truthy
+  nanonets-tag-defined:
+    description: Operations must declare at least one tag.
+    severity: warn
+    given: $.paths.*[get,post,put,patch,delete]
+    then:
+      field: tags
+      function: truthy
+  nanonets-https-only:
+    description: All servers must be HTTPS — HTTP is rejected by Nanonets.
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: '^https://'

@@ -1,0 +1,394 @@
+aid: nanonets
+url: https://raw.githubusercontent.com/api-evangelist/nanonets/refs/heads/main/apis.yml
+apis:
+- aid: nanonets:nanonets-ocr-api
+  name: Nanonets OCR API
+  tags:
+  - OCR
+  - Document AI
+  - Data Extraction
+  - Intelligent Document Processing
+  humanURL: https://docs.nanonets.com/reference/overview
+  properties:
+  - url: https://docs.nanonets.com/reference/overview
+    type: Documentation
+  - url: https://docs.nanonets.com/reference/ocrmodellabelfilebymodelidpost-1
+    type: Documentation
+  - url: https://docs.nanonets.com/reference/ocrmodellabelfileasyncbymodelidpost-1
+    type: Documentation
+  - url: https://docs.nanonets.com/reference/ocrmodellabelurlsbymodelidpost
+    type: Documentation
+  - url: https://docs.nanonets.com/reference/ocrmodellabelurlsasyncbymodelidpost-1
+    type: Documentation
+  - url: https://docs.nanonets.com/reference/ocrmodelgetpredictionfilebyfileid
+    type: Documentation
+  - url: https://docs.nanonets.com/reference/ocrmodelgetpredictionfilebypageid
+    type: Documentation
+  - url: https://docs.nanonets.com/reference/ocrmodellistpredictionfiles
+    type: Documentation
+  - url: https://docs.nanonets.com/reference/ocrmodeluploadfilebymodelidpost-1
+    type: Documentation
+  - url: https://docs.nanonets.com/reference/ocrmodeluploadurlsbymodelidpost-1
+    type: Documentation
+  - url: https://docs.nanonets.com/reference/ocrmodeltrainbymodelidpost-1
+    type: Documentation
+  - url: openapi/nanonets-ocr-api-openapi.yml
+    type: OpenAPI
+  - url: json-schema/nanonets-prediction-schema.json
+    type: JSONSchema
+  - url: json-ld/nanonets-context.jsonld
+    type: JSONLD
+  - type: NaftikoCapability
+    url: capabilities/ocr-prediction.yaml
+  - type: NaftikoCapability
+    url: capabilities/ocr-training.yaml
+  description: Synchronous and asynchronous OCR prediction and training endpoints over `app.nanonets.com/api/v2/OCR/Model/{model_id}`.
+    Upload files by local path or public URL, retrieve predictions for a file, page, or batch, and train or
+    retrain custom Nanonets OCR models. Sync endpoints are optimized for files of 3 pages or fewer; async
+    endpoints handle larger documents. Returns labels, bounding boxes, OCR text, confidence scores, and table
+    cell predictions.
+- aid: nanonets:nanonets-image-classification-api
+  name: Nanonets Image Classification API
+  tags:
+  - Image Classification
+  - Computer Vision
+  - Deep Learning
+  humanURL: https://docs.nanonets.com/reference/imagecategorizationlabelfilepost
+  properties:
+  - url: https://docs.nanonets.com/reference/imagecategorizationlabelfilepost
+    type: Documentation
+  - url: https://docs.nanonets.com/reference/imagecategorizationlabelurlspost2
+    type: Documentation
+  - url: openapi/nanonets-image-classification-api-openapi.yml
+    type: OpenAPI
+  - type: NaftikoCapability
+    url: capabilities/image-classification.yaml
+  description: Classify images by file upload or by publicly accessible URL against a Nanonets image classification
+    model. Supports batch URL submission for efficient prediction. Base path `/api/v2/ImageCategorization/LabelFile/`
+    and `/api/v2/ImageCategorization/LabelUrls/`.
+- aid: nanonets:nanonets-file-management-api
+  name: Nanonets File Management API
+  tags:
+  - File Management
+  - Workflow
+  - Approvals
+  - Documents
+  humanURL: https://docs.nanonets.com/reference/file-review-api
+  properties:
+  - url: https://docs.nanonets.com/reference/file-review-api
+    type: Documentation
+  - url: https://docs.nanonets.com/reference/assign-files-via-api
+    type: Documentation
+  - url: https://docs.nanonets.com/reference/delete-files-via-api
+    type: Documentation
+  - url: https://docs.nanonets.com/reference/export-files-via-api
+    type: Documentation
+  - url: https://docs.nanonets.com/reference/update-fields-via-api
+    type: Documentation
+  - url: https://docs.nanonets.com/docs/retry-file-upload-via-api
+    type: Documentation
+  - url: openapi/nanonets-file-management-api-openapi.yml
+    type: OpenAPI
+  - type: NaftikoCapability
+    url: capabilities/file-management.yaml
+  description: Approve, unapprove, assign, update, delete, and export files within a Nanonets model. Drives the
+    review-and-approval workflow, PATCH-based field updates, team assignment to specific reviewers, and export
+    retry to downstream destinations (Salesforce, QuickBooks, Xero, Google Sheets, SAP, etc.).
+- aid: nanonets:nanonets-external-integrations-api
+  name: Nanonets External Integrations API
+  tags:
+  - Integrations
+  - Database
+  - Lookups
+  humanURL: https://docs.nanonets.com/reference/getexternalintegrations
+  properties:
+  - url: https://docs.nanonets.com/reference/getexternalintegrations
+    type: Documentation
+  - url: https://docs.nanonets.com/reference/executequery-1
+    type: Documentation
+  - url: openapi/nanonets-external-integrations-api-openapi.yml
+    type: OpenAPI
+  - type: NaftikoCapability
+    url: capabilities/external-integrations.yaml
+  description: List external integrations connected to a Nanonets account (Postgres, MySQL, MSSQL, MongoDB, and
+    other databases) and execute generic SQL queries against them in the context of a Nanonets workflow. Used
+    by Database Matching Conditions and database lookup actions inside the no-code workflow builder.
+name: Nanonets
+description: Nanonets is a no-code document AI and OCR platform that combines a custom-model OCR API, pre-built
+  document models (invoices, receipts, purchase orders, bills of lading, passports, driver's licenses, bank
+  statements), image classification, and a visual workflow builder with imports, transformations, lookups,
+  approvals, and ERP/CRM/database exports. The Nanonets OCR-3 model and the open-source docext toolkit power
+  the IDP Leaderboard number-one ranking. Enterprise tier adds SAML SSO, SCIM, role-based access, on-prem and
+  private-cloud deployment, HIPAA, SOC 2 Type II, and ISO 27001.
+tags:
+- AI
+- Artificial Intelligence
+- OCR
+- Document AI
+- Intelligent Document Processing
+- Data Extraction
+- Workflow Automation
+- Computer Vision
+- No-Code
+kind: contract
+image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+access: 3rd-Party
+common:
+- url: https://nanonets.com
+  type: Portal
+- url: https://app.nanonets.com
+  type: Console
+- url: https://docs.nanonets.com
+  type: Documentation
+- url: https://docs.nanonets.com/docs/nanonets-overview
+  type: GettingStarted
+- url: https://docs.nanonets.com/reference/authentication
+  type: Authentication
+- url: https://docs.nanonets.com/reference/response-code-error
+  type: Errors
+- url: https://docs.nanonets.com/reference/how-to-handle-429-error
+  type: RateLimits
+- url: https://docs.nanonets.com/docs/generate-api-key
+  type: Documentation
+  name: Generate API Key
+- url: https://docs.nanonets.com/docs/async-and-sync-file-processing
+  type: Documentation
+  name: Async and Sync File Processing
+- url: https://docs.nanonets.com/docs/file-formats
+  type: Documentation
+  name: Supported File Formats
+- url: https://docs.nanonets.com/docs/language-supported
+  type: Documentation
+  name: Languages Supported
+- url: https://docs.nanonets.com/docs/webhook-export
+  type: Webhooks
+- url: https://nanonets.com/blog/
+  type: Blog
+- url: https://accounts.nanonets.com/signup
+  type: SignUp
+- url: https://legal.nanonets.com/terms
+  type: TermsOfService
+- url: https://legal.nanonets.com/privacy
+  type: PrivacyPolicy
+- url: https://legal.nanonets.com/dpa
+  type: Documentation
+  name: Data Processing Agreement
+- url: https://github.com/NanoNets
+  type: GitHubOrganization
+- url: https://www.postman.com/nanonetsapi/nanonets
+  type: Documentation
+  name: Postman Workspace
+- url: https://huggingface.co/nanonets
+  type: Documentation
+  name: Hugging Face — Nanonets Open Models
+- url: https://www.idp-leaderboard.org/
+  type: Documentation
+  name: IDP Leaderboard
+- url: https://github.com/NanoNets/docext
+  type: GitHubRepository
+  name: docext (on-prem OCR-free extraction)
+- url: https://github.com/NanoNets/docstrange
+  type: GitHubRepository
+  name: docstrange (document conversion)
+- url: https://github.com/NanoNets/nanoindex
+  type: GitHubRepository
+  name: nanoindex (agentic RAG harness)
+- url: https://github.com/NanoNets/nanonets-python-client
+  type: SDK
+  name: Python client (pip)
+- url: https://github.com/NanoNets/nanonets-javascript
+  type: SDK
+  name: JavaScript / Node.js
+- url: https://github.com/NanoNets/nanonets-go
+  type: SDK
+  name: Go
+- url: https://github.com/NanoNets/ocr-js-sdk
+  type: SDK
+  name: OCR Node.js SDK
+- url: https://github.com/NanoNets/ic-js-sdk
+  type: SDK
+  name: Image Classification Node.js SDK
+- url: https://github.com/NanoNets/object-detection-sample-python
+  type: CodeExamples
+  name: Object Detection Python sample
+- url: https://github.com/NanoNets/object-detection-sample-nodejs
+  type: CodeExamples
+  name: Object Detection Node.js sample
+- url: https://github.com/NanoNets/object-detection-sample-golang
+  type: CodeExamples
+  name: Object Detection Go sample
+- url: https://github.com/NanoNets/object-detection-sample-php
+  type: CodeExamples
+  name: Object Detection PHP sample
+- url: https://github.com/NanoNets/nanonets-ocr-sample-python
+  type: CodeExamples
+  name: OCR Python sample
+- url: https://github.com/NanoNets/n8n-nodes-nanonets
+  type: Tools
+  name: n8n nodes for Nanonets
+- url: plans/nanonets-plans-pricing.yml
+  type: Plans
+- url: rate-limits/nanonets-rate-limits.yml
+  type: RateLimits
+- url: finops/nanonets-finops.yml
+  type: FinOps
+- url: rules/nanonets-rules.yml
+  type: SpectralRules
+- url: vocabulary/nanonets-vocabulary.yml
+  type: Vocabulary
+- name: Features
+  type: Features
+  data:
+  - name: Nanonets OCR-3 model
+    description: Highest-accuracy OCR model on the public IDP Leaderboard, ahead of GPT-5, Gemini, and Claude.
+  - name: Instant Learning (zero-shot) models
+    description: Train an extraction model from a handful of examples or even from a written field description,
+      without large labeled datasets.
+  - name: Pre-built document models
+    description: Ready-to-use models for invoices, receipts, purchase orders, bills of lading, bank statements,
+      passports, and driver's licenses.
+  - name: Custom-trained OCR models
+    description: Upload images, annotate labels and tables, train and retrain a model tied to a unique `model_id`.
+  - name: Document Classification and Routing
+    description: Classify incoming documents and route each to the correct extraction model and workflow.
+  - name: Table extraction
+    description: Multi-page table parsing with per-cell bounding boxes, row/column indices, and OCR text.
+  - name: Sync and async file processing
+    description: Sync endpoints optimized for ≤3-page files; async endpoints for larger documents with polling
+      by `request_file_id`.
+  - name: Workflow builder
+    description: No-code visual pipeline of imports, transformations, lookups, approvals, conditional routing,
+      and exports.
+  - name: Approval rules and review queues
+    description: Field- and cell-level approval rules with reviewer assignment, comments, validation status,
+      and duplicate detection.
+  - name: Python post-processing blocks
+    description: Custom Python blocks inside the workflow for bespoke data transformation and validation logic.
+  - name: Generative AI blocks
+    description: LLM-powered transformation steps for normalization, enrichment, and classification.
+  - name: PII Masking
+    description: Mask personally identifiable information before downstream export.
+  - name: Confidence scoring
+    description: Per-field and per-cell confidence scores feed routing rules and human-in-the-loop review.
+  - name: On-prem and private cloud deployment
+    description: Run the Nanonets OCR stack inside customer infrastructure with the OCR Docker offering.
+  - name: White-label review and approval UI
+    description: Embed the Nanonets review experience under a customer-branded domain.
+  - name: SAML SSO and SCIM
+    description: Enterprise-grade identity and lifecycle management.
+  - name: Audit logs and SIEM integration
+    description: Enterprise audit trail with SIEM-ready export.
+  - name: Data residency
+    description: US, EU, and APAC region choices for enterprise customers.
+  - name: Open-source extraction toolkit (docext)
+    description: On-prem, OCR-free unstructured data extraction and benchmarking toolkit, MIT-licensed.
+  - name: Document conversion (docstrange)
+    description: Convert any document, PDF, image, Word doc, PPT, or URL into Markdown, JSON, CSV, or HTML.
+  - name: Agentic RAG (nanoindex)
+    description: Tree- and graph-based reasoning harness for long-document retrieval with citations down to
+      the pixel.
+- name: UseCases
+  type: UseCases
+  data:
+  - name: Accounts Payable automation
+    description: Multi-format invoice capture, 3-way matching, approval routing, and ERP posting (claimed 80%
+      cost reduction).
+  - name: Order management
+    description: Extract and reconcile purchase orders across formats and channels.
+  - name: Logistics and shipping
+    description: Bill of lading, packing list, and customs document extraction.
+  - name: Healthcare revenue cycle
+    description: Medical claim, EOB, and patient intake document processing under HIPAA BAA.
+  - name: Contract analysis
+    description: Extract obligations, parties, dates, and renewal terms from contracts.
+  - name: Claims handling
+    description: Insurance claim intake, FNOL document parsing, and adjudication support.
+  - name: Vendor onboarding
+    description: Extract W-9, tax certificate, and KYB document data for vendor master records.
+  - name: ID and insurance verification
+    description: Driver's license, passport, and insurance card capture for identity workflows.
+- name: Integrations
+  type: Integrations
+  data:
+  - name: SAP
+    description: ERP export connector for posting extracted data.
+  - name: QuickBooks
+    description: Accounting export connector for invoices and bills.
+  - name: Xero
+    description: Accounting export connector and lookup data source.
+  - name: Sage
+    description: ERP export connector.
+  - name: NetSuite
+    description: ERP export connector with credential setup guide and lookup support.
+  - name: Zoho Books
+    description: Accounting export connector.
+  - name: Salesforce
+    description: CRM export connector for routing extracted records into Salesforce objects.
+  - name: HubSpot
+    description: CRM destination for extracted data.
+  - name: Gmail
+    description: Email import and inbox-based intake.
+  - name: Microsoft Outlook / Email
+    description: Email import action with run history.
+  - name: Slack
+    description: Notification and collaboration channel.
+  - name: Microsoft Teams
+    description: Notification and collaboration channel.
+  - name: Jira
+    description: Project management destination.
+  - name: Asana
+    description: Project management destination.
+  - name: Google Drive
+    description: Import and export connector for cloud-stored documents.
+  - name: Dropbox
+    description: Import and export connector.
+  - name: Box
+    description: Cloud storage source.
+  - name: OneDrive
+    description: Import and export connector.
+  - name: SharePoint
+    description: Import and export connector.
+  - name: Google Sheets
+    description: Lookup data source and export destination.
+  - name: Google Docs
+    description: Export destination.
+  - name: Microsoft Excel
+    description: Export destination.
+  - name: Smartsheet
+    description: Export destination.
+  - name: FTP server
+    description: Export destination for partner integrations.
+  - name: Snowflake
+    description: Data warehouse destination.
+  - name: Stripe
+    description: Payment and billing data source.
+  - name: Zendesk
+    description: Support workflow integration.
+  - name: Notion
+    description: Document destination.
+  - name: Zapier
+    description: Trigger-based intake for arbitrary SaaS connections.
+  - name: n8n
+    description: Open-source workflow automation via `n8n-nodes-nanonets`.
+  - name: Webhooks
+    description: Push extracted data to any HTTP endpoint with a documented payload structure.
+  - name: PostgreSQL / MySQL / MSSQL / MongoDB
+    description: External database integrations for lookups and execute-query operations.
+- name: Solutions
+  type: Solutions
+  data:
+  - name: Starter
+    description: Free tier with $200 in credits, API access, email import, cloud storage connectors, up to
+      3 users, and community support.
+  - name: Growth
+    description: Volume-discount tier adding classification AI, barcode and signature detection, generative
+      AI blocks, custom Python blocks, ERP and database integrations, AI reporting, and team-wide credit sharing.
+  - name: Enterprise
+    description: Tailored pricing with SAML SSO, SCIM, RBAC, HIPAA and SOC 2 compliance, private cloud or on-prem
+      deployment, data residency, enterprise connectors (Salesforce, SAP, Oracle), dedicated support and SLAs,
+      audit logs, SIEM integration, and whitelabel UI.
+maintainers:
+- FN: Kin Lane
+  email: info@apievangelist.com
+created: '2026-05-25'
+modified: '2026-05-25'

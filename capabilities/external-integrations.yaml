@@ -1,0 +1,61 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Nanonets External Integrations API
+  description: List external database integrations and execute generic SQL queries against them.
+  tags: [Nanonets, Integrations, Database]
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys: { NANONETS_API_KEY: NANONETS_API_KEY }
+capability:
+  consumes:
+  - type: http
+    namespace: external-integrations
+    baseUri: https://app.nanonets.com
+    description: Nanonets external database integrations surface.
+    resources:
+    - name: list
+      path: /api/v2/externalIntegrations
+      operations:
+      - { name: getExternalIntegrations, method: GET, description: 'List external integrations.',
+          outputRawFormat: json, outputParameters: [ { name: result, type: object, value: $. } ],
+          inputParameters: [] }
+    - name: execute
+      path: /api/v2/externalIntegrations/{external_integration_id}/executequery
+      operations:
+      - { name: executeQuery, method: POST, description: 'Execute a generic SQL query against an integration.',
+          outputRawFormat: json, outputParameters: [ { name: result, type: object, value: $. } ],
+          inputParameters: [ { name: external_integration_id, in: path, type: string, required: true },
+            { name: body, in: body, type: object, required: true } ] }
+    authentication:
+      type: basic
+      username: '{{env.NANONETS_API_KEY}}'
+      password: ''
+  exposes:
+  - type: rest
+    namespace: external-integrations-rest
+    port: 8080
+    description: REST adapter for external integrations.
+    resources:
+    - path: /v1/integrations
+      name: integrations
+      operations:
+      - { method: GET, name: getExternalIntegrations, description: 'List external integrations.',
+          call: external-integrations.getExternalIntegrations, with: {} }
+    - path: /v1/integrations/query
+      name: query
+      operations:
+      - { method: POST, name: executeQuery, description: 'Execute a generic SQL query.', call: external-integrations.executeQuery,
+          with: { external_integration_id: rest.body.external_integration_id, body: rest.body.body } }
+  - type: mcp
+    namespace: external-integrations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for external integrations.
+    tools:
+    - { name: nanonets-list-integrations, description: 'List external integrations.', hints: { readOnly: true,
+          destructive: false, idempotent: true }, call: external-integrations.getExternalIntegrations, with: {} }
+    - { name: nanonets-execute-query, description: 'Execute a SQL-style query against an integration.', hints: {
+          readOnly: false, destructive: false, idempotent: false }, call: external-integrations.executeQuery,
+        with: { external_integration_id: tools.external_integration_id, body: tools.body } }

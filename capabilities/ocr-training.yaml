@@ -1,0 +1,63 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Nanonets OCR API — Training
+  description: Upload training images and train or retrain a custom Nanonets OCR model.
+  tags: [Nanonets, OCR, Training]
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys: { NANONETS_API_KEY: NANONETS_API_KEY }
+capability:
+  consumes:
+  - type: http
+    namespace: ocr-training
+    baseUri: https://app.nanonets.com/api/v2
+    description: Nanonets OCR training surface.
+    resources:
+    - name: upload-file
+      path: /OCR/Model/{model_id}/UploadFile/
+      operations:
+      - { name: uploadTrainingFile, method: POST, description: 'Upload locally stored training images.',
+          outputRawFormat: json, outputParameters: [ { name: result, type: object, value: $. } ],
+          inputParameters: [ { name: model_id, in: path, type: string, required: true },
+            { name: file, in: body, type: object, required: true } ] }
+    - name: upload-urls
+      path: /OCR/Model/{model_id}/UploadUrls/
+      operations:
+      - { name: uploadTrainingUrls, method: POST, description: 'Upload training images via URLs.',
+          outputRawFormat: json, outputParameters: [ { name: result, type: object, value: $. } ],
+          inputParameters: [ { name: model_id, in: path, type: string, required: true },
+            { name: body, in: body, type: object, required: true } ] }
+    - name: train
+      path: /OCR/Model/{model_id}/Train/
+      operations:
+      - { name: trainModel, method: POST, description: 'Train or retrain a Nanonets OCR model.',
+          outputRawFormat: json, outputParameters: [ { name: result, type: object, value: $. } ],
+          inputParameters: [ { name: model_id, in: path, type: string, required: true } ] }
+    authentication:
+      type: basic
+      username: '{{env.NANONETS_API_KEY}}'
+      password: ''
+  exposes:
+  - type: rest
+    namespace: ocr-training-rest
+    port: 8080
+    description: REST adapter for the Nanonets OCR training surface.
+    resources:
+    - path: /v1/ocr/train
+      name: train
+      operations:
+      - { method: POST, name: trainModel, description: 'Train or retrain a model.', call: ocr-training.trainModel,
+          with: { model_id: rest.body.model_id } }
+  - type: mcp
+    namespace: ocr-training-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Nanonets OCR training.
+    tools:
+    - { name: nanonets-train-model, description: 'Train or retrain a model.', hints: { readOnly: false,
+          destructive: false, idempotent: false }, call: ocr-training.trainModel, with: { model_id: tools.model_id } }
+    - { name: nanonets-upload-training-urls, description: 'Upload training images via URLs.', hints: {
+          readOnly: false, destructive: false, idempotent: false }, call: ocr-training.uploadTrainingUrls,
+        with: { model_id: tools.model_id, body: tools.body } }
