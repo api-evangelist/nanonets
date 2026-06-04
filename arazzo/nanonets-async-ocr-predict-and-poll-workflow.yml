@@ -1,0 +1,102 @@
+arazzo: 1.0.1
+info:
+  title: Nanonets Async OCR Predict and Poll
+  summary: Submit a large document for async OCR, then poll until the file-level prediction is ready.
+  description: >-
+    The recommended pattern for documents larger than three pages. The workflow
+    uploads a local file to a Nanonets OCR model in async mode, captures the
+    returned request_file_id, then repeatedly fetches the file-level inference
+    until a prediction is available, branching back to poll again while the
+    result is still pending. Every step spells out its request inline so the flow
+    can be read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: ocrApi
+  url: ../openapi/nanonets-ocr-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: async-ocr-predict-and-poll
+  summary: Async predict on a file then poll the inference request for the finished result.
+  description: >-
+    Uploads a file to a Nanonets OCR model in async mode and polls the inference
+    request endpoint until the file prediction is returned.
+  inputs:
+    type: object
+    required:
+    - authorization
+    - modelId
+    - file
+    properties:
+      authorization:
+        type: string
+        description: >-
+          HTTP Basic credential header value (Basic <base64 of apiKey:>) where the
+          Nanonets API key is the username and the password is empty.
+      modelId:
+        type: string
+        description: Unique identifier for the Nanonets OCR model.
+      file:
+        type: string
+        description: Binary contents of the document to run async OCR against.
+      requestMetadata:
+        type: string
+        description: Free-form identifier echoed back in the prediction response.
+  steps:
+  - stepId: submitAsync
+    description: >-
+      Upload the file to the model in async mode and capture the request_file_id
+      used to poll for the result.
+    operationId: ocrModelLabelFileAsyncByModelIdPost
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: model_id
+      in: path
+      value: $inputs.modelId
+    requestBody:
+      contentType: multipart/form-data
+      payload:
+        file: $inputs.file
+        async: true
+        request_metadata: $inputs.requestMetadata
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      requestFileId: $response.body#/result/0/request_file_id
+      submitStatus: $response.body#/result/0/status
+  - stepId: pollPrediction
+    description: >-
+      Fetch the file-level prediction for the request_file_id. Branch back to
+      poll again while no prediction array is present, otherwise finish.
+    operationId: ocrModelGetPredictionFileByFileId
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: model_id
+      in: path
+      value: $inputs.modelId
+    - name: request_file_id
+      in: path
+      value: $steps.submitAsync.outputs.requestFileId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      moderatedCount: $response.body#/moderated_images_count
+      unmoderatedCount: $response.body#/unmoderated_images_count
+      signedUrls: $response.body#/signed_urls
+    onSuccess:
+    - name: stillPending
+      type: goto
+      stepId: pollPrediction
+      criteria:
+      - context: $response.body
+        condition: $.moderated_images_count == 0 && $.unmoderated_images_count == 0
+        type: jsonpath
+    - name: ready
+      type: end
+  outputs:
+    requestFileId: $steps.submitAsync.outputs.requestFileId
+    moderatedCount: $steps.pollPrediction.outputs.moderatedCount
+    signedUrls: $steps.pollPrediction.outputs.signedUrls

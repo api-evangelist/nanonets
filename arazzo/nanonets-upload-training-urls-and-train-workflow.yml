@@ -1,0 +1,79 @@
+arazzo: 1.0.1
+info:
+  title: Nanonets Upload Training URLs and Train
+  summary: Add training images to an OCR model from public URLs, then start training.
+  description: >-
+    A URL-driven variant of the training-prep flow. The workflow registers one or
+    more publicly accessible training image URLs against the target Nanonets OCR
+    model and then triggers a training run on the model. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: ocrApi
+  url: ../openapi/nanonets-ocr-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: upload-training-urls-and-train
+  summary: Upload training images by URL and start a training run.
+  description: >-
+    Registers public training image URLs with a Nanonets OCR model and then
+    queues a training job.
+  inputs:
+    type: object
+    required:
+    - authorization
+    - modelId
+    - urls
+    properties:
+      authorization:
+        type: string
+        description: HTTP Basic credential header value (Basic <base64 of apiKey:>).
+      modelId:
+        type: string
+        description: Unique identifier for the Nanonets OCR model to train.
+      urls:
+        type: array
+        description: Publicly accessible URLs of the training images.
+        items:
+          type: string
+      data:
+        type: string
+        description: Optional JSON string describing the annotation for each URL.
+  steps:
+  - stepId: uploadTrainingUrls
+    description: Register the public training image URLs against the model.
+    operationId: ocrModelUploadUrlsByModelIdPost
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: model_id
+      in: path
+      value: $inputs.modelId
+    requestBody:
+      contentType: application/json
+      payload:
+        urls: $inputs.urls
+        data: $inputs.data
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      uploadResponse: $response.body
+  - stepId: trainModel
+    description: Trigger training (or retraining) on the model after the URLs are registered.
+    operationId: ocrModelTrainByModelIdPost
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: model_id
+      in: path
+      value: $inputs.modelId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      trainResponse: $response.body
+  outputs:
+    uploadResponse: $steps.uploadTrainingUrls.outputs.uploadResponse
+    trainResponse: $steps.trainModel.outputs.trainResponse

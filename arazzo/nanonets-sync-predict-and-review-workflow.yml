@@ -1,0 +1,123 @@
+arazzo: 1.0.1
+info:
+  title: Nanonets Sync Predict and Review
+  summary: Run a sync OCR prediction on a small file, then approve or hold it for review.
+  description: >-
+    A human-in-the-loop extraction flow for files of three pages or fewer. The
+    workflow runs a synchronous OCR prediction on an uploaded file, then branches
+    on the returned page: when a prediction is present it marks the file approved
+    (moderated), and when no prediction came back it leaves the file unapproved
+    for manual review. Every step spells out its request inline so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: ocrApi
+  url: ../openapi/nanonets-ocr-api-openapi.yml
+  type: openapi
+- name: fileManagementApi
+  url: ../openapi/nanonets-file-management-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: sync-predict-and-review
+  summary: Synchronously predict on a file then approve or hold it based on the result.
+  description: >-
+    Runs a sync OCR prediction on a file and branches to approve the file when a
+    prediction is returned or to unapprove it for review when none is.
+  inputs:
+    type: object
+    required:
+    - authorization
+    - modelId
+    - file
+    properties:
+      authorization:
+        type: string
+        description: HTTP Basic credential header value (Basic <base64 of apiKey:>).
+      modelId:
+        type: string
+        description: Unique identifier for the Nanonets OCR model.
+      file:
+        type: string
+        description: Binary contents of the document to run sync OCR against.
+      requestMetadata:
+        type: string
+        description: Free-form identifier echoed back in the prediction response.
+  steps:
+  - stepId: predict
+    description: Run a synchronous OCR prediction on the uploaded file.
+    operationId: ocrModelLabelFileByModelIdPost
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: model_id
+      in: path
+      value: $inputs.modelId
+    requestBody:
+      contentType: multipart/form-data
+      payload:
+        file: $inputs.file
+        request_metadata: $inputs.requestMetadata
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      requestFileId: $response.body#/result/0/request_file_id
+      predictions: $response.body#/result/0/prediction
+    onSuccess:
+    - name: hasPrediction
+      type: goto
+      stepId: approveFile
+      criteria:
+      - context: $response.body
+        condition: $.result[0].prediction.length > 0
+        type: jsonpath
+    - name: noPrediction
+      type: goto
+      stepId: holdForReview
+      criteria:
+      - context: $response.body
+        condition: $.result[0].prediction.length == 0
+        type: jsonpath
+  - stepId: approveFile
+    description: Mark the predicted file as approved (moderated).
+    operationId: verifyFile
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: model_id
+      in: path
+      value: $inputs.modelId
+    - name: request_file_id
+      in: path
+      value: $steps.predict.outputs.requestFileId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      approveResponse: $response.body
+    onSuccess:
+    - name: done
+      type: end
+  - stepId: holdForReview
+    description: >-
+      Leave the file in the unapproved state so a reviewer can inspect it before
+      it is moderated.
+    operationId: unverifyFile
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: model_id
+      in: path
+      value: $inputs.modelId
+    - name: request_file_id
+      in: path
+      value: $steps.predict.outputs.requestFileId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      holdResponse: $response.body
+  outputs:
+    requestFileId: $steps.predict.outputs.requestFileId
+    approveResponse: $steps.approveFile.outputs.approveResponse
+    holdResponse: $steps.holdForReview.outputs.holdResponse

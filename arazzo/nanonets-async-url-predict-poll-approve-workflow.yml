@@ -1,0 +1,118 @@
+arazzo: 1.0.1
+info:
+  title: Nanonets Async URL Predict Poll and Approve
+  summary: Async-predict a document by URL, poll until ready, then approve the file.
+  description: >-
+    An end-to-end URL-driven extraction flow. The workflow submits a publicly
+    accessible document URL to a Nanonets OCR model in async mode, polls the
+    inference request until the prediction is available, and then marks the
+    finished file as approved. Every step spells out its request inline so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: ocrApi
+  url: ../openapi/nanonets-ocr-api-openapi.yml
+  type: openapi
+- name: fileManagementApi
+  url: ../openapi/nanonets-file-management-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: async-url-predict-poll-approve
+  summary: Async predict by URL, poll for completion, and approve the resulting file.
+  description: >-
+    Submits a document URL for async OCR, polls the inference request until a
+    result is present, and approves the file.
+  inputs:
+    type: object
+    required:
+    - authorization
+    - modelId
+    - urls
+    properties:
+      authorization:
+        type: string
+        description: HTTP Basic credential header value (Basic <base64 of apiKey:>).
+      modelId:
+        type: string
+        description: Unique identifier for the Nanonets OCR model.
+      urls:
+        type: array
+        description: Publicly accessible URL(s) of the document(s) to extract.
+        items:
+          type: string
+      requestMetadata:
+        type: string
+        description: Free-form identifier echoed back in the prediction response.
+  steps:
+  - stepId: submitAsyncUrl
+    description: Submit the document URL(s) to the model in async mode.
+    operationId: ocrModelLabelUrlsAsyncByModelIdPost
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: model_id
+      in: path
+      value: $inputs.modelId
+    requestBody:
+      contentType: application/x-www-form-urlencoded
+      payload:
+        urls: $inputs.urls
+        async: true
+        request_metadata: $inputs.requestMetadata
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      requestFileId: $response.body#/result/0/request_file_id
+  - stepId: pollPrediction
+    description: >-
+      Poll the inference request for the file. Loop back while no page has been
+      moderated or unmoderated yet, otherwise continue to approval.
+    operationId: ocrModelGetPredictionFileByFileId
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: model_id
+      in: path
+      value: $inputs.modelId
+    - name: request_file_id
+      in: path
+      value: $steps.submitAsyncUrl.outputs.requestFileId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      moderatedCount: $response.body#/moderated_images_count
+      unmoderatedCount: $response.body#/unmoderated_images_count
+    onSuccess:
+    - name: stillPending
+      type: goto
+      stepId: pollPrediction
+      criteria:
+      - context: $response.body
+        condition: $.moderated_images_count == 0 && $.unmoderated_images_count == 0
+        type: jsonpath
+    - name: ready
+      type: goto
+      stepId: approveFile
+  - stepId: approveFile
+    description: Approve the finished file once the prediction is available.
+    operationId: verifyFile
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: model_id
+      in: path
+      value: $inputs.modelId
+    - name: request_file_id
+      in: path
+      value: $steps.submitAsyncUrl.outputs.requestFileId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      approveResponse: $response.body
+  outputs:
+    requestFileId: $steps.submitAsyncUrl.outputs.requestFileId
+    approveResponse: $steps.approveFile.outputs.approveResponse

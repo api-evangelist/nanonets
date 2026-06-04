@@ -1,0 +1,96 @@
+arazzo: 1.0.1
+info:
+  title: Nanonets Classify Image and Branch
+  summary: Classify an uploaded image and branch on whether a top label was predicted.
+  description: >-
+    A routing flow built on image classification. The workflow uploads a single
+    image to a Nanonets classification model and branches on the result: when at
+    least one label is predicted it ends as classified, and when no prediction is
+    returned it re-submits the same image as a public URL batch for a second
+    attempt. Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: imageClassificationApi
+  url: ../openapi/nanonets-image-classification-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: classify-image-and-branch
+  summary: Classify an image and fall back to a URL submission when nothing is predicted.
+  description: >-
+    Uploads an image to a classification model and, if no label is predicted,
+    retries the classification using a public URL batch.
+  inputs:
+    type: object
+    required:
+    - authorization
+    - modelId
+    - file
+    - fallbackUrls
+    properties:
+      authorization:
+        type: string
+        description: HTTP Basic credential header value (Basic <base64 of apiKey:>).
+      modelId:
+        type: string
+        description: Unique identifier of the classification model.
+      file:
+        type: string
+        description: Binary contents of the image to classify.
+      fallbackUrls:
+        type: array
+        description: Public URL(s) of the same image to retry on if the upload yields no label.
+        items:
+          type: string
+  steps:
+  - stepId: classifyFile
+    description: Upload the image to the classification model.
+    operationId: imageCategorizationLabelFilePost
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    requestBody:
+      contentType: multipart/form-data
+      payload:
+        file: $inputs.file
+        modelId: $inputs.modelId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      topLabel: $response.body#/result/0/prediction/0/label
+      topProbability: $response.body#/result/0/prediction/0/probability
+    onSuccess:
+    - name: classified
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.result[0].prediction.length > 0
+        type: jsonpath
+    - name: noLabel
+      type: goto
+      stepId: classifyUrlFallback
+      criteria:
+      - context: $response.body
+        condition: $.result[0].prediction.length == 0
+        type: jsonpath
+  - stepId: classifyUrlFallback
+    description: Retry classification by submitting the image as a public URL batch.
+    operationId: imageCategorizationLabelUrlsPost
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    requestBody:
+      contentType: application/x-www-form-urlencoded
+      payload:
+        urls: $inputs.fallbackUrls
+        modelId: $inputs.modelId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      fallbackLabel: $response.body#/result/0/prediction/0/label
+      fallbackProbability: $response.body#/result/0/prediction/0/probability
+  outputs:
+    topLabel: $steps.classifyFile.outputs.topLabel
+    fallbackLabel: $steps.classifyUrlFallback.outputs.fallbackLabel

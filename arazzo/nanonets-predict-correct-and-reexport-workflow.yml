@@ -1,0 +1,111 @@
+arazzo: 1.0.1
+info:
+  title: Nanonets Predict Correct and Re-export
+  summary: Predict on a file, correct its extracted fields, and retry the export.
+  description: >-
+    A correction-and-export loop for downstream integrations. The workflow runs a
+    sync OCR prediction on a file, applies a corrected field payload (derived from
+    the prediction structure) back onto the file, and then re-triggers the
+    downstream export for that file. Every step spells out its request inline so
+    the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: ocrApi
+  url: ../openapi/nanonets-ocr-api-openapi.yml
+  type: openapi
+- name: fileManagementApi
+  url: ../openapi/nanonets-file-management-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: predict-correct-and-reexport
+  summary: Predict, correct extracted fields, and retry the downstream export.
+  description: >-
+    Runs a sync prediction, patches the file's fields with corrected values, and
+    retries the export for the file.
+  inputs:
+    type: object
+    required:
+    - authorization
+    - modelId
+    - file
+    - correctedFields
+    properties:
+      authorization:
+        type: string
+        description: HTTP Basic credential header value (Basic <base64 of apiKey:>).
+      modelId:
+        type: string
+        description: Unique identifier for the Nanonets OCR model.
+      file:
+        type: string
+        description: Binary contents of the document to run OCR against.
+      correctedFields:
+        type: object
+        description: >-
+          Corrected field payload mirroring the structure returned by the file
+          prediction, used to update or add fields on the file.
+  steps:
+  - stepId: predict
+    description: Run a synchronous OCR prediction on the uploaded file.
+    operationId: ocrModelLabelFileByModelIdPost
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: model_id
+      in: path
+      value: $inputs.modelId
+    requestBody:
+      contentType: multipart/form-data
+      payload:
+        file: $inputs.file
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      requestFileId: $response.body#/result/0/request_file_id
+  - stepId: updateFields
+    description: >-
+      Patch the file with corrected field values. use_ui_version=true is required
+      and the body mirrors the prediction response structure.
+    operationId: updateFileFields
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: model_id
+      in: path
+      value: $inputs.modelId
+    - name: use_ui_version
+      in: query
+      value: true
+    requestBody:
+      contentType: application/json
+      payload: $inputs.correctedFields
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      updateResponse: $response.body
+  - stepId: retryExport
+    description: Re-trigger the downstream export for the corrected file.
+    operationId: retryAllExports
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: model_id
+      in: path
+      value: $inputs.modelId
+    requestBody:
+      contentType: application/json
+      payload:
+        file_ids:
+        - $steps.predict.outputs.requestFileId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      exportResponse: $response.body
+  outputs:
+    requestFileId: $steps.predict.outputs.requestFileId
+    updateResponse: $steps.updateFields.outputs.updateResponse
+    exportResponse: $steps.retryExport.outputs.exportResponse

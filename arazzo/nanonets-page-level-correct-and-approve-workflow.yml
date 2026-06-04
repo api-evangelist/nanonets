@@ -1,0 +1,113 @@
+arazzo: 1.0.1
+info:
+  title: Nanonets Page-Level Correct and Approve
+  summary: Pull a single page's prediction, correct its fields, then approve the file.
+  description: >-
+    A page-scoped correction flow. The workflow retrieves the prediction for one
+    specific page of an already-processed file, applies a corrected field payload
+    onto the file, and approves the file once the page is fixed. Every step spells
+    out its request inline so the flow can be read and executed without opening
+    the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: ocrApi
+  url: ../openapi/nanonets-ocr-api-openapi.yml
+  type: openapi
+- name: fileManagementApi
+  url: ../openapi/nanonets-file-management-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: page-level-correct-and-approve
+  summary: Get a page's prediction, correct fields on the file, and approve it.
+  description: >-
+    Fetches a single page's prediction, patches the file's fields with corrected
+    values, and approves the file.
+  inputs:
+    type: object
+    required:
+    - authorization
+    - modelId
+    - requestFileId
+    - pageId
+    - correctedFields
+    properties:
+      authorization:
+        type: string
+        description: HTTP Basic credential header value (Basic <base64 of apiKey:>).
+      modelId:
+        type: string
+        description: Unique identifier for the Nanonets OCR model.
+      requestFileId:
+        type: string
+        description: Identifier of the already-processed file.
+      pageId:
+        type: string
+        description: Unique page id within the file to inspect.
+      correctedFields:
+        type: object
+        description: >-
+          Corrected field payload mirroring the prediction response structure,
+          used to update or add fields on the file.
+  steps:
+  - stepId: getPage
+    description: Retrieve the prediction for the specific page of the file.
+    operationId: ocrModelGetPredictionFileByPageId
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: model_id
+      in: path
+      value: $inputs.modelId
+    - name: request_file_id
+      in: path
+      value: $inputs.requestFileId
+    - name: page_id
+      in: path
+      value: $inputs.pageId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      moderatedCount: $response.body#/moderated_images_count
+  - stepId: updateFields
+    description: >-
+      Patch the file with corrected field values. use_ui_version=true is required
+      and the body mirrors the prediction response structure.
+    operationId: updateFileFields
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: model_id
+      in: path
+      value: $inputs.modelId
+    - name: use_ui_version
+      in: query
+      value: true
+    requestBody:
+      contentType: application/json
+      payload: $inputs.correctedFields
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      updateResponse: $response.body
+  - stepId: approveFile
+    description: Approve the file now that the page-level corrections are applied.
+    operationId: verifyFile
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: model_id
+      in: path
+      value: $inputs.modelId
+    - name: request_file_id
+      in: path
+      value: $inputs.requestFileId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      approveResponse: $response.body
+  outputs:
+    updateResponse: $steps.updateFields.outputs.updateResponse
+    approveResponse: $steps.approveFile.outputs.approveResponse

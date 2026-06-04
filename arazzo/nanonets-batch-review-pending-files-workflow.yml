@@ -1,0 +1,97 @@
+arazzo: 1.0.1
+info:
+  title: Nanonets Batch Review Pending Files
+  summary: List a model's recent predictions, then approve the first unmoderated file.
+  description: >-
+    Drives the moderation queue for a time window. The workflow lists all
+    prediction files for a model across a day-based window, then branches: when
+    unmoderated pages exist it approves the first pending file, and when none
+    remain it ends. Every step spells out its request inline so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: ocrApi
+  url: ../openapi/nanonets-ocr-api-openapi.yml
+  type: openapi
+- name: fileManagementApi
+  url: ../openapi/nanonets-file-management-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: batch-review-pending-files
+  summary: List recent predictions and approve the first unmoderated file.
+  description: >-
+    Lists prediction files for a model within a time window and approves the
+    first unmoderated file when one exists.
+  inputs:
+    type: object
+    required:
+    - authorization
+    - modelId
+    - startDayInterval
+    - currentBatchDay
+    properties:
+      authorization:
+        type: string
+        description: HTTP Basic credential header value (Basic <base64 of apiKey:>).
+      modelId:
+        type: string
+        description: Unique identifier for the Nanonets OCR model.
+      startDayInterval:
+        type: integer
+        description: Number of days back from the current batch day (days since epoch).
+      currentBatchDay:
+        type: integer
+        description: Most recent day-since-epoch boundary for the window.
+  steps:
+  - stepId: listPredictions
+    description: List all prediction files for the model within the requested window.
+    operationId: ocrModelListPredictionFiles
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: model_id
+      in: path
+      value: $inputs.modelId
+    - name: start_day_interval
+      in: query
+      value: $inputs.startDayInterval
+    - name: current_batch_day
+      in: query
+      value: $inputs.currentBatchDay
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      unmoderatedCount: $response.body#/unmoderated_images_count
+      firstPendingId: $response.body#/unmoderated_images/0/id
+    onSuccess:
+    - name: hasPending
+      type: goto
+      stepId: approvePending
+      criteria:
+      - context: $response.body
+        condition: $.unmoderated_images_count > 0
+        type: jsonpath
+    - name: nothingPending
+      type: end
+  - stepId: approvePending
+    description: Approve the first unmoderated file from the window.
+    operationId: verifyFile
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: model_id
+      in: path
+      value: $inputs.modelId
+    - name: request_file_id
+      in: path
+      value: $steps.listPredictions.outputs.firstPendingId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      approveResponse: $response.body
+  outputs:
+    unmoderatedCount: $steps.listPredictions.outputs.unmoderatedCount
+    approvedFileId: $steps.listPredictions.outputs.firstPendingId
+    approveResponse: $steps.approvePending.outputs.approveResponse

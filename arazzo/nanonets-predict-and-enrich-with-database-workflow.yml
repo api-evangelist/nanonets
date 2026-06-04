@@ -1,0 +1,98 @@
+arazzo: 1.0.1
+info:
+  title: Nanonets Predict and Enrich with Database
+  summary: Extract a document, then validate it against an external database integration.
+  description: >-
+    Combines OCR extraction with a database lookup. The workflow runs a sync OCR
+    prediction on a file, resolves the first connected external integration, and
+    executes a SQL-style validation query against it — the building block behind
+    Nanonets Database Matching Conditions where extracted values are checked
+    against a system of record. Every step spells out its request inline so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: ocrApi
+  url: ../openapi/nanonets-ocr-api-openapi.yml
+  type: openapi
+- name: externalIntegrationsApi
+  url: ../openapi/nanonets-external-integrations-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: predict-and-enrich-with-database
+  summary: Predict on a file then validate the extraction against an external database.
+  description: >-
+    Runs a sync OCR prediction, resolves an external integration, and runs a
+    validation query against it.
+  inputs:
+    type: object
+    required:
+    - authorization
+    - modelId
+    - file
+    - query
+    properties:
+      authorization:
+        type: string
+        description: HTTP Basic credential header value (Basic <base64 of apiKey:>).
+      modelId:
+        type: string
+        description: Unique identifier for the Nanonets OCR model.
+      file:
+        type: string
+        description: Binary contents of the document to extract.
+      query:
+        type: string
+        description: SQL-style validation query to run against the external integration.
+  steps:
+  - stepId: predict
+    description: Run a synchronous OCR prediction on the uploaded file.
+    operationId: ocrModelLabelFileByModelIdPost
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: model_id
+      in: path
+      value: $inputs.modelId
+    requestBody:
+      contentType: multipart/form-data
+      payload:
+        file: $inputs.file
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      requestFileId: $response.body#/result/0/request_file_id
+      predictions: $response.body#/result/0/prediction
+  - stepId: resolveIntegration
+    description: List external integrations and take the first integration id.
+    operationId: getExternalIntegrations
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      integrationId: $response.body#/0/id
+  - stepId: validateAgainstDatabase
+    description: Run the validation query against the resolved integration.
+    operationId: executeQuery
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: external_integration_id
+      in: path
+      value: $steps.resolveIntegration.outputs.integrationId
+    requestBody:
+      contentType: application/json
+      payload:
+        query: $inputs.query
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      rows: $response.body#/rows
+  outputs:
+    requestFileId: $steps.predict.outputs.requestFileId
+    rows: $steps.validateAgainstDatabase.outputs.rows

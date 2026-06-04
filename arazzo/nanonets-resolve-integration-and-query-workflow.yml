@@ -1,0 +1,68 @@
+arazzo: 1.0.1
+info:
+  title: Nanonets Resolve Integration and Query
+  summary: List external integrations, pick the first one, and run a SQL-style query.
+  description: >-
+    Backs the database-matching workflow block. The workflow lists the external
+    database integrations connected to the account, selects the first integration
+    id, and executes a generic SQL-style query against it — the same lookup used
+    inside Nanonets Database Matching Conditions. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: externalIntegrationsApi
+  url: ../openapi/nanonets-external-integrations-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: resolve-integration-and-query
+  summary: Resolve the first external integration and run a query against it.
+  description: >-
+    Lists external integrations, takes the first id, and executes a SQL-style
+    query against that integration.
+  inputs:
+    type: object
+    required:
+    - authorization
+    - query
+    properties:
+      authorization:
+        type: string
+        description: HTTP Basic credential header value (Basic <base64 of apiKey:>).
+      query:
+        type: string
+        description: SQL-style query string to run against the external integration.
+  steps:
+  - stepId: listIntegrations
+    description: List the external database integrations connected to the account.
+    operationId: getExternalIntegrations
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      integrationId: $response.body#/0/id
+      integrationType: $response.body#/0/type
+  - stepId: runQuery
+    description: Execute the SQL-style query against the resolved integration.
+    operationId: executeQuery
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: external_integration_id
+      in: path
+      value: $steps.listIntegrations.outputs.integrationId
+    requestBody:
+      contentType: application/json
+      payload:
+        query: $inputs.query
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      rows: $response.body#/rows
+  outputs:
+    integrationId: $steps.listIntegrations.outputs.integrationId
+    rows: $steps.runQuery.outputs.rows

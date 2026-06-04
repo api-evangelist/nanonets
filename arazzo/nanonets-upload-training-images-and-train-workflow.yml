@@ -1,0 +1,78 @@
+arazzo: 1.0.1
+info:
+  title: Nanonets Upload Training Images and Train
+  summary: Upload annotated local training images to an OCR model, then kick off training.
+  description: >-
+    Prepares a Nanonets OCR model for a new training run. The workflow uploads
+    one or more locally-stored, annotated training images to the target model and
+    then triggers training on the freshly uploaded data. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: ocrApi
+  url: ../openapi/nanonets-ocr-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: upload-training-images-and-train
+  summary: Upload annotated training images by file and start a training run.
+  description: >-
+    Uploads annotated local training images to a Nanonets OCR model and then
+    queues a training job on the model.
+  inputs:
+    type: object
+    required:
+    - authorization
+    - modelId
+    - file
+    - data
+    properties:
+      authorization:
+        type: string
+        description: HTTP Basic credential header value (Basic <base64 of apiKey:>).
+      modelId:
+        type: string
+        description: Unique identifier for the Nanonets OCR model to train.
+      file:
+        type: string
+        description: Binary contents of the training image to upload.
+      data:
+        type: string
+        description: JSON string describing the annotation for each uploaded file.
+  steps:
+  - stepId: uploadTrainingImages
+    description: Upload the annotated local training image(s) to the model.
+    operationId: ocrModelUploadFileByModelIdPost
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: model_id
+      in: path
+      value: $inputs.modelId
+    requestBody:
+      contentType: multipart/form-data
+      payload:
+        file: $inputs.file
+        data: $inputs.data
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      uploadResponse: $response.body
+  - stepId: trainModel
+    description: Trigger training (or retraining) on the model after the upload completes.
+    operationId: ocrModelTrainByModelIdPost
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: model_id
+      in: path
+      value: $inputs.modelId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      trainResponse: $response.body
+  outputs:
+    uploadResponse: $steps.uploadTrainingImages.outputs.uploadResponse
+    trainResponse: $steps.trainModel.outputs.trainResponse
