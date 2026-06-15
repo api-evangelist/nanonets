@@ -1,0 +1,197 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nanonets File Management API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "File Review",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Approve File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.nanonets.com/api/v2/ImageLevelInferences/Model/:model_id/Verify/:request_file_id",
+            "params": [
+              {
+                "name": "model_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "request_file_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Mark a processed file as approved (moderated)."
+        },
+        {
+          "info": {
+            "name": "Unapprove File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.nanonets.com/api/v2/ImageLevelInferences/Model/:model_id/UnVerify/:request_file_id",
+            "params": [
+              {
+                "name": "model_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "request_file_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Revert an approved file back to unapproved state."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "File Assignment",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Assign Files To A Team Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.nanonets.com/api/v2/team/members/model/:model_id/assign/files",
+            "params": [
+              {
+                "name": "model_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assign one or more files in a model to a specific reviewer by email."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "File Update",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update Fields On A File",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.nanonets.com/api/v2/Inferences/Model/:model_id/ImageLevelInference",
+            "params": [
+              {
+                "name": "model_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "use_ui_version",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update existing fields or add new fields on a file. Payload is derived\nfrom the prior GET prediction response; `use_ui_version=true` is required.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "File Delete",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Delete A File",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.nanonets.com/api/v2/Inferences/Model/:model_id/InferenceRequestFiles/:file_id",
+            "params": [
+              {
+                "name": "model_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "file_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Permanently delete a processed file from a model."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "File Export",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retry All Exports",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.nanonets.com/api/v2/Inferences/Model/:model_id/ImageLevelInferences/retryallexports",
+            "params": [
+              {
+                "name": "model_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Re-trigger downstream export for one or more files whose initial export failed."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

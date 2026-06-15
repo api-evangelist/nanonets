@@ -1,0 +1,279 @@
+{
+  "info": {
+    "_postman_id": "3d6e475a-3663-4093-866c-2db6cbb197f0",
+    "name": "Nanonets External Integrations API",
+    "description": "Manage external database integrations linked to a Nanonets account and\nexecute generic SQL-style queries against them inside a Nanonets workflow.\nUsed by the Database Matching Conditions and database lookup workflow blocks.\n\n\nContact Support:\n Name: Nanonets\n Email: support@nanonets.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:12:58.000Z",
+    "updatedAt": "2026-06-05T15:12:58.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3d6e475a-3663-4093-866c-2db6cbb197f0"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v2",
+          "item": [
+            {
+              "name": "externalIntegrations",
+              "item": [
+                {
+                  "name": "{external_integration_id}",
+                  "item": [
+                    {
+                      "name": "executequery",
+                      "item": [
+                        {
+                          "name": "Execute Query",
+                          "id": "7f74345a-d4a8-4202-b48a-3026ddd284ef",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"query\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v2/externalIntegrations/:external_integration_id/executequery",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v2",
+                                "externalIntegrations",
+                                ":external_integration_id",
+                                "executequery"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "223d73a3-4d81-4c93-b952-423452f5d203",
+                                  "key": "external_integration_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Execute a generic SQL-style query against a connected external integration."
+                          },
+                          "response": [
+                            {
+                              "id": "76e6fae3-5d83-4ea1-92bb-a94b9e3e1404",
+                              "name": "Query result rows.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"query\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v2/externalIntegrations/:external_integration_id/executequery",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v2",
+                                    "externalIntegrations",
+                                    ":external_integration_id",
+                                    "executequery"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "external_integration_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"rows\": [\n    {\n      \"tempor__\": 28649556.135843083\n    },\n    {\n      \"quis606\": 87535086,\n      \"amet538\": false\n    }\n  ]\n}",
+                              "createdAt": "2026-06-05T15:12:58.000Z",
+                              "updatedAt": "2026-06-05T15:12:58.000Z",
+                              "uid": "35240-76e6fae3-5d83-4ea1-92bb-a94b9e3e1404"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:12:58.000Z",
+                          "updatedAt": "2026-06-05T15:12:58.000Z",
+                          "uid": "35240-7f74345a-d4a8-4202-b48a-3026ddd284ef"
+                        }
+                      ],
+                      "id": "d684246b-79d0-431b-89da-ec444975ce91",
+                      "createdAt": "2026-06-05T15:12:58.000Z",
+                      "updatedAt": "2026-06-05T15:12:58.000Z",
+                      "uid": "35240-d684246b-79d0-431b-89da-ec444975ce91"
+                    }
+                  ],
+                  "id": "522ff5fe-b450-4be8-b12c-e81345165a13",
+                  "createdAt": "2026-06-05T15:12:58.000Z",
+                  "updatedAt": "2026-06-05T15:12:58.000Z",
+                  "uid": "35240-522ff5fe-b450-4be8-b12c-e81345165a13"
+                },
+                {
+                  "name": "Get External Integrations",
+                  "id": "ad583ed3-7849-4d2b-b7d4-e5cf679aa903",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v2/externalIntegrations",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v2",
+                        "externalIntegrations"
+                      ]
+                    },
+                    "description": "List external integrations connected to the account."
+                  },
+                  "response": [
+                    {
+                      "id": "e2e88c02-c4fe-4d44-9897-8821d4aa643b",
+                      "name": "List of external integrations.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v2/externalIntegrations",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v2",
+                            "externalIntegrations"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<string>\",\n    \"email\": \"<email>\",\n    \"name\": \"<string>\",\n    \"type\": \"mssql\",\n    \"info\": {\n      \"do__f\": -23693070.684426412\n    }\n  },\n  {\n    \"id\": \"<string>\",\n    \"email\": \"<email>\",\n    \"name\": \"<string>\",\n    \"type\": \"mysql\",\n    \"info\": {\n      \"laborisdd8\": \"culpa\",\n      \"dolord\": false\n    }\n  }\n]",
+                      "createdAt": "2026-06-05T15:12:58.000Z",
+                      "updatedAt": "2026-06-05T15:12:58.000Z",
+                      "uid": "35240-e2e88c02-c4fe-4d44-9897-8821d4aa643b"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:12:58.000Z",
+                  "updatedAt": "2026-06-05T15:12:58.000Z",
+                  "uid": "35240-ad583ed3-7849-4d2b-b7d4-e5cf679aa903"
+                }
+              ],
+              "id": "126a2f8e-0bd3-4b14-8ebb-2f1ff67fa760",
+              "createdAt": "2026-06-05T15:12:58.000Z",
+              "updatedAt": "2026-06-05T15:12:58.000Z",
+              "uid": "35240-126a2f8e-0bd3-4b14-8ebb-2f1ff67fa760"
+            }
+          ],
+          "id": "d40e0a76-9bfd-4641-9568-d36fd132ed3d",
+          "createdAt": "2026-06-05T15:12:58.000Z",
+          "updatedAt": "2026-06-05T15:12:58.000Z",
+          "uid": "35240-d40e0a76-9bfd-4641-9568-d36fd132ed3d"
+        }
+      ],
+      "id": "4d9be433-b7fa-46ed-a6c5-d1161d78c5d4",
+      "createdAt": "2026-06-05T15:12:58.000Z",
+      "updatedAt": "2026-06-05T15:12:58.000Z",
+      "uid": "35240-4d9be433-b7fa-46ed-a6c5-d1161d78c5d4"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://app.nanonets.com"
+    }
+  ]
+}

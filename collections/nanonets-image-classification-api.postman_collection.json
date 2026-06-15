@@ -1,0 +1,309 @@
+{
+  "item": [
+    {
+      "id": "4430ee36-ea49-4f01-9ef5-9e2c6125b1cc",
+      "name": "Image Classification Predict",
+      "description": {
+        "content": "Predict on uploaded images or image URLs against a classification model.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5d9446a6-cbda-4778-bb47-761dba21bfb1",
+          "name": "Prediction For Image File",
+          "request": {
+            "name": "Prediction For Image File",
+            "description": {
+              "content": "Upload a file from the local filesystem to an image classification model.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ImageCategorization",
+                "LabelFile",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": "(Required) "
+                },
+                {
+                  "key": "modelId",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Unique identifier of the classification model."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "02598020-094c-4af7-9751-81194e9c9b79",
+              "name": "Classification result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ImageCategorization",
+                    "LabelFile",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Unique identifier of the classification model.",
+                        "type": "text/plain"
+                      },
+                      "key": "modelId",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"result\": [\n    {\n      \"message\": \"string\",\n      \"prediction\": [\n        {\n          \"label\": \"string\",\n          \"probability\": 0.2537962409907799\n        },\n        {\n          \"label\": \"string\",\n          \"probability\": 0.18653395504373071\n        }\n      ],\n      \"input\": \"string\"\n    },\n    {\n      \"message\": \"string\",\n      \"prediction\": [\n        {\n          \"label\": \"string\",\n          \"probability\": 0.02677868775643022\n        },\n        {\n          \"label\": \"string\",\n          \"probability\": 0.16180429959595888\n        }\n      ],\n      \"input\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dcc4a5cb-7361-4a91-8d8f-491e44516eca",
+          "name": "Prediction For Image URLs",
+          "request": {
+            "name": "Prediction For Image URLs",
+            "description": {
+              "content": "Submit one or more publicly accessible image URLs for classification.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ImageCategorization",
+                "LabelUrls",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "urls",
+                  "value": "<uri>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "urls",
+                  "value": "<uri>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "modelId",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e33d2689-2c82-4dae-a4e5-19e97c459745",
+              "name": "Classification result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ImageCategorization",
+                    "LabelUrls",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "urls",
+                      "value": "<uri>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "urls",
+                      "value": "<uri>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "modelId",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"result\": [\n    {\n      \"message\": \"string\",\n      \"prediction\": [\n        {\n          \"label\": \"string\",\n          \"probability\": 0.21843727686658976\n        },\n        {\n          \"label\": \"string\",\n          \"probability\": 0.6467580710089647\n        }\n      ],\n      \"input\": \"string\"\n    },\n    {\n      \"message\": \"string\",\n      \"prediction\": [\n        {\n          \"label\": \"string\",\n          \"probability\": 0.40091585792804074\n        },\n        {\n          \"label\": \"string\",\n          \"probability\": 0.22784648304458344\n        }\n      ],\n      \"input\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.nanonets.com/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "eb2bf0ce-1108-4239-98d2-48827d201a84",
+    "name": "Nanonets Image Classification API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Predict against a Nanonets image classification model. Submit images either\nas multipart file uploads or as a batch of publicly accessible URLs.\n\n\nContact Support:\n Name: Nanonets\n Email: support@nanonets.com",
+      "type": "text/plain"
+    }
+  }
+}

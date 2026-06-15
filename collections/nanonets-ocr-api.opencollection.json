@@ -1,0 +1,342 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nanonets OCR API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OCR Predict",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Prediction For Image File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.nanonets.com/api/v2/OCR/Model/:model_id/LabelFile/",
+            "params": [
+              {
+                "name": "model_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the Nanonets model."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "request_metadata",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Upload one or more files from the local filesystem to a Nanonets OCR model\nin sync mode. Optimized for files of 3 pages or fewer.\n"
+        },
+        {
+          "info": {
+            "name": "Async Prediction For Image File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.nanonets.com/api/v2/OCR/Model/:model_id/LabelFile/Async/",
+            "params": [
+              {
+                "name": "model_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the Nanonets model."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "async",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "request_metadata",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Upload one or more files from the local filesystem to a Nanonets OCR model\nin async mode. Recommended for files larger than 3 pages.\n"
+        },
+        {
+          "info": {
+            "name": "Prediction For Image URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.nanonets.com/api/v2/OCR/Model/:model_id/LabelUrls/",
+            "params": [
+              {
+                "name": "model_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the Nanonets model."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "urls",
+                  "value": ""
+                },
+                {
+                  "name": "request_metadata",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Send one or more publicly accessible URLs to a Nanonets OCR model in sync mode."
+        },
+        {
+          "info": {
+            "name": "Async Prediction For Image URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.nanonets.com/api/v2/OCR/Model/:model_id/LabelUrls/Async/",
+            "params": [
+              {
+                "name": "model_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the Nanonets model."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "urls",
+                  "value": ""
+                },
+                {
+                  "name": "async",
+                  "value": ""
+                },
+                {
+                  "name": "request_metadata",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Send one or more publicly accessible URLs to a Nanonets OCR model in async mode."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "OCR Retrieve",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Prediction File By File ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.nanonets.com/api/v2/Inferences/Model/:model_id/InferenceRequest/:request_file_id",
+            "params": [
+              {
+                "name": "model_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the Nanonets model."
+              },
+              {
+                "name": "request_file_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve prediction results for a single file by `model_id` and\n`request_file_id`. Includes the model prediction, modifications, and the\nfinal processed outcome plus signed URLs to download the source file.\n"
+        },
+        {
+          "info": {
+            "name": "Get Prediction File By Page ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.nanonets.com/api/v2/Inferences/Model/:model_id/InferenceRequest/:request_file_id/page/:page_id",
+            "params": [
+              {
+                "name": "model_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the Nanonets model."
+              },
+              {
+                "name": "request_file_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve prediction results for a specific page by unique page id."
+        },
+        {
+          "info": {
+            "name": "Get All Prediction Files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.nanonets.com/api/v2/Inferences/Model/:model_id/InferenceRequest/",
+            "params": [
+              {
+                "name": "model_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the Nanonets model."
+              },
+              {
+                "name": "start_day_interval",
+                "value": "",
+                "type": "query",
+                "description": "Number of days back from the current batch day (days since epoch)."
+              },
+              {
+                "name": "current_batch_day",
+                "value": "",
+                "type": "query",
+                "description": "Most recent day-since-epoch boundary for the window."
+              }
+            ]
+          },
+          "docs": "Get prediction results for all files uploaded to a model within a specified\ntimeframe. Pages are bucketed into `moderated_images` (approved) and\n`unmoderated_images` (rejected or not yet approved).\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "OCR Train",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Upload Training Images By File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.nanonets.com/api/v2/OCR/Model/:model_id/UploadFile/",
+            "params": [
+              {
+                "name": "model_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the Nanonets model."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "data",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Upload locally-stored training images for a model."
+        },
+        {
+          "info": {
+            "name": "Upload Training Images By URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.nanonets.com/api/v2/OCR/Model/:model_id/UploadUrls/",
+            "params": [
+              {
+                "name": "model_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the Nanonets model."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Upload training images for a model via publicly accessible URLs."
+        },
+        {
+          "info": {
+            "name": "Train Model",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.nanonets.com/api/v2/OCR/Model/:model_id/Train/",
+            "params": [
+              {
+                "name": "model_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the Nanonets model."
+              }
+            ]
+          },
+          "docs": "Train or retrain a Nanonets OCR model after training data has been uploaded."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

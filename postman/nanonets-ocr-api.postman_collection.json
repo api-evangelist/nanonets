@@ -1,0 +1,1409 @@
+{
+  "info": {
+    "_postman_id": "26a34ad0-5865-4241-b45b-1919364c1fa2",
+    "name": "Nanonets OCR API",
+    "description": "Synchronous and asynchronous OCR prediction and training endpoints for Nanonets\ncustom OCR models. Upload files by local path (multipart) or by public URL,\nretrieve predictions for a file, a page, or a batch within a time window, and\ntrain or retrain a model. Sync endpoints are optimized for files of 3 pages or\nfewer; async endpoints handle larger documents.\n\nAuthentication uses HTTP Basic with the API key as the username and an empty\npassword. All traffic must be HTTPS.\n\n\nContact Support:\n Name: Nanonets\n Email: support@nanonets.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:12:55.000Z",
+    "updatedAt": "2026-06-05T15:12:55.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-26a34ad0-5865-4241-b45b-1919364c1fa2"
+  },
+  "item": [
+    {
+      "name": "OCR",
+      "item": [
+        {
+          "name": "Model",
+          "item": [
+            {
+              "name": "{model_id}",
+              "item": [
+                {
+                  "name": "LabelFile",
+                  "item": [
+                    {
+                      "name": "Async",
+                      "item": [
+                        {
+                          "name": "Async Prediction For Image File",
+                          "id": "703ad8e0-7b57-42ed-8d28-6e4d77a7812d",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "multipart/form-data"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "formdata",
+                              "formdata": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "file",
+                                  "value": "<binary>,<binary>",
+                                  "type": "text"
+                                },
+                                {
+                                  "key": "async",
+                                  "value": "true",
+                                  "type": "text"
+                                },
+                                {
+                                  "key": "request_metadata",
+                                  "value": "<string>",
+                                  "type": "text"
+                                }
+                              ]
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/OCR/Model/:model_id/LabelFile/Async/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "OCR",
+                                "Model",
+                                ":model_id",
+                                "LabelFile",
+                                "Async",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "id": "f79d0ba9-11a2-40c7-9a8b-2148ed5b2e7b",
+                                  "key": "model_id",
+                                  "value": "<string>",
+                                  "description": "(Required) Unique identifier for the Nanonets model."
+                                }
+                              ]
+                            },
+                            "description": "Upload one or more files from the local filesystem to a Nanonets OCR model\nin async mode. Recommended for files larger than 3 pages.\n"
+                          },
+                          "response": [
+                            {
+                              "id": "4aa99052-ccee-451a-ba70-d4df62ae5274",
+                              "name": "Async prediction accepted with `request_file_id` for polling.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "multipart/form-data"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "formdata",
+                                  "formdata": [
+                                    {
+                                      "description": "(Required) ",
+                                      "key": "file",
+                                      "value": "<binary>,<binary>",
+                                      "type": "text"
+                                    },
+                                    {
+                                      "key": "async",
+                                      "value": "true",
+                                      "type": "text"
+                                    },
+                                    {
+                                      "key": "request_metadata",
+                                      "value": "<string>",
+                                      "type": "text"
+                                    }
+                                  ]
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/OCR/Model/:model_id/LabelFile/Async/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "OCR",
+                                    "Model",
+                                    ":model_id",
+                                    "LabelFile",
+                                    "Async",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "model_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"<string>\",\n  \"result\": [\n    {\n      \"message\": \"<string>\",\n      \"request_file_id\": \"<string>\",\n      \"filepath\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"request_file_id\": \"<string>\",\n      \"filepath\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-06-05T15:12:55.000Z",
+                              "updatedAt": "2026-06-05T15:12:55.000Z",
+                              "uid": "35240-4aa99052-ccee-451a-ba70-d4df62ae5274"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:12:55.000Z",
+                          "updatedAt": "2026-06-05T15:12:55.000Z",
+                          "uid": "35240-703ad8e0-7b57-42ed-8d28-6e4d77a7812d"
+                        }
+                      ],
+                      "id": "5cca3448-4578-415b-af5f-9ac443cd954b",
+                      "createdAt": "2026-06-05T15:12:55.000Z",
+                      "updatedAt": "2026-06-05T15:12:55.000Z",
+                      "uid": "35240-5cca3448-4578-415b-af5f-9ac443cd954b"
+                    },
+                    {
+                      "name": "Prediction For Image File",
+                      "id": "218dbbec-c506-4cb4-9005-4ff73d8a29e8",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) ",
+                              "key": "file",
+                              "value": "<binary>,<binary>",
+                              "type": "text"
+                            },
+                            {
+                              "description": "Free-form identifier echoed in the response.",
+                              "key": "request_metadata",
+                              "value": "<string>",
+                              "type": "text"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/OCR/Model/:model_id/LabelFile/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "OCR",
+                            "Model",
+                            ":model_id",
+                            "LabelFile",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "532ecab5-9a60-44b8-a110-e8256068a0a3",
+                              "key": "model_id",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier for the Nanonets model."
+                            }
+                          ]
+                        },
+                        "description": "Upload one or more files from the local filesystem to a Nanonets OCR model\nin sync mode. Optimized for files of 3 pages or fewer.\n"
+                      },
+                      "response": [
+                        {
+                          "id": "92931c70-fc44-46bf-a167-1e70f0bc9dc2",
+                          "name": "Prediction result.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "multipart/form-data"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "formdata",
+                              "formdata": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "file",
+                                  "value": "<binary>,<binary>",
+                                  "type": "text"
+                                },
+                                {
+                                  "description": "Free-form identifier echoed in the response.",
+                                  "key": "request_metadata",
+                                  "value": "<string>",
+                                  "type": "text"
+                                }
+                              ]
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/OCR/Model/:model_id/LabelFile/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "OCR",
+                                "Model",
+                                ":model_id",
+                                "LabelFile",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "model_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"result\": [\n    {\n      \"message\": \"<string>\",\n      \"input\": \"<string>\",\n      \"prediction\": [\n        {\n          \"id\": \"<string>\",\n          \"label\": \"<string>\",\n          \"xmin\": \"<number>\",\n          \"ymin\": \"<number>\",\n          \"xmax\": \"<number>\",\n          \"ymax\": \"<number>\",\n          \"score\": \"<number>\",\n          \"ocr_text\": \"<string>\",\n          \"type\": \"table\",\n          \"status\": \"<string>\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"<string>\",\n          \"page_no\": \"<integer>\",\n          \"label_id\": \"<string>\",\n          \"cells\": [\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            }\n          ]\n        },\n        {\n          \"id\": \"<string>\",\n          \"label\": \"<string>\",\n          \"xmin\": \"<number>\",\n          \"ymin\": \"<number>\",\n          \"xmax\": \"<number>\",\n          \"ymax\": \"<number>\",\n          \"score\": \"<number>\",\n          \"ocr_text\": \"<string>\",\n          \"type\": \"table\",\n          \"status\": \"<string>\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"<string>\",\n          \"page_no\": \"<integer>\",\n          \"label_id\": \"<string>\",\n          \"cells\": [\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            }\n          ]\n        }\n      ],\n      \"page\": \"<integer>\",\n      \"request_file_id\": \"<string>\",\n      \"id\": \"<string>\",\n      \"request_metadata\": \"<string>\",\n      \"processing_type\": \"\",\n      \"size\": {\n        \"width\": \"<number>\",\n        \"height\": \"<number>\"\n      }\n    },\n    {\n      \"message\": \"<string>\",\n      \"input\": \"<string>\",\n      \"prediction\": [\n        {\n          \"id\": \"<string>\",\n          \"label\": \"<string>\",\n          \"xmin\": \"<number>\",\n          \"ymin\": \"<number>\",\n          \"xmax\": \"<number>\",\n          \"ymax\": \"<number>\",\n          \"score\": \"<number>\",\n          \"ocr_text\": \"<string>\",\n          \"type\": \"field\",\n          \"status\": \"<string>\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"<string>\",\n          \"page_no\": \"<integer>\",\n          \"label_id\": \"<string>\",\n          \"cells\": [\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            }\n          ]\n        },\n        {\n          \"id\": \"<string>\",\n          \"label\": \"<string>\",\n          \"xmin\": \"<number>\",\n          \"ymin\": \"<number>\",\n          \"xmax\": \"<number>\",\n          \"ymax\": \"<number>\",\n          \"score\": \"<number>\",\n          \"ocr_text\": \"<string>\",\n          \"type\": \"table\",\n          \"status\": \"<string>\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"<string>\",\n          \"page_no\": \"<integer>\",\n          \"label_id\": \"<string>\",\n          \"cells\": [\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            }\n          ]\n        }\n      ],\n      \"page\": \"<integer>\",\n      \"request_file_id\": \"<string>\",\n      \"id\": \"<string>\",\n      \"request_metadata\": \"<string>\",\n      \"processing_type\": \"async\",\n      \"size\": {\n        \"width\": \"<number>\",\n        \"height\": \"<number>\"\n      }\n    }\n  ],\n  \"signed_urls\": {}\n}",
+                          "createdAt": "2026-06-05T15:12:55.000Z",
+                          "updatedAt": "2026-06-05T15:12:55.000Z",
+                          "uid": "35240-92931c70-fc44-46bf-a167-1e70f0bc9dc2"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:12:55.000Z",
+                      "updatedAt": "2026-06-05T15:12:55.000Z",
+                      "uid": "35240-218dbbec-c506-4cb4-9005-4ff73d8a29e8"
+                    }
+                  ],
+                  "id": "f51adbb3-fa95-43cf-b7d2-d99879b2fb21",
+                  "createdAt": "2026-06-05T15:12:55.000Z",
+                  "updatedAt": "2026-06-05T15:12:55.000Z",
+                  "uid": "35240-f51adbb3-fa95-43cf-b7d2-d99879b2fb21"
+                },
+                {
+                  "name": "LabelUrls",
+                  "item": [
+                    {
+                      "name": "Async",
+                      "item": [
+                        {
+                          "name": "Async Prediction For Image URL",
+                          "id": "dbe82ef6-6f32-4f8c-8a24-3d8115205641",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "urlencoded",
+                              "urlencoded": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "urls",
+                                  "value": "<uri>"
+                                },
+                                {
+                                  "description": "(Required) ",
+                                  "key": "urls",
+                                  "value": "<uri>"
+                                },
+                                {
+                                  "key": "async",
+                                  "value": "true"
+                                },
+                                {
+                                  "key": "request_metadata",
+                                  "value": "<string>"
+                                }
+                              ]
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/OCR/Model/:model_id/LabelUrls/Async/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "OCR",
+                                "Model",
+                                ":model_id",
+                                "LabelUrls",
+                                "Async",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "id": "ecdc26d3-0a58-4e19-a2f5-46f69d5b10f6",
+                                  "key": "model_id",
+                                  "value": "<string>",
+                                  "description": "(Required) Unique identifier for the Nanonets model."
+                                }
+                              ]
+                            },
+                            "description": "Send one or more publicly accessible URLs to a Nanonets OCR model in async mode."
+                          },
+                          "response": [
+                            {
+                              "id": "6d4d5971-a9c5-4315-a559-47e6df9d200d",
+                              "name": "Async prediction accepted.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/x-www-form-urlencoded"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "urlencoded",
+                                  "urlencoded": [
+                                    {
+                                      "description": "(Required) ",
+                                      "key": "urls",
+                                      "value": "<uri>"
+                                    },
+                                    {
+                                      "description": "(Required) ",
+                                      "key": "urls",
+                                      "value": "<uri>"
+                                    },
+                                    {
+                                      "key": "async",
+                                      "value": "true"
+                                    },
+                                    {
+                                      "key": "request_metadata",
+                                      "value": "<string>"
+                                    }
+                                  ]
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/OCR/Model/:model_id/LabelUrls/Async/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "OCR",
+                                    "Model",
+                                    ":model_id",
+                                    "LabelUrls",
+                                    "Async",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "model_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"<string>\",\n  \"result\": [\n    {\n      \"message\": \"<string>\",\n      \"request_file_id\": \"<string>\",\n      \"filepath\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"request_file_id\": \"<string>\",\n      \"filepath\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-06-05T15:12:55.000Z",
+                              "updatedAt": "2026-06-05T15:12:55.000Z",
+                              "uid": "35240-6d4d5971-a9c5-4315-a559-47e6df9d200d"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:12:55.000Z",
+                          "updatedAt": "2026-06-05T15:12:55.000Z",
+                          "uid": "35240-dbe82ef6-6f32-4f8c-8a24-3d8115205641"
+                        }
+                      ],
+                      "id": "dded52fb-d86d-43dd-8d0b-14f6b1fe03c6",
+                      "createdAt": "2026-06-05T15:12:55.000Z",
+                      "updatedAt": "2026-06-05T15:12:55.000Z",
+                      "uid": "35240-dded52fb-d86d-43dd-8d0b-14f6b1fe03c6"
+                    },
+                    {
+                      "name": "Prediction For Image URL",
+                      "id": "8e63e9f9-b65a-48ba-8e60-d5b046151e55",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/x-www-form-urlencoded"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "urlencoded",
+                          "urlencoded": [
+                            {
+                              "description": "(Required) ",
+                              "key": "urls",
+                              "value": "<uri>"
+                            },
+                            {
+                              "description": "(Required) ",
+                              "key": "urls",
+                              "value": "<uri>"
+                            },
+                            {
+                              "key": "request_metadata",
+                              "value": "<string>"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/OCR/Model/:model_id/LabelUrls/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "OCR",
+                            "Model",
+                            ":model_id",
+                            "LabelUrls",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "770a90e9-eabf-434f-b801-4b50b8c01d38",
+                              "key": "model_id",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier for the Nanonets model."
+                            }
+                          ]
+                        },
+                        "description": "Send one or more publicly accessible URLs to a Nanonets OCR model in sync mode."
+                      },
+                      "response": [
+                        {
+                          "id": "ff6b1486-6782-44ef-8c4e-4da6fb9b33c9",
+                          "name": "Prediction result.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "urlencoded",
+                              "urlencoded": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "urls",
+                                  "value": "<uri>"
+                                },
+                                {
+                                  "description": "(Required) ",
+                                  "key": "urls",
+                                  "value": "<uri>"
+                                },
+                                {
+                                  "key": "request_metadata",
+                                  "value": "<string>"
+                                }
+                              ]
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/OCR/Model/:model_id/LabelUrls/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "OCR",
+                                "Model",
+                                ":model_id",
+                                "LabelUrls",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "model_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"result\": [\n    {\n      \"message\": \"<string>\",\n      \"input\": \"<string>\",\n      \"prediction\": [\n        {\n          \"id\": \"<string>\",\n          \"label\": \"<string>\",\n          \"xmin\": \"<number>\",\n          \"ymin\": \"<number>\",\n          \"xmax\": \"<number>\",\n          \"ymax\": \"<number>\",\n          \"score\": \"<number>\",\n          \"ocr_text\": \"<string>\",\n          \"type\": \"table\",\n          \"status\": \"<string>\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"<string>\",\n          \"page_no\": \"<integer>\",\n          \"label_id\": \"<string>\",\n          \"cells\": [\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            }\n          ]\n        },\n        {\n          \"id\": \"<string>\",\n          \"label\": \"<string>\",\n          \"xmin\": \"<number>\",\n          \"ymin\": \"<number>\",\n          \"xmax\": \"<number>\",\n          \"ymax\": \"<number>\",\n          \"score\": \"<number>\",\n          \"ocr_text\": \"<string>\",\n          \"type\": \"table\",\n          \"status\": \"<string>\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"<string>\",\n          \"page_no\": \"<integer>\",\n          \"label_id\": \"<string>\",\n          \"cells\": [\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            }\n          ]\n        }\n      ],\n      \"page\": \"<integer>\",\n      \"request_file_id\": \"<string>\",\n      \"id\": \"<string>\",\n      \"request_metadata\": \"<string>\",\n      \"processing_type\": \"\",\n      \"size\": {\n        \"width\": \"<number>\",\n        \"height\": \"<number>\"\n      }\n    },\n    {\n      \"message\": \"<string>\",\n      \"input\": \"<string>\",\n      \"prediction\": [\n        {\n          \"id\": \"<string>\",\n          \"label\": \"<string>\",\n          \"xmin\": \"<number>\",\n          \"ymin\": \"<number>\",\n          \"xmax\": \"<number>\",\n          \"ymax\": \"<number>\",\n          \"score\": \"<number>\",\n          \"ocr_text\": \"<string>\",\n          \"type\": \"field\",\n          \"status\": \"<string>\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"<string>\",\n          \"page_no\": \"<integer>\",\n          \"label_id\": \"<string>\",\n          \"cells\": [\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            }\n          ]\n        },\n        {\n          \"id\": \"<string>\",\n          \"label\": \"<string>\",\n          \"xmin\": \"<number>\",\n          \"ymin\": \"<number>\",\n          \"xmax\": \"<number>\",\n          \"ymax\": \"<number>\",\n          \"score\": \"<number>\",\n          \"ocr_text\": \"<string>\",\n          \"type\": \"table\",\n          \"status\": \"<string>\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"<string>\",\n          \"page_no\": \"<integer>\",\n          \"label_id\": \"<string>\",\n          \"cells\": [\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            }\n          ]\n        }\n      ],\n      \"page\": \"<integer>\",\n      \"request_file_id\": \"<string>\",\n      \"id\": \"<string>\",\n      \"request_metadata\": \"<string>\",\n      \"processing_type\": \"async\",\n      \"size\": {\n        \"width\": \"<number>\",\n        \"height\": \"<number>\"\n      }\n    }\n  ],\n  \"signed_urls\": {}\n}",
+                          "createdAt": "2026-06-05T15:12:55.000Z",
+                          "updatedAt": "2026-06-05T15:12:55.000Z",
+                          "uid": "35240-ff6b1486-6782-44ef-8c4e-4da6fb9b33c9"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:12:55.000Z",
+                      "updatedAt": "2026-06-05T15:12:55.000Z",
+                      "uid": "35240-8e63e9f9-b65a-48ba-8e60-d5b046151e55"
+                    }
+                  ],
+                  "id": "95f2d703-c940-4ab7-8bf8-54c34fabe0ac",
+                  "createdAt": "2026-06-05T15:12:55.000Z",
+                  "updatedAt": "2026-06-05T15:12:55.000Z",
+                  "uid": "35240-95f2d703-c940-4ab7-8bf8-54c34fabe0ac"
+                },
+                {
+                  "name": "UploadFile",
+                  "item": [
+                    {
+                      "name": "Upload Training Images By File",
+                      "id": "feb1f848-b4ee-47be-8ce0-505541d8b7e2",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) ",
+                              "key": "file",
+                              "value": "<binary>,<binary>",
+                              "type": "text"
+                            },
+                            {
+                              "description": "(Required) JSON describing the annotation for each uploaded file.",
+                              "key": "data",
+                              "value": "<string>",
+                              "type": "text"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/OCR/Model/:model_id/UploadFile/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "OCR",
+                            "Model",
+                            ":model_id",
+                            "UploadFile",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "fcceb3ec-abf7-49d5-baef-5c40af91b871",
+                              "key": "model_id",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier for the Nanonets model."
+                            }
+                          ]
+                        },
+                        "description": "Upload locally-stored training images for a model."
+                      },
+                      "response": [
+                        {
+                          "id": "3eb2afa5-0a4b-49e2-b910-046bd3e88561",
+                          "name": "Upload acknowledged with totals per category.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "multipart/form-data"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "formdata",
+                              "formdata": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "file",
+                                  "value": "<binary>,<binary>",
+                                  "type": "text"
+                                },
+                                {
+                                  "description": "(Required) JSON describing the annotation for each uploaded file.",
+                                  "key": "data",
+                                  "value": "<string>",
+                                  "type": "text"
+                                }
+                              ]
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/OCR/Model/:model_id/UploadFile/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "OCR",
+                                "Model",
+                                ":model_id",
+                                "UploadFile",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "model_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:12:55.000Z",
+                          "updatedAt": "2026-06-05T15:12:55.000Z",
+                          "uid": "35240-3eb2afa5-0a4b-49e2-b910-046bd3e88561"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:12:55.000Z",
+                      "updatedAt": "2026-06-05T15:12:55.000Z",
+                      "uid": "35240-feb1f848-b4ee-47be-8ce0-505541d8b7e2"
+                    }
+                  ],
+                  "id": "3cf2b88a-10f2-42a6-a4bd-b4af38f9b544",
+                  "createdAt": "2026-06-05T15:12:55.000Z",
+                  "updatedAt": "2026-06-05T15:12:55.000Z",
+                  "uid": "35240-3cf2b88a-10f2-42a6-a4bd-b4af38f9b544"
+                },
+                {
+                  "name": "UploadUrls",
+                  "item": [
+                    {
+                      "name": "Upload Training Images By URL",
+                      "id": "46573dbf-8da2-4662-a5f6-6d0ad6be3dd3",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"urls\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"data\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/OCR/Model/:model_id/UploadUrls/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "OCR",
+                            "Model",
+                            ":model_id",
+                            "UploadUrls",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "a9060e44-0d25-410f-816a-15d62a7e2c9a",
+                              "key": "model_id",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier for the Nanonets model."
+                            }
+                          ]
+                        },
+                        "description": "Upload training images for a model via publicly accessible URLs."
+                      },
+                      "response": [
+                        {
+                          "id": "2176e07e-fede-4837-b2e3-bee19c87f510",
+                          "name": "Upload acknowledged.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"urls\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"data\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/OCR/Model/:model_id/UploadUrls/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "OCR",
+                                "Model",
+                                ":model_id",
+                                "UploadUrls",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "model_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:12:55.000Z",
+                          "updatedAt": "2026-06-05T15:12:55.000Z",
+                          "uid": "35240-2176e07e-fede-4837-b2e3-bee19c87f510"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:12:55.000Z",
+                      "updatedAt": "2026-06-05T15:12:55.000Z",
+                      "uid": "35240-46573dbf-8da2-4662-a5f6-6d0ad6be3dd3"
+                    }
+                  ],
+                  "id": "c7234aed-4fe0-4b11-9695-da487fff8e5f",
+                  "createdAt": "2026-06-05T15:12:55.000Z",
+                  "updatedAt": "2026-06-05T15:12:55.000Z",
+                  "uid": "35240-c7234aed-4fe0-4b11-9695-da487fff8e5f"
+                },
+                {
+                  "name": "Train",
+                  "item": [
+                    {
+                      "name": "Train Model",
+                      "id": "562b3800-3d16-4dc8-a2bb-ed5e8c1e1ce4",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/OCR/Model/:model_id/Train/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "OCR",
+                            "Model",
+                            ":model_id",
+                            "Train",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "9fa8095c-d292-4b78-972c-e56aa42e2446",
+                              "key": "model_id",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier for the Nanonets model."
+                            }
+                          ]
+                        },
+                        "description": "Train or retrain a Nanonets OCR model after training data has been uploaded."
+                      },
+                      "response": [
+                        {
+                          "id": "8a957e2e-3f35-484b-a147-42b611f6534c",
+                          "name": "Training job queued or running.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/OCR/Model/:model_id/Train/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "OCR",
+                                "Model",
+                                ":model_id",
+                                "Train",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "model_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:12:55.000Z",
+                          "updatedAt": "2026-06-05T15:12:55.000Z",
+                          "uid": "35240-8a957e2e-3f35-484b-a147-42b611f6534c"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:12:55.000Z",
+                      "updatedAt": "2026-06-05T15:12:55.000Z",
+                      "uid": "35240-562b3800-3d16-4dc8-a2bb-ed5e8c1e1ce4"
+                    }
+                  ],
+                  "id": "b9e0d1ce-0b3b-4f11-8e2e-a56f0c81ef83",
+                  "createdAt": "2026-06-05T15:12:55.000Z",
+                  "updatedAt": "2026-06-05T15:12:55.000Z",
+                  "uid": "35240-b9e0d1ce-0b3b-4f11-8e2e-a56f0c81ef83"
+                }
+              ],
+              "id": "13aff112-4bac-404d-8329-bfe5c603ee8c",
+              "createdAt": "2026-06-05T15:12:55.000Z",
+              "updatedAt": "2026-06-05T15:12:55.000Z",
+              "uid": "35240-13aff112-4bac-404d-8329-bfe5c603ee8c"
+            }
+          ],
+          "id": "14c01396-e7d3-44e7-86f4-f91159b58c0d",
+          "createdAt": "2026-06-05T15:12:55.000Z",
+          "updatedAt": "2026-06-05T15:12:55.000Z",
+          "uid": "35240-14c01396-e7d3-44e7-86f4-f91159b58c0d"
+        }
+      ],
+      "id": "8c998406-bdc2-48f6-b656-b277a6c75f04",
+      "createdAt": "2026-06-05T15:12:55.000Z",
+      "updatedAt": "2026-06-05T15:12:55.000Z",
+      "uid": "35240-8c998406-bdc2-48f6-b656-b277a6c75f04"
+    },
+    {
+      "name": "Inferences",
+      "item": [
+        {
+          "name": "Model",
+          "item": [
+            {
+              "name": "{model_id}",
+              "item": [
+                {
+                  "name": "InferenceRequest",
+                  "item": [
+                    {
+                      "name": "{request_file_id}",
+                      "item": [
+                        {
+                          "name": "page",
+                          "item": [
+                            {
+                              "name": "{page_id}",
+                              "item": [
+                                {
+                                  "name": "Get Prediction File By Page ID",
+                                  "id": "00b82db0-1aa0-4ef9-86e2-f55282a7d832",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/Inferences/Model/:model_id/InferenceRequest/:request_file_id/page/:page_id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "Inferences",
+                                        "Model",
+                                        ":model_id",
+                                        "InferenceRequest",
+                                        ":request_file_id",
+                                        "page",
+                                        ":page_id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "b3b8105d-7d3d-4f68-860d-2fdfb88fbf1d",
+                                          "key": "model_id",
+                                          "value": "<string>",
+                                          "description": "(Required) Unique identifier for the Nanonets model."
+                                        },
+                                        {
+                                          "id": "0a1f92b1-f3e4-495a-8bfd-6be24d3dc6b4",
+                                          "key": "request_file_id",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "5ee5b0da-0132-4e11-93dc-7bd71781456d",
+                                          "key": "page_id",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "Retrieve prediction results for a specific page by unique page id."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "bf10bb31-9d80-4f65-a07d-c513ff86b13a",
+                                      "name": "Page-level prediction result.",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: basic",
+                                            "key": "Authorization",
+                                            "value": "Basic <credentials>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/Inferences/Model/:model_id/InferenceRequest/:request_file_id/page/:page_id",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "Inferences",
+                                            "Model",
+                                            ":model_id",
+                                            "InferenceRequest",
+                                            ":request_file_id",
+                                            "page",
+                                            ":page_id"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "model_id"
+                                            },
+                                            {
+                                              "key": "request_file_id"
+                                            },
+                                            {
+                                              "key": "page_id"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"moderated_images_count\": \"<integer>\",\n  \"unmoderated_images_count\": \"<integer>\",\n  \"moderated_images\": [\n    {\n      \"model_id\": \"<string>\",\n      \"day_since_epoch\": \"<integer>\",\n      \"is_moderated\": \"<boolean>\",\n      \"id\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"predicted_boxes\": [\n        {\n          \"id\": \"<string>\",\n          \"label\": \"<string>\",\n          \"xmin\": \"<number>\",\n          \"ymin\": \"<number>\",\n          \"xmax\": \"<number>\",\n          \"ymax\": \"<number>\",\n          \"score\": \"<number>\",\n          \"ocr_text\": \"<string>\",\n          \"type\": \"table\",\n          \"status\": \"<string>\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"<string>\",\n          \"page_no\": \"<integer>\",\n          \"label_id\": \"<string>\",\n          \"cells\": [\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            }\n          ]\n        },\n        {\n          \"id\": \"<string>\",\n          \"label\": \"<string>\",\n          \"xmin\": \"<number>\",\n          \"ymin\": \"<number>\",\n          \"xmax\": \"<number>\",\n          \"ymax\": \"<number>\",\n          \"score\": \"<number>\",\n          \"ocr_text\": \"<string>\",\n          \"type\": \"table\",\n          \"status\": \"<string>\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"<string>\",\n          \"page_no\": \"<integer>\",\n          \"label_id\": \"<string>\",\n          \"cells\": [\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"model_id\": \"<string>\",\n      \"day_since_epoch\": \"<integer>\",\n      \"is_moderated\": \"<boolean>\",\n      \"id\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"predicted_boxes\": [\n        {\n          \"id\": \"<string>\",\n          \"label\": \"<string>\",\n          \"xmin\": \"<number>\",\n          \"ymin\": \"<number>\",\n          \"xmax\": \"<number>\",\n          \"ymax\": \"<number>\",\n          \"score\": \"<number>\",\n          \"ocr_text\": \"<string>\",\n          \"type\": \"table\",\n          \"status\": \"<string>\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"<string>\",\n          \"page_no\": \"<integer>\",\n          \"label_id\": \"<string>\",\n          \"cells\": [\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            }\n          ]\n        },\n        {\n          \"id\": \"<string>\",\n          \"label\": \"<string>\",\n          \"xmin\": \"<number>\",\n          \"ymin\": \"<number>\",\n          \"xmax\": \"<number>\",\n          \"ymax\": \"<number>\",\n          \"score\": \"<number>\",\n          \"ocr_text\": \"<string>\",\n          \"type\": \"field\",\n          \"status\": \"<string>\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"<string>\",\n          \"page_no\": \"<integer>\",\n          \"label_id\": \"<string>\",\n          \"cells\": [\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            }\n          ]\n        }\n      ]\n    }\n  ],\n  \"unmoderated_images\": [\n    {\n      \"model_id\": \"<string>\",\n      \"day_since_epoch\": \"<integer>\",\n      \"is_moderated\": \"<boolean>\",\n      \"id\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"predicted_boxes\": [\n        {\n          \"id\": \"<string>\",\n          \"label\": \"<string>\",\n          \"xmin\": \"<number>\",\n          \"ymin\": \"<number>\",\n          \"xmax\": \"<number>\",\n          \"ymax\": \"<number>\",\n          \"score\": \"<number>\",\n          \"ocr_text\": \"<string>\",\n          \"type\": \"field\",\n          \"status\": \"<string>\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"<string>\",\n          \"page_no\": \"<integer>\",\n          \"label_id\": \"<string>\",\n          \"cells\": [\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            }\n          ]\n        },\n        {\n          \"id\": \"<string>\",\n          \"label\": \"<string>\",\n          \"xmin\": \"<number>\",\n          \"ymin\": \"<number>\",\n          \"xmax\": \"<number>\",\n          \"ymax\": \"<number>\",\n          \"score\": \"<number>\",\n          \"ocr_text\": \"<string>\",\n          \"type\": \"field\",\n          \"status\": \"<string>\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"<string>\",\n          \"page_no\": \"<integer>\",\n          \"label_id\": \"<string>\",\n          \"cells\": [\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"model_id\": \"<string>\",\n      \"day_since_epoch\": \"<integer>\",\n      \"is_moderated\": \"<boolean>\",\n      \"id\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"predicted_boxes\": [\n        {\n          \"id\": \"<string>\",\n          \"label\": \"<string>\",\n          \"xmin\": \"<number>\",\n          \"ymin\": \"<number>\",\n          \"xmax\": \"<number>\",\n          \"ymax\": \"<number>\",\n          \"score\": \"<number>\",\n          \"ocr_text\": \"<string>\",\n          \"type\": \"field\",\n          \"status\": \"<string>\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"<string>\",\n          \"page_no\": \"<integer>\",\n          \"label_id\": \"<string>\",\n          \"cells\": [\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            }\n          ]\n        },\n        {\n          \"id\": \"<string>\",\n          \"label\": \"<string>\",\n          \"xmin\": \"<number>\",\n          \"ymin\": \"<number>\",\n          \"xmax\": \"<number>\",\n          \"ymax\": \"<number>\",\n          \"score\": \"<number>\",\n          \"ocr_text\": \"<string>\",\n          \"type\": \"table\",\n          \"status\": \"<string>\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"<string>\",\n          \"page_no\": \"<integer>\",\n          \"label_id\": \"<string>\",\n          \"cells\": [\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            }\n          ]\n        }\n      ]\n    }\n  ],\n  \"signed_urls\": {}\n}",
+                                      "createdAt": "2026-06-05T15:12:55.000Z",
+                                      "updatedAt": "2026-06-05T15:12:55.000Z",
+                                      "uid": "35240-bf10bb31-9d80-4f65-a07d-c513ff86b13a"
+                                    }
+                                  ],
+                                  "createdAt": "2026-06-05T15:12:55.000Z",
+                                  "updatedAt": "2026-06-05T15:12:55.000Z",
+                                  "uid": "35240-00b82db0-1aa0-4ef9-86e2-f55282a7d832"
+                                }
+                              ],
+                              "id": "e031a69b-a035-470c-aaa5-d366bbe8b669",
+                              "createdAt": "2026-06-05T15:12:55.000Z",
+                              "updatedAt": "2026-06-05T15:12:55.000Z",
+                              "uid": "35240-e031a69b-a035-470c-aaa5-d366bbe8b669"
+                            }
+                          ],
+                          "id": "2dc6e1d5-c740-443f-aeaa-29583f8e1ae0",
+                          "createdAt": "2026-06-05T15:12:55.000Z",
+                          "updatedAt": "2026-06-05T15:12:55.000Z",
+                          "uid": "35240-2dc6e1d5-c740-443f-aeaa-29583f8e1ae0"
+                        },
+                        {
+                          "name": "Get Prediction File By File ID",
+                          "id": "7a9ff388-381c-4f7d-9582-8d97eea5fd76",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/Inferences/Model/:model_id/InferenceRequest/:request_file_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "Inferences",
+                                "Model",
+                                ":model_id",
+                                "InferenceRequest",
+                                ":request_file_id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "3ca3567a-70ff-43b7-8e8f-907ffdafbe44",
+                                  "key": "model_id",
+                                  "value": "<string>",
+                                  "description": "(Required) Unique identifier for the Nanonets model."
+                                },
+                                {
+                                  "id": "354811e3-b374-44d2-a1f0-98d87d6c9bf0",
+                                  "key": "request_file_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Retrieve prediction results for a single file by `model_id` and\n`request_file_id`. Includes the model prediction, modifications, and the\nfinal processed outcome plus signed URLs to download the source file.\n"
+                          },
+                          "response": [
+                            {
+                              "id": "e339e2e6-24ef-4fa8-80e7-be3923fb8dd8",
+                              "name": "File-level prediction result.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/Inferences/Model/:model_id/InferenceRequest/:request_file_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "Inferences",
+                                    "Model",
+                                    ":model_id",
+                                    "InferenceRequest",
+                                    ":request_file_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "model_id"
+                                    },
+                                    {
+                                      "key": "request_file_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"moderated_images_count\": \"<integer>\",\n  \"unmoderated_images_count\": \"<integer>\",\n  \"moderated_images\": [\n    {\n      \"model_id\": \"<string>\",\n      \"day_since_epoch\": \"<integer>\",\n      \"is_moderated\": \"<boolean>\",\n      \"id\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"predicted_boxes\": [\n        {\n          \"id\": \"<string>\",\n          \"label\": \"<string>\",\n          \"xmin\": \"<number>\",\n          \"ymin\": \"<number>\",\n          \"xmax\": \"<number>\",\n          \"ymax\": \"<number>\",\n          \"score\": \"<number>\",\n          \"ocr_text\": \"<string>\",\n          \"type\": \"table\",\n          \"status\": \"<string>\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"<string>\",\n          \"page_no\": \"<integer>\",\n          \"label_id\": \"<string>\",\n          \"cells\": [\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            }\n          ]\n        },\n        {\n          \"id\": \"<string>\",\n          \"label\": \"<string>\",\n          \"xmin\": \"<number>\",\n          \"ymin\": \"<number>\",\n          \"xmax\": \"<number>\",\n          \"ymax\": \"<number>\",\n          \"score\": \"<number>\",\n          \"ocr_text\": \"<string>\",\n          \"type\": \"table\",\n          \"status\": \"<string>\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"<string>\",\n          \"page_no\": \"<integer>\",\n          \"label_id\": \"<string>\",\n          \"cells\": [\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"model_id\": \"<string>\",\n      \"day_since_epoch\": \"<integer>\",\n      \"is_moderated\": \"<boolean>\",\n      \"id\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"predicted_boxes\": [\n        {\n          \"id\": \"<string>\",\n          \"label\": \"<string>\",\n          \"xmin\": \"<number>\",\n          \"ymin\": \"<number>\",\n          \"xmax\": \"<number>\",\n          \"ymax\": \"<number>\",\n          \"score\": \"<number>\",\n          \"ocr_text\": \"<string>\",\n          \"type\": \"table\",\n          \"status\": \"<string>\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"<string>\",\n          \"page_no\": \"<integer>\",\n          \"label_id\": \"<string>\",\n          \"cells\": [\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            }\n          ]\n        },\n        {\n          \"id\": \"<string>\",\n          \"label\": \"<string>\",\n          \"xmin\": \"<number>\",\n          \"ymin\": \"<number>\",\n          \"xmax\": \"<number>\",\n          \"ymax\": \"<number>\",\n          \"score\": \"<number>\",\n          \"ocr_text\": \"<string>\",\n          \"type\": \"field\",\n          \"status\": \"<string>\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"<string>\",\n          \"page_no\": \"<integer>\",\n          \"label_id\": \"<string>\",\n          \"cells\": [\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            }\n          ]\n        }\n      ]\n    }\n  ],\n  \"unmoderated_images\": [\n    {\n      \"model_id\": \"<string>\",\n      \"day_since_epoch\": \"<integer>\",\n      \"is_moderated\": \"<boolean>\",\n      \"id\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"predicted_boxes\": [\n        {\n          \"id\": \"<string>\",\n          \"label\": \"<string>\",\n          \"xmin\": \"<number>\",\n          \"ymin\": \"<number>\",\n          \"xmax\": \"<number>\",\n          \"ymax\": \"<number>\",\n          \"score\": \"<number>\",\n          \"ocr_text\": \"<string>\",\n          \"type\": \"field\",\n          \"status\": \"<string>\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"<string>\",\n          \"page_no\": \"<integer>\",\n          \"label_id\": \"<string>\",\n          \"cells\": [\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            }\n          ]\n        },\n        {\n          \"id\": \"<string>\",\n          \"label\": \"<string>\",\n          \"xmin\": \"<number>\",\n          \"ymin\": \"<number>\",\n          \"xmax\": \"<number>\",\n          \"ymax\": \"<number>\",\n          \"score\": \"<number>\",\n          \"ocr_text\": \"<string>\",\n          \"type\": \"field\",\n          \"status\": \"<string>\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"<string>\",\n          \"page_no\": \"<integer>\",\n          \"label_id\": \"<string>\",\n          \"cells\": [\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"model_id\": \"<string>\",\n      \"day_since_epoch\": \"<integer>\",\n      \"is_moderated\": \"<boolean>\",\n      \"id\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"predicted_boxes\": [\n        {\n          \"id\": \"<string>\",\n          \"label\": \"<string>\",\n          \"xmin\": \"<number>\",\n          \"ymin\": \"<number>\",\n          \"xmax\": \"<number>\",\n          \"ymax\": \"<number>\",\n          \"score\": \"<number>\",\n          \"ocr_text\": \"<string>\",\n          \"type\": \"field\",\n          \"status\": \"<string>\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"<string>\",\n          \"page_no\": \"<integer>\",\n          \"label_id\": \"<string>\",\n          \"cells\": [\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            }\n          ]\n        },\n        {\n          \"id\": \"<string>\",\n          \"label\": \"<string>\",\n          \"xmin\": \"<number>\",\n          \"ymin\": \"<number>\",\n          \"xmax\": \"<number>\",\n          \"ymax\": \"<number>\",\n          \"score\": \"<number>\",\n          \"ocr_text\": \"<string>\",\n          \"type\": \"table\",\n          \"status\": \"<string>\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"<string>\",\n          \"page_no\": \"<integer>\",\n          \"label_id\": \"<string>\",\n          \"cells\": [\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            }\n          ]\n        }\n      ]\n    }\n  ],\n  \"signed_urls\": {}\n}",
+                              "createdAt": "2026-06-05T15:12:55.000Z",
+                              "updatedAt": "2026-06-05T15:12:55.000Z",
+                              "uid": "35240-e339e2e6-24ef-4fa8-80e7-be3923fb8dd8"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:12:55.000Z",
+                          "updatedAt": "2026-06-05T15:12:55.000Z",
+                          "uid": "35240-7a9ff388-381c-4f7d-9582-8d97eea5fd76"
+                        }
+                      ],
+                      "id": "8aaffb02-58c5-4d6c-a6be-f2f40ce8eeab",
+                      "createdAt": "2026-06-05T15:12:55.000Z",
+                      "updatedAt": "2026-06-05T15:12:55.000Z",
+                      "uid": "35240-8aaffb02-58c5-4d6c-a6be-f2f40ce8eeab"
+                    },
+                    {
+                      "name": "Get All Prediction Files",
+                      "id": "1fde6ff0-260d-41dd-906e-64b39ff7e72b",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/Inferences/Model/:model_id/InferenceRequest/?start_day_interval=<integer>&current_batch_day=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Inferences",
+                            "Model",
+                            ":model_id",
+                            "InferenceRequest",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Number of days back from the current batch day (days since epoch).",
+                              "key": "start_day_interval",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "(Required) Most recent day-since-epoch boundary for the window.",
+                              "key": "current_batch_day",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "9b6fbc0a-9ed5-4fe4-af5b-3a2c95c46d80",
+                              "key": "model_id",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier for the Nanonets model."
+                            }
+                          ]
+                        },
+                        "description": "Get prediction results for all files uploaded to a model within a specified\ntimeframe. Pages are bucketed into `moderated_images` (approved) and\n`unmoderated_images` (rejected or not yet approved).\n"
+                      },
+                      "response": [
+                        {
+                          "id": "7880bbf4-ff55-4c3e-af2c-a37df2996985",
+                          "name": "Time-windowed batch of predictions.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/Inferences/Model/:model_id/InferenceRequest/?start_day_interval=<integer>&current_batch_day=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "Inferences",
+                                "Model",
+                                ":model_id",
+                                "InferenceRequest",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Number of days back from the current batch day (days since epoch).",
+                                  "key": "start_day_interval",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "(Required) Most recent day-since-epoch boundary for the window.",
+                                  "key": "current_batch_day",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "model_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"moderated_images_count\": \"<integer>\",\n  \"unmoderated_images_count\": \"<integer>\",\n  \"moderated_images\": [\n    {\n      \"model_id\": \"<string>\",\n      \"day_since_epoch\": \"<integer>\",\n      \"is_moderated\": \"<boolean>\",\n      \"id\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"predicted_boxes\": [\n        {\n          \"id\": \"<string>\",\n          \"label\": \"<string>\",\n          \"xmin\": \"<number>\",\n          \"ymin\": \"<number>\",\n          \"xmax\": \"<number>\",\n          \"ymax\": \"<number>\",\n          \"score\": \"<number>\",\n          \"ocr_text\": \"<string>\",\n          \"type\": \"table\",\n          \"status\": \"<string>\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"<string>\",\n          \"page_no\": \"<integer>\",\n          \"label_id\": \"<string>\",\n          \"cells\": [\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            }\n          ]\n        },\n        {\n          \"id\": \"<string>\",\n          \"label\": \"<string>\",\n          \"xmin\": \"<number>\",\n          \"ymin\": \"<number>\",\n          \"xmax\": \"<number>\",\n          \"ymax\": \"<number>\",\n          \"score\": \"<number>\",\n          \"ocr_text\": \"<string>\",\n          \"type\": \"table\",\n          \"status\": \"<string>\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"<string>\",\n          \"page_no\": \"<integer>\",\n          \"label_id\": \"<string>\",\n          \"cells\": [\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"model_id\": \"<string>\",\n      \"day_since_epoch\": \"<integer>\",\n      \"is_moderated\": \"<boolean>\",\n      \"id\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"predicted_boxes\": [\n        {\n          \"id\": \"<string>\",\n          \"label\": \"<string>\",\n          \"xmin\": \"<number>\",\n          \"ymin\": \"<number>\",\n          \"xmax\": \"<number>\",\n          \"ymax\": \"<number>\",\n          \"score\": \"<number>\",\n          \"ocr_text\": \"<string>\",\n          \"type\": \"table\",\n          \"status\": \"<string>\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"<string>\",\n          \"page_no\": \"<integer>\",\n          \"label_id\": \"<string>\",\n          \"cells\": [\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            }\n          ]\n        },\n        {\n          \"id\": \"<string>\",\n          \"label\": \"<string>\",\n          \"xmin\": \"<number>\",\n          \"ymin\": \"<number>\",\n          \"xmax\": \"<number>\",\n          \"ymax\": \"<number>\",\n          \"score\": \"<number>\",\n          \"ocr_text\": \"<string>\",\n          \"type\": \"field\",\n          \"status\": \"<string>\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"<string>\",\n          \"page_no\": \"<integer>\",\n          \"label_id\": \"<string>\",\n          \"cells\": [\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            }\n          ]\n        }\n      ]\n    }\n  ],\n  \"unmoderated_images\": [\n    {\n      \"model_id\": \"<string>\",\n      \"day_since_epoch\": \"<integer>\",\n      \"is_moderated\": \"<boolean>\",\n      \"id\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"predicted_boxes\": [\n        {\n          \"id\": \"<string>\",\n          \"label\": \"<string>\",\n          \"xmin\": \"<number>\",\n          \"ymin\": \"<number>\",\n          \"xmax\": \"<number>\",\n          \"ymax\": \"<number>\",\n          \"score\": \"<number>\",\n          \"ocr_text\": \"<string>\",\n          \"type\": \"field\",\n          \"status\": \"<string>\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"<string>\",\n          \"page_no\": \"<integer>\",\n          \"label_id\": \"<string>\",\n          \"cells\": [\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            }\n          ]\n        },\n        {\n          \"id\": \"<string>\",\n          \"label\": \"<string>\",\n          \"xmin\": \"<number>\",\n          \"ymin\": \"<number>\",\n          \"xmax\": \"<number>\",\n          \"ymax\": \"<number>\",\n          \"score\": \"<number>\",\n          \"ocr_text\": \"<string>\",\n          \"type\": \"field\",\n          \"status\": \"<string>\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"<string>\",\n          \"page_no\": \"<integer>\",\n          \"label_id\": \"<string>\",\n          \"cells\": [\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"model_id\": \"<string>\",\n      \"day_since_epoch\": \"<integer>\",\n      \"is_moderated\": \"<boolean>\",\n      \"id\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"predicted_boxes\": [\n        {\n          \"id\": \"<string>\",\n          \"label\": \"<string>\",\n          \"xmin\": \"<number>\",\n          \"ymin\": \"<number>\",\n          \"xmax\": \"<number>\",\n          \"ymax\": \"<number>\",\n          \"score\": \"<number>\",\n          \"ocr_text\": \"<string>\",\n          \"type\": \"field\",\n          \"status\": \"<string>\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"<string>\",\n          \"page_no\": \"<integer>\",\n          \"label_id\": \"<string>\",\n          \"cells\": [\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            }\n          ]\n        },\n        {\n          \"id\": \"<string>\",\n          \"label\": \"<string>\",\n          \"xmin\": \"<number>\",\n          \"ymin\": \"<number>\",\n          \"xmax\": \"<number>\",\n          \"ymax\": \"<number>\",\n          \"score\": \"<number>\",\n          \"ocr_text\": \"<string>\",\n          \"type\": \"table\",\n          \"status\": \"<string>\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"<string>\",\n          \"page_no\": \"<integer>\",\n          \"label_id\": \"<string>\",\n          \"cells\": [\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            },\n            {\n              \"id\": \"<string>\",\n              \"row\": \"<integer>\",\n              \"col\": \"<integer>\",\n              \"label\": \"<string>\",\n              \"xmin\": \"<number>\",\n              \"ymin\": \"<number>\",\n              \"xmax\": \"<number>\",\n              \"ymax\": \"<number>\",\n              \"score\": \"<number>\",\n              \"text\": \"<string>\",\n              \"verification_status\": \"<string>\",\n              \"status\": \"<string>\",\n              \"failed_validation\": \"<string>\",\n              \"label_id\": \"<string>\"\n            }\n          ]\n        }\n      ]\n    }\n  ],\n  \"signed_urls\": {}\n}",
+                          "createdAt": "2026-06-05T15:12:55.000Z",
+                          "updatedAt": "2026-06-05T15:12:55.000Z",
+                          "uid": "35240-7880bbf4-ff55-4c3e-af2c-a37df2996985"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:12:55.000Z",
+                      "updatedAt": "2026-06-05T15:12:55.000Z",
+                      "uid": "35240-1fde6ff0-260d-41dd-906e-64b39ff7e72b"
+                    }
+                  ],
+                  "id": "e6b84f43-70be-4533-8916-105eb99b0dcb",
+                  "createdAt": "2026-06-05T15:12:55.000Z",
+                  "updatedAt": "2026-06-05T15:12:55.000Z",
+                  "uid": "35240-e6b84f43-70be-4533-8916-105eb99b0dcb"
+                }
+              ],
+              "id": "1ba8589b-0639-4ed4-a4ae-155d57698b4a",
+              "createdAt": "2026-06-05T15:12:55.000Z",
+              "updatedAt": "2026-06-05T15:12:55.000Z",
+              "uid": "35240-1ba8589b-0639-4ed4-a4ae-155d57698b4a"
+            }
+          ],
+          "id": "9c07496e-6abc-4d28-967c-c20722b5659c",
+          "createdAt": "2026-06-05T15:12:55.000Z",
+          "updatedAt": "2026-06-05T15:12:55.000Z",
+          "uid": "35240-9c07496e-6abc-4d28-967c-c20722b5659c"
+        }
+      ],
+      "id": "566646df-6750-42c5-9bbc-9b95383fed34",
+      "createdAt": "2026-06-05T15:12:55.000Z",
+      "updatedAt": "2026-06-05T15:12:55.000Z",
+      "uid": "35240-566646df-6750-42c5-9bbc-9b95383fed34"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://app.nanonets.com/api/v2"
+    }
+  ]
+}

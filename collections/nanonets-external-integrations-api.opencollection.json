@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nanonets External Integrations API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "External Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get External Integrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.nanonets.com/api/v2/externalIntegrations"
+          },
+          "docs": "List external integrations connected to the account."
+        },
+        {
+          "info": {
+            "name": "Execute Query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.nanonets.com/api/v2/externalIntegrations/:external_integration_id/executequery",
+            "params": [
+              {
+                "name": "external_integration_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Execute a generic SQL-style query against a connected external integration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

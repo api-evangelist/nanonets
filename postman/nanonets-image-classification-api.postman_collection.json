@@ -1,0 +1,305 @@
+{
+  "info": {
+    "_postman_id": "506f3b69-9c9a-4acd-bc3a-cab2e70dfdcc",
+    "name": "Nanonets Image Classification API",
+    "description": "Predict against a Nanonets image classification model. Submit images either\nas multipart file uploads or as a batch of publicly accessible URLs.\n\n\nContact Support:\n Name: Nanonets\n Email: support@nanonets.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:12:56.000Z",
+    "updatedAt": "2026-06-05T15:12:56.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-506f3b69-9c9a-4acd-bc3a-cab2e70dfdcc"
+  },
+  "item": [
+    {
+      "name": "ImageCategorization",
+      "item": [
+        {
+          "name": "LabelFile",
+          "item": [
+            {
+              "name": "Prediction For Image File",
+              "id": "0df6911a-d541-46f7-8eab-1f67873c2a22",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "multipart/form-data"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": "(Required) ",
+                      "key": "file",
+                      "type": "file",
+                      "value": null
+                    },
+                    {
+                      "description": "(Required) Unique identifier of the classification model.",
+                      "key": "modelId",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/ImageCategorization/LabelFile/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ImageCategorization",
+                    "LabelFile",
+                    ""
+                  ]
+                },
+                "description": "Upload a file from the local filesystem to an image classification model."
+              },
+              "response": [
+                {
+                  "id": "fc2fca44-cc70-4514-9074-4163e6fcb87e",
+                  "name": "Classification result.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "description": "(Required) ",
+                          "key": "file",
+                          "type": "file"
+                        },
+                        {
+                          "description": "(Required) Unique identifier of the classification model.",
+                          "key": "modelId",
+                          "value": "<string>",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/ImageCategorization/LabelFile/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ImageCategorization",
+                        "LabelFile",
+                        ""
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"result\": [\n    {\n      \"message\": \"<string>\",\n      \"prediction\": [\n        {\n          \"label\": \"<string>\",\n          \"probability\": \"<number>\"\n        },\n        {\n          \"label\": \"<string>\",\n          \"probability\": \"<number>\"\n        }\n      ],\n      \"input\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"prediction\": [\n        {\n          \"label\": \"<string>\",\n          \"probability\": \"<number>\"\n        },\n        {\n          \"label\": \"<string>\",\n          \"probability\": \"<number>\"\n        }\n      ],\n      \"input\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:12:56.000Z",
+                  "updatedAt": "2026-06-05T15:12:56.000Z",
+                  "uid": "35240-fc2fca44-cc70-4514-9074-4163e6fcb87e"
+                }
+              ],
+              "createdAt": "2026-06-05T15:12:56.000Z",
+              "updatedAt": "2026-06-05T15:12:56.000Z",
+              "uid": "35240-0df6911a-d541-46f7-8eab-1f67873c2a22"
+            }
+          ],
+          "id": "5846da01-dbf2-4e5e-919f-50cf96157519",
+          "createdAt": "2026-06-05T15:12:56.000Z",
+          "updatedAt": "2026-06-05T15:12:56.000Z",
+          "uid": "35240-5846da01-dbf2-4e5e-919f-50cf96157519"
+        },
+        {
+          "name": "LabelUrls",
+          "item": [
+            {
+              "name": "Prediction For Image URLs",
+              "id": "1e124d4d-5d24-43fe-8f3c-25d48f1c8705",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) ",
+                      "key": "urls",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "urls",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "modelId",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/ImageCategorization/LabelUrls/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ImageCategorization",
+                    "LabelUrls",
+                    ""
+                  ]
+                },
+                "description": "Submit one or more publicly accessible image URLs for classification."
+              },
+              "response": [
+                {
+                  "id": "01933e9b-ac9a-49ae-811f-33f6621928b7",
+                  "name": "Classification result.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) ",
+                          "key": "urls",
+                          "value": "<uri>"
+                        },
+                        {
+                          "description": "(Required) ",
+                          "key": "urls",
+                          "value": "<uri>"
+                        },
+                        {
+                          "description": "(Required) ",
+                          "key": "modelId",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/ImageCategorization/LabelUrls/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ImageCategorization",
+                        "LabelUrls",
+                        ""
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"result\": [\n    {\n      \"message\": \"<string>\",\n      \"prediction\": [\n        {\n          \"label\": \"<string>\",\n          \"probability\": \"<number>\"\n        },\n        {\n          \"label\": \"<string>\",\n          \"probability\": \"<number>\"\n        }\n      ],\n      \"input\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"prediction\": [\n        {\n          \"label\": \"<string>\",\n          \"probability\": \"<number>\"\n        },\n        {\n          \"label\": \"<string>\",\n          \"probability\": \"<number>\"\n        }\n      ],\n      \"input\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:12:56.000Z",
+                  "updatedAt": "2026-06-05T15:12:56.000Z",
+                  "uid": "35240-01933e9b-ac9a-49ae-811f-33f6621928b7"
+                }
+              ],
+              "createdAt": "2026-06-05T15:12:56.000Z",
+              "updatedAt": "2026-06-05T15:12:56.000Z",
+              "uid": "35240-1e124d4d-5d24-43fe-8f3c-25d48f1c8705"
+            }
+          ],
+          "id": "0347a1cc-63dd-4533-8664-ffb5507acf3b",
+          "createdAt": "2026-06-05T15:12:56.000Z",
+          "updatedAt": "2026-06-05T15:12:56.000Z",
+          "uid": "35240-0347a1cc-63dd-4533-8664-ffb5507acf3b"
+        }
+      ],
+      "id": "18d9479e-68ae-4eb3-8377-e0ffab3bdfc5",
+      "createdAt": "2026-06-05T15:12:56.000Z",
+      "updatedAt": "2026-06-05T15:12:56.000Z",
+      "uid": "35240-18d9479e-68ae-4eb3-8377-e0ffab3bdfc5"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://app.nanonets.com/api/v2"
+    }
+  ]
+}

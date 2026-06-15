@@ -1,0 +1,874 @@
+{
+  "info": {
+    "_postman_id": "de9432c5-9c8a-4f11-82f2-7f54c0771345",
+    "name": "Nanonets File Management API",
+    "description": "Approve, unapprove, assign, update fields on, delete, and re-export files\nwithin a Nanonets model. These endpoints drive the human-in-the-loop review\nworkflow and downstream export retries.\n\n\nContact Support:\n Name: Nanonets\n Email: support@nanonets.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:12:57.000Z",
+    "updatedAt": "2026-06-05T15:12:57.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-de9432c5-9c8a-4f11-82f2-7f54c0771345"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v2",
+          "item": [
+            {
+              "name": "ImageLevelInferences",
+              "item": [
+                {
+                  "name": "Model",
+                  "item": [
+                    {
+                      "name": "{model_id}",
+                      "item": [
+                        {
+                          "name": "Verify",
+                          "item": [
+                            {
+                              "name": "{request_file_id}",
+                              "item": [
+                                {
+                                  "name": "Approve File",
+                                  "id": "0f2fb1ff-b423-4106-8abc-d9ab3a2c58c1",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "POST",
+                                    "header": [],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v2/ImageLevelInferences/Model/:model_id/Verify/:request_file_id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v2",
+                                        "ImageLevelInferences",
+                                        "Model",
+                                        ":model_id",
+                                        "Verify",
+                                        ":request_file_id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "47dcb0ba-7a87-4e77-8c9a-107a8a88edb8",
+                                          "key": "model_id",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "1208f2ae-696b-443e-8c64-574ef5fc867a",
+                                          "key": "request_file_id",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "Mark a processed file as approved (moderated)."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "4061b3d8-0e15-4431-afb6-6178adf482bd",
+                                      "name": "File approved.",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: basic",
+                                            "key": "Authorization",
+                                            "value": "Basic <credentials>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v2/ImageLevelInferences/Model/:model_id/Verify/:request_file_id",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v2",
+                                            "ImageLevelInferences",
+                                            "Model",
+                                            ":model_id",
+                                            "Verify",
+                                            ":request_file_id"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "model_id"
+                                            },
+                                            {
+                                              "key": "request_file_id"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-06-05T15:12:57.000Z",
+                                      "updatedAt": "2026-06-05T15:12:57.000Z",
+                                      "uid": "35240-4061b3d8-0e15-4431-afb6-6178adf482bd"
+                                    }
+                                  ],
+                                  "createdAt": "2026-06-05T15:12:57.000Z",
+                                  "updatedAt": "2026-06-05T15:12:57.000Z",
+                                  "uid": "35240-0f2fb1ff-b423-4106-8abc-d9ab3a2c58c1"
+                                }
+                              ],
+                              "id": "3a3dbe9f-978c-44d5-92ec-6148126dff8e",
+                              "createdAt": "2026-06-05T15:12:57.000Z",
+                              "updatedAt": "2026-06-05T15:12:57.000Z",
+                              "uid": "35240-3a3dbe9f-978c-44d5-92ec-6148126dff8e"
+                            }
+                          ],
+                          "id": "fb6b500d-edb8-45f8-8c73-eca557621a4e",
+                          "createdAt": "2026-06-05T15:12:57.000Z",
+                          "updatedAt": "2026-06-05T15:12:57.000Z",
+                          "uid": "35240-fb6b500d-edb8-45f8-8c73-eca557621a4e"
+                        },
+                        {
+                          "name": "UnVerify",
+                          "item": [
+                            {
+                              "name": "{request_file_id}",
+                              "item": [
+                                {
+                                  "name": "Unapprove File",
+                                  "id": "2246e244-c2ce-46b6-a8dc-04fbef2e4477",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "POST",
+                                    "header": [],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v2/ImageLevelInferences/Model/:model_id/UnVerify/:request_file_id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v2",
+                                        "ImageLevelInferences",
+                                        "Model",
+                                        ":model_id",
+                                        "UnVerify",
+                                        ":request_file_id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "79b72603-3c6a-412e-89c6-0fbbb425dbc9",
+                                          "key": "model_id",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "53558c19-06e7-4db5-9dcf-c9aa40366717",
+                                          "key": "request_file_id",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "Revert an approved file back to unapproved state."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "1877d300-0d6d-41b5-b383-e25e6ca6d310",
+                                      "name": "File unapproved.",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: basic",
+                                            "key": "Authorization",
+                                            "value": "Basic <credentials>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v2/ImageLevelInferences/Model/:model_id/UnVerify/:request_file_id",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v2",
+                                            "ImageLevelInferences",
+                                            "Model",
+                                            ":model_id",
+                                            "UnVerify",
+                                            ":request_file_id"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "model_id"
+                                            },
+                                            {
+                                              "key": "request_file_id"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-06-05T15:12:57.000Z",
+                                      "updatedAt": "2026-06-05T15:12:57.000Z",
+                                      "uid": "35240-1877d300-0d6d-41b5-b383-e25e6ca6d310"
+                                    }
+                                  ],
+                                  "createdAt": "2026-06-05T15:12:57.000Z",
+                                  "updatedAt": "2026-06-05T15:12:57.000Z",
+                                  "uid": "35240-2246e244-c2ce-46b6-a8dc-04fbef2e4477"
+                                }
+                              ],
+                              "id": "530c10b0-c309-4e4e-8cb1-33dd04f458ce",
+                              "createdAt": "2026-06-05T15:12:57.000Z",
+                              "updatedAt": "2026-06-05T15:12:57.000Z",
+                              "uid": "35240-530c10b0-c309-4e4e-8cb1-33dd04f458ce"
+                            }
+                          ],
+                          "id": "83234d04-1f88-4c5d-84e8-17bd26482ae2",
+                          "createdAt": "2026-06-05T15:12:57.000Z",
+                          "updatedAt": "2026-06-05T15:12:57.000Z",
+                          "uid": "35240-83234d04-1f88-4c5d-84e8-17bd26482ae2"
+                        }
+                      ],
+                      "id": "2ba9745f-4f10-42e2-9e04-878561eb7795",
+                      "createdAt": "2026-06-05T15:12:57.000Z",
+                      "updatedAt": "2026-06-05T15:12:57.000Z",
+                      "uid": "35240-2ba9745f-4f10-42e2-9e04-878561eb7795"
+                    }
+                  ],
+                  "id": "99a3177d-bcde-4bd7-b73b-0b167d8ce860",
+                  "createdAt": "2026-06-05T15:12:57.000Z",
+                  "updatedAt": "2026-06-05T15:12:57.000Z",
+                  "uid": "35240-99a3177d-bcde-4bd7-b73b-0b167d8ce860"
+                }
+              ],
+              "id": "9e1bfdce-d7e5-4fc5-8b75-74f7cf30cc74",
+              "createdAt": "2026-06-05T15:12:57.000Z",
+              "updatedAt": "2026-06-05T15:12:57.000Z",
+              "uid": "35240-9e1bfdce-d7e5-4fc5-8b75-74f7cf30cc74"
+            },
+            {
+              "name": "team",
+              "item": [
+                {
+                  "name": "members",
+                  "item": [
+                    {
+                      "name": "model",
+                      "item": [
+                        {
+                          "name": "{model_id}",
+                          "item": [
+                            {
+                              "name": "assign",
+                              "item": [
+                                {
+                                  "name": "files",
+                                  "item": [
+                                    {
+                                      "name": "Assign Files To A Team Member",
+                                      "id": "e28073ad-3915-4843-a35f-985544c9f1e3",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"member\": \"<email>\",\n  \"file_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v2/team/members/model/:model_id/assign/files",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v2",
+                                            "team",
+                                            "members",
+                                            "model",
+                                            ":model_id",
+                                            "assign",
+                                            "files"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "cfa34129-ebc8-4373-a135-02c259619bde",
+                                              "key": "model_id",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "Assign one or more files in a model to a specific reviewer by email."
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "d03bd1d7-203e-4eb9-bc07-9b4ed9f22666",
+                                          "name": "Files assigned.",
+                                          "originalRequest": {
+                                            "method": "POST",
+                                            "header": [
+                                              {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: basic",
+                                                "key": "Authorization",
+                                                "value": "Basic <credentials>"
+                                              }
+                                            ],
+                                            "body": {
+                                              "mode": "raw",
+                                              "raw": "{\n  \"member\": \"<email>\",\n  \"file_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                                              "options": {
+                                                "raw": {
+                                                  "headerFamily": "json",
+                                                  "language": "json"
+                                                }
+                                              }
+                                            },
+                                            "url": {
+                                              "raw": "{{baseUrl}}/api/v2/team/members/model/:model_id/assign/files",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "api",
+                                                "v2",
+                                                "team",
+                                                "members",
+                                                "model",
+                                                ":model_id",
+                                                "assign",
+                                                "files"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "model_id"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-06-05T15:12:57.000Z",
+                                          "updatedAt": "2026-06-05T15:12:57.000Z",
+                                          "uid": "35240-d03bd1d7-203e-4eb9-bc07-9b4ed9f22666"
+                                        }
+                                      ],
+                                      "createdAt": "2026-06-05T15:12:57.000Z",
+                                      "updatedAt": "2026-06-05T15:12:57.000Z",
+                                      "uid": "35240-e28073ad-3915-4843-a35f-985544c9f1e3"
+                                    }
+                                  ],
+                                  "id": "3ce786b3-bc1e-4bf2-9ef5-521ba5d01867",
+                                  "createdAt": "2026-06-05T15:12:57.000Z",
+                                  "updatedAt": "2026-06-05T15:12:57.000Z",
+                                  "uid": "35240-3ce786b3-bc1e-4bf2-9ef5-521ba5d01867"
+                                }
+                              ],
+                              "id": "d65096a6-ff65-4fba-a4e5-757811d24187",
+                              "createdAt": "2026-06-05T15:12:57.000Z",
+                              "updatedAt": "2026-06-05T15:12:57.000Z",
+                              "uid": "35240-d65096a6-ff65-4fba-a4e5-757811d24187"
+                            }
+                          ],
+                          "id": "81dded18-e2b4-4fa9-abd6-84c3362b507a",
+                          "createdAt": "2026-06-05T15:12:57.000Z",
+                          "updatedAt": "2026-06-05T15:12:57.000Z",
+                          "uid": "35240-81dded18-e2b4-4fa9-abd6-84c3362b507a"
+                        }
+                      ],
+                      "id": "0ad57f8d-19c6-471c-99a3-d7825b1d8f26",
+                      "createdAt": "2026-06-05T15:12:57.000Z",
+                      "updatedAt": "2026-06-05T15:12:57.000Z",
+                      "uid": "35240-0ad57f8d-19c6-471c-99a3-d7825b1d8f26"
+                    }
+                  ],
+                  "id": "a77257e2-c914-4b5b-817a-e698671754e9",
+                  "createdAt": "2026-06-05T15:12:57.000Z",
+                  "updatedAt": "2026-06-05T15:12:57.000Z",
+                  "uid": "35240-a77257e2-c914-4b5b-817a-e698671754e9"
+                }
+              ],
+              "id": "86724be1-99d2-4916-a5dd-ba09de3c11bb",
+              "createdAt": "2026-06-05T15:12:57.000Z",
+              "updatedAt": "2026-06-05T15:12:57.000Z",
+              "uid": "35240-86724be1-99d2-4916-a5dd-ba09de3c11bb"
+            },
+            {
+              "name": "Inferences",
+              "item": [
+                {
+                  "name": "Model",
+                  "item": [
+                    {
+                      "name": "{model_id}",
+                      "item": [
+                        {
+                          "name": "ImageLevelInference",
+                          "item": [
+                            {
+                              "name": "Update Fields On A File",
+                              "id": "03b57e26-9e45-44fe-8dfc-bb1a7826fe72",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "PATCH",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v2/Inferences/Model/:model_id/ImageLevelInference?use_ui_version=true",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v2",
+                                    "Inferences",
+                                    "Model",
+                                    ":model_id",
+                                    "ImageLevelInference"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) ",
+                                      "key": "use_ui_version",
+                                      "value": "true"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "6d175552-fde3-42cb-94d4-b46922f58751",
+                                      "key": "model_id",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "Update existing fields or add new fields on a file. Payload is derived\nfrom the prior GET prediction response; `use_ui_version=true` is required.\n"
+                              },
+                              "response": [
+                                {
+                                  "id": "074ea468-e647-40fd-9fb7-4ba0c759c9c5",
+                                  "name": "Field update applied.",
+                                  "originalRequest": {
+                                    "method": "PATCH",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v2/Inferences/Model/:model_id/ImageLevelInference?use_ui_version=true",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v2",
+                                        "Inferences",
+                                        "Model",
+                                        ":model_id",
+                                        "ImageLevelInference"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "(Required) ",
+                                          "key": "use_ui_version",
+                                          "value": "true"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "model_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-06-05T15:12:57.000Z",
+                                  "updatedAt": "2026-06-05T15:12:57.000Z",
+                                  "uid": "35240-074ea468-e647-40fd-9fb7-4ba0c759c9c5"
+                                }
+                              ],
+                              "createdAt": "2026-06-05T15:12:57.000Z",
+                              "updatedAt": "2026-06-05T15:12:57.000Z",
+                              "uid": "35240-03b57e26-9e45-44fe-8dfc-bb1a7826fe72"
+                            }
+                          ],
+                          "id": "97a9a106-82d6-47be-b71b-10acba0de568",
+                          "createdAt": "2026-06-05T15:12:57.000Z",
+                          "updatedAt": "2026-06-05T15:12:57.000Z",
+                          "uid": "35240-97a9a106-82d6-47be-b71b-10acba0de568"
+                        },
+                        {
+                          "name": "InferenceRequestFiles",
+                          "item": [
+                            {
+                              "name": "{file_id}",
+                              "item": [
+                                {
+                                  "name": "Delete A File",
+                                  "id": "15f97b47-139e-4315-9ff8-bd2852e7d899",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "DELETE",
+                                    "header": [],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v2/Inferences/Model/:model_id/InferenceRequestFiles/:file_id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v2",
+                                        "Inferences",
+                                        "Model",
+                                        ":model_id",
+                                        "InferenceRequestFiles",
+                                        ":file_id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "26cdb56a-0b52-4846-8ae5-414d9ebfdd9b",
+                                          "key": "model_id",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "c55dc1a2-261b-4771-ab76-ccf7a7e387f8",
+                                          "key": "file_id",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "Permanently delete a processed file from a model."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "35b6cdf3-deed-4fd1-8909-904720c62095",
+                                      "name": "File deleted.",
+                                      "originalRequest": {
+                                        "method": "DELETE",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: basic",
+                                            "key": "Authorization",
+                                            "value": "Basic <credentials>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v2/Inferences/Model/:model_id/InferenceRequestFiles/:file_id",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v2",
+                                            "Inferences",
+                                            "Model",
+                                            ":model_id",
+                                            "InferenceRequestFiles",
+                                            ":file_id"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "model_id"
+                                            },
+                                            {
+                                              "key": "file_id"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-06-05T15:12:57.000Z",
+                                      "updatedAt": "2026-06-05T15:12:57.000Z",
+                                      "uid": "35240-35b6cdf3-deed-4fd1-8909-904720c62095"
+                                    }
+                                  ],
+                                  "createdAt": "2026-06-05T15:12:57.000Z",
+                                  "updatedAt": "2026-06-05T15:12:57.000Z",
+                                  "uid": "35240-15f97b47-139e-4315-9ff8-bd2852e7d899"
+                                }
+                              ],
+                              "id": "03b04cf4-4608-4803-9e09-4abc4781da03",
+                              "createdAt": "2026-06-05T15:12:57.000Z",
+                              "updatedAt": "2026-06-05T15:12:57.000Z",
+                              "uid": "35240-03b04cf4-4608-4803-9e09-4abc4781da03"
+                            }
+                          ],
+                          "id": "eba52ab2-78c3-4524-a0b4-04130d582ee3",
+                          "createdAt": "2026-06-05T15:12:57.000Z",
+                          "updatedAt": "2026-06-05T15:12:57.000Z",
+                          "uid": "35240-eba52ab2-78c3-4524-a0b4-04130d582ee3"
+                        },
+                        {
+                          "name": "ImageLevelInferences",
+                          "item": [
+                            {
+                              "name": "retryallexports",
+                              "item": [
+                                {
+                                  "name": "Retry All Exports",
+                                  "id": "a1c05793-621e-4cfa-b336-488b073a3636",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"file_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v2/Inferences/Model/:model_id/ImageLevelInferences/retryallexports",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v2",
+                                        "Inferences",
+                                        "Model",
+                                        ":model_id",
+                                        "ImageLevelInferences",
+                                        "retryallexports"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "e119a2fc-c366-49a7-8c05-84d801266400",
+                                          "key": "model_id",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "Re-trigger downstream export for one or more files whose initial export failed."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "0ec3a1a0-0064-41d7-b5f2-d10dd9434864",
+                                      "name": "Export retried.",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: basic",
+                                            "key": "Authorization",
+                                            "value": "Basic <credentials>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"file_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v2/Inferences/Model/:model_id/ImageLevelInferences/retryallexports",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v2",
+                                            "Inferences",
+                                            "Model",
+                                            ":model_id",
+                                            "ImageLevelInferences",
+                                            "retryallexports"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "model_id"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-06-05T15:12:57.000Z",
+                                      "updatedAt": "2026-06-05T15:12:57.000Z",
+                                      "uid": "35240-0ec3a1a0-0064-41d7-b5f2-d10dd9434864"
+                                    }
+                                  ],
+                                  "createdAt": "2026-06-05T15:12:57.000Z",
+                                  "updatedAt": "2026-06-05T15:12:57.000Z",
+                                  "uid": "35240-a1c05793-621e-4cfa-b336-488b073a3636"
+                                }
+                              ],
+                              "id": "6743d64a-46a2-4044-ba07-f6e1b60113ae",
+                              "createdAt": "2026-06-05T15:12:57.000Z",
+                              "updatedAt": "2026-06-05T15:12:57.000Z",
+                              "uid": "35240-6743d64a-46a2-4044-ba07-f6e1b60113ae"
+                            }
+                          ],
+                          "id": "54b954b9-1f52-45cc-96f6-385304bccb23",
+                          "createdAt": "2026-06-05T15:12:57.000Z",
+                          "updatedAt": "2026-06-05T15:12:57.000Z",
+                          "uid": "35240-54b954b9-1f52-45cc-96f6-385304bccb23"
+                        }
+                      ],
+                      "id": "f84596fa-13ce-4c4b-acea-0dec6fea42ab",
+                      "createdAt": "2026-06-05T15:12:57.000Z",
+                      "updatedAt": "2026-06-05T15:12:57.000Z",
+                      "uid": "35240-f84596fa-13ce-4c4b-acea-0dec6fea42ab"
+                    }
+                  ],
+                  "id": "df35cb28-66ea-42ab-82f1-bcfe7a3e18b2",
+                  "createdAt": "2026-06-05T15:12:57.000Z",
+                  "updatedAt": "2026-06-05T15:12:57.000Z",
+                  "uid": "35240-df35cb28-66ea-42ab-82f1-bcfe7a3e18b2"
+                }
+              ],
+              "id": "4fd326bb-4309-4a24-83f5-283885add5eb",
+              "createdAt": "2026-06-05T15:12:57.000Z",
+              "updatedAt": "2026-06-05T15:12:57.000Z",
+              "uid": "35240-4fd326bb-4309-4a24-83f5-283885add5eb"
+            }
+          ],
+          "id": "ce434795-2e77-4187-ac74-3ddd13933956",
+          "createdAt": "2026-06-05T15:12:57.000Z",
+          "updatedAt": "2026-06-05T15:12:57.000Z",
+          "uid": "35240-ce434795-2e77-4187-ac74-3ddd13933956"
+        }
+      ],
+      "id": "b3d51b7d-3c28-4a7c-8387-30087209aa20",
+      "createdAt": "2026-06-05T15:12:57.000Z",
+      "updatedAt": "2026-06-05T15:12:57.000Z",
+      "uid": "35240-b3d51b7d-3c28-4a7c-8387-30087209aa20"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://app.nanonets.com"
+    }
+  ]
+}
