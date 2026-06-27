@@ -131,45 +131,42 @@ access: 3rd-Party
 common:
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/nanonets/overview
-  - type: ArazzoWorkflows
-    url: arazzo/
-    workflows:
-      - url: arazzo/nanonets-async-ocr-predict-and-poll-workflow.yml
-        name: Nanonets Async OCR Predict and Poll
-        summary: Submit a large document for async OCR, then poll until the file-level prediction is ready.
-      - url: arazzo/nanonets-async-url-predict-poll-approve-workflow.yml
-        name: Nanonets Async URL Predict Poll and Approve
-        summary: Async-predict a document by URL, poll until ready, then approve the file.
-      - url: arazzo/nanonets-batch-review-pending-files-workflow.yml
-        name: Nanonets Batch Review Pending Files
-        summary: List a model's recent predictions, then approve the first unmoderated file.
-      - url: arazzo/nanonets-classify-image-and-branch-workflow.yml
-        name: Nanonets Classify Image and Branch
-        summary: Classify an uploaded image and branch on whether a top label was predicted.
-      - url: arazzo/nanonets-page-level-correct-and-approve-workflow.yml
-        name: Nanonets Page-Level Correct and Approve
-        summary: Pull a single page's prediction, correct its fields, then approve the file.
-      - url: arazzo/nanonets-predict-and-assign-reviewer-workflow.yml
-        name: Nanonets Predict and Assign Reviewer
-        summary: Predict on a file, fetch the file-level result, and assign it to a reviewer.
-      - url: arazzo/nanonets-predict-and-enrich-with-database-workflow.yml
-        name: Nanonets Predict and Enrich with Database
-        summary: Extract a document, then validate it against an external database integration.
-      - url: arazzo/nanonets-predict-correct-and-reexport-workflow.yml
-        name: Nanonets Predict Correct and Re-export
-        summary: Predict on a file, correct its extracted fields, and retry the export.
-      - url: arazzo/nanonets-resolve-integration-and-query-workflow.yml
-        name: Nanonets Resolve Integration and Query
-        summary: List external integrations, pick the first one, and run a SQL-style query.
-      - url: arazzo/nanonets-sync-predict-and-review-workflow.yml
-        name: Nanonets Sync Predict and Review
-        summary: Run a sync OCR prediction on a small file, then approve or hold it for review.
-      - url: arazzo/nanonets-upload-training-images-and-train-workflow.yml
-        name: Nanonets Upload Training Images and Train
-        summary: Upload annotated local training images to an OCR model, then kick off training.
-      - url: arazzo/nanonets-upload-training-urls-and-train-workflow.yml
-        name: Nanonets Upload Training URLs and Train
-        summary: Add training images to an OCR model from public URLs, then start training.
+  - type: Arazzo
+    url: arazzo/nanonets-async-ocr-predict-and-poll-workflow.yml
+    name: Nanonets Async OCR Predict and Poll
+  - type: Arazzo
+    url: arazzo/nanonets-async-url-predict-poll-approve-workflow.yml
+    name: Nanonets Async URL Predict Poll and Approve
+  - type: Arazzo
+    url: arazzo/nanonets-batch-review-pending-files-workflow.yml
+    name: Nanonets Batch Review Pending Files
+  - type: Arazzo
+    url: arazzo/nanonets-classify-image-and-branch-workflow.yml
+    name: Nanonets Classify Image and Branch
+  - type: Arazzo
+    url: arazzo/nanonets-page-level-correct-and-approve-workflow.yml
+    name: Nanonets Page-Level Correct and Approve
+  - type: Arazzo
+    url: arazzo/nanonets-predict-and-assign-reviewer-workflow.yml
+    name: Nanonets Predict and Assign Reviewer
+  - type: Arazzo
+    url: arazzo/nanonets-predict-and-enrich-with-database-workflow.yml
+    name: Nanonets Predict and Enrich with Database
+  - type: Arazzo
+    url: arazzo/nanonets-predict-correct-and-reexport-workflow.yml
+    name: Nanonets Predict Correct and Re-export
+  - type: Arazzo
+    url: arazzo/nanonets-resolve-integration-and-query-workflow.yml
+    name: Nanonets Resolve Integration and Query
+  - type: Arazzo
+    url: arazzo/nanonets-sync-predict-and-review-workflow.yml
+    name: Nanonets Sync Predict and Review
+  - type: Arazzo
+    url: arazzo/nanonets-upload-training-images-and-train-workflow.yml
+    name: Nanonets Upload Training Images and Train
+  - type: Arazzo
+    url: arazzo/nanonets-upload-training-urls-and-train-workflow.yml
+    name: Nanonets Upload Training URLs and Train
   - url: https://nanonets.com
     type: Portal
   - url: https://app.nanonets.com
@@ -181,7 +178,7 @@ common:
   - url: https://docs.nanonets.com/reference/authentication
     type: Authentication
   - url: https://docs.nanonets.com/reference/response-code-error
-    type: Errors
+    type: ErrorCodes
   - url: https://docs.nanonets.com/reference/how-to-handle-429-error
     type: RateLimits
   - url: https://docs.nanonets.com/docs/generate-api-key
@@ -201,7 +198,7 @@ common:
   - url: https://nanonets.com/blog/
     type: Blog
   - url: https://accounts.nanonets.com/signup
-    type: SignUp
+    type: Signup
   - url: https://legal.nanonets.com/terms
     type: TermsOfService
   - url: https://legal.nanonets.com/privacy
@@ -230,19 +227,19 @@ common:
     type: GitHubRepository
     name: nanoindex (agentic RAG harness)
   - url: https://github.com/NanoNets/nanonets-python-client
-    type: SDK
+    type: SDKs
     name: Python client (pip)
   - url: https://github.com/NanoNets/nanonets-javascript
-    type: SDK
+    type: SDKs
     name: JavaScript / Node.js
   - url: https://github.com/NanoNets/nanonets-go
-    type: SDK
+    type: SDKs
     name: Go
   - url: https://github.com/NanoNets/ocr-js-sdk
-    type: SDK
+    type: SDKs
     name: OCR Node.js SDK
   - url: https://github.com/NanoNets/ic-js-sdk
-    type: SDK
+    type: SDKs
     name: Image Classification Node.js SDK
   - url: https://github.com/NanoNets/object-detection-sample-python
     type: CodeExamples
