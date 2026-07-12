@@ -129,6 +129,10 @@ kind: contract
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 common:
+  - type: DomainSecurity
+    url: security/nanonets-domain-security.yml
+  - type: Authentication
+    url: authentication/nanonets-authentication.yml
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/nanonets/overview
   - type: Arazzo

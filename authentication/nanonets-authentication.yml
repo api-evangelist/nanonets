@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/nanonets-external-integrations-api-openapi.yml, openapi/nanonets-file-management-api-openapi.yml,
+  openapi/nanonets-image-classification-api-openapi.yml, openapi/nanonets-ocr-api-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: BasicAuth
+  type: http
+  scheme: basic
+  sources:
+  - openapi/nanonets-external-integrations-api-openapi.yml
+  - openapi/nanonets-file-management-api-openapi.yml
+  - openapi/nanonets-image-classification-api-openapi.yml
+  - openapi/nanonets-ocr-api-openapi.yml
