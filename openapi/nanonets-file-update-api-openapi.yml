@@ -1,0 +1,64 @@
+openapi: 3.0.3
+info:
+  title: Nanonets External Integrations File Update API
+  description: 'Manage external database integrations linked to a Nanonets account and
+
+    execute generic SQL-style queries against them inside a Nanonets workflow.
+
+    Used by the Database Matching Conditions and database lookup workflow blocks.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Nanonets
+    url: https://nanonets.com
+    email: support@nanonets.com
+servers:
+- url: https://app.nanonets.com
+security:
+- BasicAuth: []
+tags:
+- name: File Update
+  description: Update or add extracted field values on a file.
+paths:
+  /api/v2/Inferences/Model/{model_id}/ImageLevelInference:
+    patch:
+      tags:
+      - File Update
+      summary: Update Fields On A File
+      description: 'Update existing fields or add new fields on a file. Payload is derived
+
+        from the prior GET prediction response; `use_ui_version=true` is required.
+
+        '
+      operationId: updateFileFields
+      parameters:
+      - $ref: '#/components/parameters/ModelId'
+      - name: use_ui_version
+        in: query
+        required: true
+        schema:
+          type: boolean
+          default: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Body must mirror the structure returned by Get Prediction File By File ID.
+      responses:
+        '200':
+          description: Field update applied.
+components:
+  parameters:
+    ModelId:
+      name: model_id
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

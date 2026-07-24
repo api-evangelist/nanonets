@@ -1,0 +1,52 @@
+openapi: 3.0.3
+info:
+  title: Nanonets External Integrations File Delete API
+  description: 'Manage external database integrations linked to a Nanonets account and
+
+    execute generic SQL-style queries against them inside a Nanonets workflow.
+
+    Used by the Database Matching Conditions and database lookup workflow blocks.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Nanonets
+    url: https://nanonets.com
+    email: support@nanonets.com
+servers:
+- url: https://app.nanonets.com
+security:
+- BasicAuth: []
+tags:
+- name: File Delete
+  description: Delete a processed file.
+paths:
+  /api/v2/Inferences/Model/{model_id}/InferenceRequestFiles/{file_id}:
+    delete:
+      tags:
+      - File Delete
+      summary: Delete A File
+      description: Permanently delete a processed file from a model.
+      operationId: deleteFile
+      parameters:
+      - $ref: '#/components/parameters/ModelId'
+      - name: file_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: File deleted.
+components:
+  parameters:
+    ModelId:
+      name: model_id
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

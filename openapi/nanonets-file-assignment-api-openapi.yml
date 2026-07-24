@@ -1,0 +1,64 @@
+openapi: 3.0.3
+info:
+  title: Nanonets External Integrations File Assignment API
+  description: 'Manage external database integrations linked to a Nanonets account and
+
+    execute generic SQL-style queries against them inside a Nanonets workflow.
+
+    Used by the Database Matching Conditions and database lookup workflow blocks.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Nanonets
+    url: https://nanonets.com
+    email: support@nanonets.com
+servers:
+- url: https://app.nanonets.com
+security:
+- BasicAuth: []
+tags:
+- name: File Assignment
+  description: Assign files to reviewers.
+paths:
+  /api/v2/team/members/model/{model_id}/assign/files:
+    post:
+      tags:
+      - File Assignment
+      summary: Assign Files To A Team Member
+      description: Assign one or more files in a model to a specific reviewer by email.
+      operationId: assignFiles
+      parameters:
+      - $ref: '#/components/parameters/ModelId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - member
+              - file_ids
+              properties:
+                member:
+                  type: string
+                  format: email
+                file_ids:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: Files assigned.
+components:
+  parameters:
+    ModelId:
+      name: model_id
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

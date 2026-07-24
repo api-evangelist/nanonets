@@ -1,0 +1,106 @@
+openapi: 3.0.3
+info:
+  title: Nanonets External Integrations OCR Train API
+  description: 'Manage external database integrations linked to a Nanonets account and
+
+    execute generic SQL-style queries against them inside a Nanonets workflow.
+
+    Used by the Database Matching Conditions and database lookup workflow blocks.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Nanonets
+    url: https://nanonets.com
+    email: support@nanonets.com
+servers:
+- url: https://app.nanonets.com
+security:
+- BasicAuth: []
+tags:
+- name: OCR Train
+  description: Upload training images and train or retrain an OCR model.
+paths:
+  /OCR/Model/{model_id}/UploadFile/:
+    post:
+      tags:
+      - OCR Train
+      summary: Upload Training Images By File
+      description: Upload locally-stored training images for a model.
+      operationId: ocrModelUploadFileByModelIdPost
+      parameters:
+      - $ref: '#/components/parameters/ModelId'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - file
+              - data
+              properties:
+                file:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+                data:
+                  type: string
+                  description: JSON describing the annotation for each uploaded file.
+      responses:
+        '200':
+          description: Upload acknowledged with totals per category.
+  /OCR/Model/{model_id}/UploadUrls/:
+    post:
+      tags:
+      - OCR Train
+      summary: Upload Training Images By URL
+      description: Upload training images for a model via publicly accessible URLs.
+      operationId: ocrModelUploadUrlsByModelIdPost
+      parameters:
+      - $ref: '#/components/parameters/ModelId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - urls
+              properties:
+                urls:
+                  type: array
+                  items:
+                    type: string
+                    format: uri
+                data:
+                  type: string
+      responses:
+        '200':
+          description: Upload acknowledged.
+  /OCR/Model/{model_id}/Train/:
+    post:
+      tags:
+      - OCR Train
+      summary: Train Model
+      description: Train or retrain a Nanonets OCR model after training data has been uploaded.
+      operationId: ocrModelTrainByModelIdPost
+      parameters:
+      - $ref: '#/components/parameters/ModelId'
+      responses:
+        '200':
+          description: Training job queued or running.
+components:
+  parameters:
+    ModelId:
+      name: model_id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Unique identifier for the Nanonets model.
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

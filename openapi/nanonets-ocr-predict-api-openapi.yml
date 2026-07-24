@@ -1,0 +1,316 @@
+openapi: 3.0.3
+info:
+  title: Nanonets External Integrations OCR Predict API
+  description: 'Manage external database integrations linked to a Nanonets account and
+
+    execute generic SQL-style queries against them inside a Nanonets workflow.
+
+    Used by the Database Matching Conditions and database lookup workflow blocks.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Nanonets
+    url: https://nanonets.com
+    email: support@nanonets.com
+servers:
+- url: https://app.nanonets.com
+security:
+- BasicAuth: []
+tags:
+- name: OCR Predict
+  description: Predict on uploaded files or file URLs against a Nanonets OCR model.
+paths:
+  /OCR/Model/{model_id}/LabelFile/:
+    post:
+      tags:
+      - OCR Predict
+      summary: Prediction For Image File
+      description: 'Upload one or more files from the local filesystem to a Nanonets OCR model
+
+        in sync mode. Optimized for files of 3 pages or fewer.
+
+        '
+      operationId: ocrModelLabelFileByModelIdPost
+      parameters:
+      - $ref: '#/components/parameters/ModelId'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - file
+              properties:
+                file:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+                request_metadata:
+                  type: string
+                  description: Free-form identifier echoed in the response.
+      responses:
+        '200':
+          description: Prediction result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PredictionResponse'
+  /OCR/Model/{model_id}/LabelFile/Async/:
+    post:
+      tags:
+      - OCR Predict
+      summary: Async Prediction For Image File
+      description: 'Upload one or more files from the local filesystem to a Nanonets OCR model
+
+        in async mode. Recommended for files larger than 3 pages.
+
+        '
+      operationId: ocrModelLabelFileAsyncByModelIdPost
+      parameters:
+      - $ref: '#/components/parameters/ModelId'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - file
+              properties:
+                file:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+                async:
+                  type: boolean
+                  default: true
+                request_metadata:
+                  type: string
+      responses:
+        '200':
+          description: Async prediction accepted with `request_file_id` for polling.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncAcceptedResponse'
+  /OCR/Model/{model_id}/LabelUrls/:
+    post:
+      tags:
+      - OCR Predict
+      summary: Prediction For Image URL
+      description: Send one or more publicly accessible URLs to a Nanonets OCR model in sync mode.
+      operationId: ocrModelLabelUrlsByModelIdPost
+      parameters:
+      - $ref: '#/components/parameters/ModelId'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - urls
+              properties:
+                urls:
+                  type: array
+                  items:
+                    type: string
+                    format: uri
+                request_metadata:
+                  type: string
+      responses:
+        '200':
+          description: Prediction result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PredictionResponse'
+  /OCR/Model/{model_id}/LabelUrls/Async/:
+    post:
+      tags:
+      - OCR Predict
+      summary: Async Prediction For Image URL
+      description: Send one or more publicly accessible URLs to a Nanonets OCR model in async mode.
+      operationId: ocrModelLabelUrlsAsyncByModelIdPost
+      parameters:
+      - $ref: '#/components/parameters/ModelId'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - urls
+              properties:
+                urls:
+                  type: array
+                  items:
+                    type: string
+                    format: uri
+                async:
+                  type: boolean
+                  default: true
+                request_metadata:
+                  type: string
+      responses:
+        '200':
+          description: Async prediction accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncAcceptedResponse'
+components:
+  schemas:
+    Prediction:
+      type: object
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+        xmin:
+          type: number
+        ymin:
+          type: number
+        xmax:
+          type: number
+        ymax:
+          type: number
+        score:
+          type: number
+          minimum: 0
+          maximum: 1
+        ocr_text:
+          type: string
+        type:
+          type: string
+          enum:
+          - field
+          - table
+        status:
+          type: string
+        validation_status:
+          type: string
+          enum:
+          - failed
+        validation_message:
+          type: string
+        page_no:
+          type: integer
+        label_id:
+          type: string
+        cells:
+          type: array
+          items:
+            $ref: '#/components/schemas/TableCell'
+    AsyncAcceptedResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        result:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+              request_file_id:
+                type: string
+              filepath:
+                type: string
+              status:
+                type: string
+    PredictionResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Overall success status.
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/PredictionPage'
+        signed_urls:
+          type: object
+          description: Signed URLs to original and processed file artifacts.
+    PredictionPage:
+      type: object
+      properties:
+        message:
+          type: string
+        input:
+          type: string
+          description: Uploaded filename.
+        prediction:
+          type: array
+          items:
+            $ref: '#/components/schemas/Prediction'
+        page:
+          type: integer
+        request_file_id:
+          type: string
+        id:
+          type: string
+        request_metadata:
+          type: string
+        processing_type:
+          type: string
+          enum:
+          - ''
+          - async
+        size:
+          type: object
+          properties:
+            width:
+              type: number
+            height:
+              type: number
+    TableCell:
+      type: object
+      properties:
+        id:
+          type: string
+        row:
+          type: integer
+        col:
+          type: integer
+        label:
+          type: string
+        xmin:
+          type: number
+        ymin:
+          type: number
+        xmax:
+          type: number
+        ymax:
+          type: number
+        score:
+          type: number
+        text:
+          type: string
+        verification_status:
+          type: string
+        status:
+          type: string
+        failed_validation:
+          type: string
+        label_id:
+          type: string
+  parameters:
+    ModelId:
+      name: model_id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Unique identifier for the Nanonets model.
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

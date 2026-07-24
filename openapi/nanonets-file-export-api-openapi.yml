@@ -1,0 +1,60 @@
+openapi: 3.0.3
+info:
+  title: Nanonets External Integrations File Export API
+  description: 'Manage external database integrations linked to a Nanonets account and
+
+    execute generic SQL-style queries against them inside a Nanonets workflow.
+
+    Used by the Database Matching Conditions and database lookup workflow blocks.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Nanonets
+    url: https://nanonets.com
+    email: support@nanonets.com
+servers:
+- url: https://app.nanonets.com
+security:
+- BasicAuth: []
+tags:
+- name: File Export
+  description: Retry exports to configured downstream destinations.
+paths:
+  /api/v2/Inferences/Model/{model_id}/ImageLevelInferences/retryallexports:
+    post:
+      tags:
+      - File Export
+      summary: Retry All Exports
+      description: Re-trigger downstream export for one or more files whose initial export failed.
+      operationId: retryAllExports
+      parameters:
+      - $ref: '#/components/parameters/ModelId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - file_ids
+              properties:
+                file_ids:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: Export retried.
+components:
+  parameters:
+    ModelId:
+      name: model_id
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

@@ -1,0 +1,232 @@
+openapi: 3.0.3
+info:
+  title: Nanonets External Integrations OCR Retrieve API
+  description: 'Manage external database integrations linked to a Nanonets account and
+
+    execute generic SQL-style queries against them inside a Nanonets workflow.
+
+    Used by the Database Matching Conditions and database lookup workflow blocks.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Nanonets
+    url: https://nanonets.com
+    email: support@nanonets.com
+servers:
+- url: https://app.nanonets.com
+security:
+- BasicAuth: []
+tags:
+- name: OCR Retrieve
+  description: Retrieve prediction results for a file, page, or batch.
+paths:
+  /Inferences/Model/{model_id}/InferenceRequest/{request_file_id}:
+    get:
+      tags:
+      - OCR Retrieve
+      summary: Get Prediction File By File ID
+      description: 'Retrieve prediction results for a single file by `model_id` and
+
+        `request_file_id`. Includes the model prediction, modifications, and the
+
+        final processed outcome plus signed URLs to download the source file.
+
+        '
+      operationId: ocrModelGetPredictionFileByFileId
+      parameters:
+      - $ref: '#/components/parameters/ModelId'
+      - name: request_file_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: File-level prediction result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModeratedFileResponse'
+  /Inferences/Model/{model_id}/InferenceRequest/{request_file_id}/page/{page_id}:
+    get:
+      tags:
+      - OCR Retrieve
+      summary: Get Prediction File By Page ID
+      description: Retrieve prediction results for a specific page by unique page id.
+      operationId: ocrModelGetPredictionFileByPageId
+      parameters:
+      - $ref: '#/components/parameters/ModelId'
+      - name: request_file_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: page_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Page-level prediction result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModeratedFileResponse'
+  /Inferences/Model/{model_id}/InferenceRequest/:
+    get:
+      tags:
+      - OCR Retrieve
+      summary: Get All Prediction Files
+      description: 'Get prediction results for all files uploaded to a model within a specified
+
+        timeframe. Pages are bucketed into `moderated_images` (approved) and
+
+        `unmoderated_images` (rejected or not yet approved).
+
+        '
+      operationId: ocrModelListPredictionFiles
+      parameters:
+      - $ref: '#/components/parameters/ModelId'
+      - name: start_day_interval
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: Number of days back from the current batch day (days since epoch).
+      - name: current_batch_day
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: Most recent day-since-epoch boundary for the window.
+      responses:
+        '200':
+          description: Time-windowed batch of predictions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModeratedFileResponse'
+components:
+  schemas:
+    ModeratedFileResponse:
+      type: object
+      properties:
+        moderated_images_count:
+          type: integer
+        unmoderated_images_count:
+          type: integer
+        moderated_images:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModeratedPage'
+        unmoderated_images:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModeratedPage'
+        signed_urls:
+          type: object
+    ModeratedPage:
+      type: object
+      properties:
+        model_id:
+          type: string
+        day_since_epoch:
+          type: integer
+        is_moderated:
+          type: boolean
+        id:
+          type: string
+        url:
+          type: string
+          format: uri
+        predicted_boxes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Prediction'
+    Prediction:
+      type: object
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+        xmin:
+          type: number
+        ymin:
+          type: number
+        xmax:
+          type: number
+        ymax:
+          type: number
+        score:
+          type: number
+          minimum: 0
+          maximum: 1
+        ocr_text:
+          type: string
+        type:
+          type: string
+          enum:
+          - field
+          - table
+        status:
+          type: string
+        validation_status:
+          type: string
+          enum:
+          - failed
+        validation_message:
+          type: string
+        page_no:
+          type: integer
+        label_id:
+          type: string
+        cells:
+          type: array
+          items:
+            $ref: '#/components/schemas/TableCell'
+    TableCell:
+      type: object
+      properties:
+        id:
+          type: string
+        row:
+          type: integer
+        col:
+          type: integer
+        label:
+          type: string
+        xmin:
+          type: number
+        ymin:
+          type: number
+        xmax:
+          type: number
+        ymax:
+          type: number
+        score:
+          type: number
+        text:
+          type: string
+        verification_status:
+          type: string
+        status:
+          type: string
+        failed_validation:
+          type: string
+        label_id:
+          type: string
+  parameters:
+    ModelId:
+      name: model_id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Unique identifier for the Nanonets model.
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

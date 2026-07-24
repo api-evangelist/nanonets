@@ -1,26 +1,30 @@
 openapi: 3.0.3
 info:
   title: Nanonets External Integrations API
-  description: |
-    Manage external database integrations linked to a Nanonets account and
+  description: 'Manage external database integrations linked to a Nanonets account and
+
     execute generic SQL-style queries against them inside a Nanonets workflow.
+
     Used by the Database Matching Conditions and database lookup workflow blocks.
+
+    '
   version: 1.0.0
   contact:
     name: Nanonets
     url: https://nanonets.com
     email: support@nanonets.com
 servers:
-  - url: https://app.nanonets.com
+- url: https://app.nanonets.com
 security:
-  - BasicAuth: []
+- BasicAuth: []
 tags:
-  - name: External Integrations
-    description: List and query external database integrations.
+- name: External Integrations
+  description: List and query external database integrations.
 paths:
   /api/v2/externalIntegrations:
     get:
-      tags: [External Integrations]
+      tags:
+      - External Integrations
       summary: Get External Integrations
       description: List external integrations connected to the account.
       operationId: getExternalIntegrations
@@ -31,29 +35,33 @@ paths:
             application/json:
               schema:
                 type: array
-                items: { $ref: '#/components/schemas/ExternalIntegration' }
+                items:
+                  $ref: '#/components/schemas/ExternalIntegration'
   /api/v2/externalIntegrations/{external_integration_id}/executequery:
     post:
-      tags: [External Integrations]
+      tags:
+      - External Integrations
       summary: Execute Query
       description: Execute a generic SQL-style query against a connected external integration.
       operationId: executeQuery
       parameters:
-        - name: external_integration_id
-          in: path
-          required: true
-          schema: { type: string }
+      - name: external_integration_id
+        in: path
+        required: true
+        schema:
+          type: string
       requestBody:
         required: true
         content:
           application/json:
             schema:
               type: object
-              required: [query]
+              required:
+              - query
               properties:
                 query:
                   type: string
-                  example: "select * from passports where dob='file_url'"
+                  example: select * from passports where dob='file_url'
       responses:
         '200':
           description: Query result rows.
@@ -64,23 +72,34 @@ paths:
                 properties:
                   rows:
                     type: array
-                    items: { type: object, additionalProperties: true }
+                    items:
+                      type: object
+                      additionalProperties: true
 components:
-  securitySchemes:
-    BasicAuth:
-      type: http
-      scheme: basic
   schemas:
     ExternalIntegration:
       type: object
       properties:
-        id: { type: string, example: 4013d779-c2f9-11eb-ba65-122daa108bc5 }
-        email: { type: string, format: email }
-        name: { type: string }
+        id:
+          type: string
+          example: 4013d779-c2f9-11eb-ba65-122daa108bc5
+        email:
+          type: string
+          format: email
+        name:
+          type: string
         type:
           type: string
           example: postgresql
-          enum: [postgresql, mysql, mssql, mongodb]
+          enum:
+          - postgresql
+          - mysql
+          - mssql
+          - mongodb
         info:
           type: object
           additionalProperties: true
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
