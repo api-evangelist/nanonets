@@ -1,112 +1,483 @@
 aid: nanonets
 url: https://raw.githubusercontent.com/api-evangelist/nanonets/refs/heads/main/apis.yml
 apis:
-  - aid: nanonets:nanonets-ocr-api
-    name: Nanonets OCR API
-    tags:
-      - OCR
-      - Document AI
-      - Data Extraction
-      - Intelligent Document Processing
-    humanURL: https://docs.nanonets.com/reference/overview
-    properties:
-      - url: https://docs.nanonets.com/reference/overview
-        type: Documentation
-      - url: https://docs.nanonets.com/reference/ocrmodellabelfilebymodelidpost-1
-        type: Documentation
-      - url: https://docs.nanonets.com/reference/ocrmodellabelfileasyncbymodelidpost-1
-        type: Documentation
-      - url: https://docs.nanonets.com/reference/ocrmodellabelurlsbymodelidpost
-        type: Documentation
-      - url: https://docs.nanonets.com/reference/ocrmodellabelurlsasyncbymodelidpost-1
-        type: Documentation
-      - url: https://docs.nanonets.com/reference/ocrmodelgetpredictionfilebyfileid
-        type: Documentation
-      - url: https://docs.nanonets.com/reference/ocrmodelgetpredictionfilebypageid
-        type: Documentation
-      - url: https://docs.nanonets.com/reference/ocrmodellistpredictionfiles
-        type: Documentation
-      - url: https://docs.nanonets.com/reference/ocrmodeluploadfilebymodelidpost-1
-        type: Documentation
-      - url: https://docs.nanonets.com/reference/ocrmodeluploadurlsbymodelidpost-1
-        type: Documentation
-      - url: https://docs.nanonets.com/reference/ocrmodeltrainbymodelidpost-1
-        type: Documentation
-      - url: openapi/nanonets-ocr-api-openapi.yml
-        type: OpenAPI
-      - url: json-schema/nanonets-prediction-schema.json
-        type: JSONSchema
-      - url: json-ld/nanonets-context.jsonld
-        type: JSONLD
-    description: >-
-      Synchronous and asynchronous OCR prediction and training endpoints over
-      `app.nanonets.com/api/v2/OCR/Model/{model_id}`. Upload files by local path or public URL, retrieve predictions for
-      a file, page, or batch, and train or retrain custom Nanonets OCR models. Sync endpoints are optimized for files of
-      3 pages or fewer; async endpoints handle larger documents. Returns labels, bounding boxes, OCR text, confidence
-      scores, and table cell predictions.
-  - aid: nanonets:nanonets-image-classification-api
-    name: Nanonets Image Classification API
-    tags:
-      - Image Classification
-      - Computer Vision
-      - Deep Learning
-    humanURL: https://docs.nanonets.com/reference/imagecategorizationlabelfilepost
-    properties:
-      - url: https://docs.nanonets.com/reference/imagecategorizationlabelfilepost
-        type: Documentation
-      - url: https://docs.nanonets.com/reference/imagecategorizationlabelurlspost2
-        type: Documentation
-      - url: openapi/nanonets-image-classification-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      Classify images by file upload or by publicly accessible URL against a Nanonets image classification model.
-      Supports batch URL submission for efficient prediction. Base path `/api/v2/ImageCategorization/LabelFile/` and
-      `/api/v2/ImageCategorization/LabelUrls/`.
-  - aid: nanonets:nanonets-file-management-api
-    name: Nanonets File Management API
-    tags:
-      - File Management
-      - Workflow
-      - Approvals
-      - Documents
-    humanURL: https://docs.nanonets.com/reference/file-review-api
-    properties:
-      - url: https://docs.nanonets.com/reference/file-review-api
-        type: Documentation
-      - url: https://docs.nanonets.com/reference/assign-files-via-api
-        type: Documentation
-      - url: https://docs.nanonets.com/reference/delete-files-via-api
-        type: Documentation
-      - url: https://docs.nanonets.com/reference/export-files-via-api
-        type: Documentation
-      - url: https://docs.nanonets.com/reference/update-fields-via-api
-        type: Documentation
-      - url: https://docs.nanonets.com/docs/retry-file-upload-via-api
-        type: Documentation
-      - url: openapi/nanonets-file-management-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      Approve, unapprove, assign, update, delete, and export files within a Nanonets model. Drives the
-      review-and-approval workflow, PATCH-based field updates, team assignment to specific reviewers, and export retry
-      to downstream destinations (Salesforce, QuickBooks, Xero, Google Sheets, SAP, etc.).
-  - aid: nanonets:nanonets-external-integrations-api
-    name: Nanonets External Integrations API
-    tags:
-      - Integrations
-      - Database
-      - Lookups
-    humanURL: https://docs.nanonets.com/reference/getexternalintegrations
-    properties:
-      - url: https://docs.nanonets.com/reference/getexternalintegrations
-        type: Documentation
-      - url: https://docs.nanonets.com/reference/executequery-1
-        type: Documentation
-      - url: openapi/nanonets-external-integrations-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      List external integrations connected to a Nanonets account (Postgres, MySQL, MSSQL, MongoDB, and other databases)
-      and execute generic SQL queries against them in the context of a Nanonets workflow. Used by Database Matching
-      Conditions and database lookup actions inside the no-code workflow builder.
+- aid: nanonets:nanonets-external-integrations-api
+  name: Nanonets External Integrations API
+  tags:
+  - Integrations
+  - Database
+  - Lookups
+  humanURL: https://docs.nanonets.com/reference/getexternalintegrations
+  properties:
+  - url: https://docs.nanonets.com/reference/getexternalintegrations
+    type: Documentation
+  - url: https://docs.nanonets.com/reference/executequery-1
+    type: Documentation
+  - url: openapi/nanonets-external-integrations-api-openapi.yml
+    type: OpenAPI
+  description: >-
+    List external integrations connected to a Nanonets account (Postgres, MySQL, MSSQL, MongoDB, and other
+    databases) and execute generic SQL queries against them in the context of a Nanonets workflow. Used
+    by Database Matching Conditions and database lookup actions inside the no-code workflow builder.
+- aid: nanonets:nanonets-file-assignment-api
+  name: Nanonets File Assignment API
+  description: Assign files to reviewers.
+  humanURL: https://docs.nanonets.com/reference/overview
+  tags:
+  - File Assignment
+  properties:
+  - type: OpenAPI
+    url: openapi/nanonets-file-assignment-api-openapi.yml
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/overview
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellabelfilebymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellabelfileasyncbymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellabelurlsbymodelidpost
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellabelurlsasyncbymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodelgetpredictionfilebyfileid
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodelgetpredictionfilebypageid
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellistpredictionfiles
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodeluploadfilebymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodeluploadurlsbymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodeltrainbymodelidpost-1
+  - type: JSONSchema
+    url: json-schema/nanonets-prediction-schema.json
+  - type: JSONLD
+    url: json-ld/nanonets-context.jsonld
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/imagecategorizationlabelfilepost
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/imagecategorizationlabelurlspost2
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/file-review-api
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/assign-files-via-api
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/delete-files-via-api
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/export-files-via-api
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/update-fields-via-api
+  - type: Documentation
+    url: https://docs.nanonets.com/docs/retry-file-upload-via-api
+- aid: nanonets:nanonets-file-delete-api
+  name: Nanonets File Delete API
+  description: Delete a processed file.
+  humanURL: https://docs.nanonets.com/reference/overview
+  tags:
+  - File Delete
+  properties:
+  - type: OpenAPI
+    url: openapi/nanonets-file-delete-api-openapi.yml
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/overview
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellabelfilebymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellabelfileasyncbymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellabelurlsbymodelidpost
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellabelurlsasyncbymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodelgetpredictionfilebyfileid
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodelgetpredictionfilebypageid
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellistpredictionfiles
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodeluploadfilebymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodeluploadurlsbymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodeltrainbymodelidpost-1
+  - type: JSONSchema
+    url: json-schema/nanonets-prediction-schema.json
+  - type: JSONLD
+    url: json-ld/nanonets-context.jsonld
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/imagecategorizationlabelfilepost
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/imagecategorizationlabelurlspost2
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/file-review-api
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/assign-files-via-api
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/delete-files-via-api
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/export-files-via-api
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/update-fields-via-api
+  - type: Documentation
+    url: https://docs.nanonets.com/docs/retry-file-upload-via-api
+- aid: nanonets:nanonets-file-export-api
+  name: Nanonets File Export API
+  description: Retry exports to configured downstream destinations.
+  humanURL: https://docs.nanonets.com/reference/overview
+  tags:
+  - File Export
+  properties:
+  - type: OpenAPI
+    url: openapi/nanonets-file-export-api-openapi.yml
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/overview
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellabelfilebymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellabelfileasyncbymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellabelurlsbymodelidpost
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellabelurlsasyncbymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodelgetpredictionfilebyfileid
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodelgetpredictionfilebypageid
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellistpredictionfiles
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodeluploadfilebymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodeluploadurlsbymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodeltrainbymodelidpost-1
+  - type: JSONSchema
+    url: json-schema/nanonets-prediction-schema.json
+  - type: JSONLD
+    url: json-ld/nanonets-context.jsonld
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/imagecategorizationlabelfilepost
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/imagecategorizationlabelurlspost2
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/file-review-api
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/assign-files-via-api
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/delete-files-via-api
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/export-files-via-api
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/update-fields-via-api
+  - type: Documentation
+    url: https://docs.nanonets.com/docs/retry-file-upload-via-api
+- aid: nanonets:nanonets-file-review-api
+  name: Nanonets File Review API
+  description: Approve and unapprove files post-extraction.
+  humanURL: https://docs.nanonets.com/reference/overview
+  tags:
+  - File Review
+  properties:
+  - type: OpenAPI
+    url: openapi/nanonets-file-review-api-openapi.yml
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/overview
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellabelfilebymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellabelfileasyncbymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellabelurlsbymodelidpost
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellabelurlsasyncbymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodelgetpredictionfilebyfileid
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodelgetpredictionfilebypageid
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellistpredictionfiles
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodeluploadfilebymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodeluploadurlsbymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodeltrainbymodelidpost-1
+  - type: JSONSchema
+    url: json-schema/nanonets-prediction-schema.json
+  - type: JSONLD
+    url: json-ld/nanonets-context.jsonld
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/imagecategorizationlabelfilepost
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/imagecategorizationlabelurlspost2
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/file-review-api
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/assign-files-via-api
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/delete-files-via-api
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/export-files-via-api
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/update-fields-via-api
+  - type: Documentation
+    url: https://docs.nanonets.com/docs/retry-file-upload-via-api
+- aid: nanonets:nanonets-file-update-api
+  name: Nanonets File Update API
+  description: Update or add extracted field values on a file.
+  humanURL: https://docs.nanonets.com/reference/overview
+  tags:
+  - File Update
+  properties:
+  - type: OpenAPI
+    url: openapi/nanonets-file-update-api-openapi.yml
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/overview
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellabelfilebymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellabelfileasyncbymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellabelurlsbymodelidpost
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellabelurlsasyncbymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodelgetpredictionfilebyfileid
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodelgetpredictionfilebypageid
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellistpredictionfiles
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodeluploadfilebymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodeluploadurlsbymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodeltrainbymodelidpost-1
+  - type: JSONSchema
+    url: json-schema/nanonets-prediction-schema.json
+  - type: JSONLD
+    url: json-ld/nanonets-context.jsonld
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/imagecategorizationlabelfilepost
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/imagecategorizationlabelurlspost2
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/file-review-api
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/assign-files-via-api
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/delete-files-via-api
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/export-files-via-api
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/update-fields-via-api
+  - type: Documentation
+    url: https://docs.nanonets.com/docs/retry-file-upload-via-api
+- aid: nanonets:nanonets-image-classification-predict-api
+  name: Nanonets Image Classification Predict API
+  description: Predict on uploaded images or image URLs against a classification model.
+  humanURL: https://docs.nanonets.com/reference/overview
+  tags:
+  - Image Classification Predict
+  properties:
+  - type: OpenAPI
+    url: openapi/nanonets-image-classification-predict-api-openapi.yml
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/overview
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellabelfilebymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellabelfileasyncbymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellabelurlsbymodelidpost
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellabelurlsasyncbymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodelgetpredictionfilebyfileid
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodelgetpredictionfilebypageid
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellistpredictionfiles
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodeluploadfilebymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodeluploadurlsbymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodeltrainbymodelidpost-1
+  - type: JSONSchema
+    url: json-schema/nanonets-prediction-schema.json
+  - type: JSONLD
+    url: json-ld/nanonets-context.jsonld
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/imagecategorizationlabelfilepost
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/imagecategorizationlabelurlspost2
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/file-review-api
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/assign-files-via-api
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/delete-files-via-api
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/export-files-via-api
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/update-fields-via-api
+  - type: Documentation
+    url: https://docs.nanonets.com/docs/retry-file-upload-via-api
+- aid: nanonets:nanonets-ocr-predict-api
+  name: Nanonets OCR Predict API
+  description: Predict on uploaded files or file URLs against a Nanonets OCR model.
+  humanURL: https://docs.nanonets.com/reference/overview
+  tags:
+  - OCR Predict
+  properties:
+  - type: OpenAPI
+    url: openapi/nanonets-ocr-predict-api-openapi.yml
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/overview
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellabelfilebymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellabelfileasyncbymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellabelurlsbymodelidpost
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellabelurlsasyncbymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodelgetpredictionfilebyfileid
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodelgetpredictionfilebypageid
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellistpredictionfiles
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodeluploadfilebymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodeluploadurlsbymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodeltrainbymodelidpost-1
+  - type: JSONSchema
+    url: json-schema/nanonets-prediction-schema.json
+  - type: JSONLD
+    url: json-ld/nanonets-context.jsonld
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/imagecategorizationlabelfilepost
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/imagecategorizationlabelurlspost2
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/file-review-api
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/assign-files-via-api
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/delete-files-via-api
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/export-files-via-api
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/update-fields-via-api
+  - type: Documentation
+    url: https://docs.nanonets.com/docs/retry-file-upload-via-api
+- aid: nanonets:nanonets-ocr-retrieve-api
+  name: Nanonets OCR Retrieve API
+  description: Retrieve prediction results for a file, page, or batch.
+  humanURL: https://docs.nanonets.com/reference/overview
+  tags:
+  - OCR Retrieve
+  properties:
+  - type: OpenAPI
+    url: openapi/nanonets-ocr-retrieve-api-openapi.yml
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/overview
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellabelfilebymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellabelfileasyncbymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellabelurlsbymodelidpost
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellabelurlsasyncbymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodelgetpredictionfilebyfileid
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodelgetpredictionfilebypageid
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellistpredictionfiles
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodeluploadfilebymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodeluploadurlsbymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodeltrainbymodelidpost-1
+  - type: JSONSchema
+    url: json-schema/nanonets-prediction-schema.json
+  - type: JSONLD
+    url: json-ld/nanonets-context.jsonld
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/imagecategorizationlabelfilepost
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/imagecategorizationlabelurlspost2
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/file-review-api
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/assign-files-via-api
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/delete-files-via-api
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/export-files-via-api
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/update-fields-via-api
+  - type: Documentation
+    url: https://docs.nanonets.com/docs/retry-file-upload-via-api
+- aid: nanonets:nanonets-ocr-train-api
+  name: Nanonets OCR Train API
+  description: Upload training images and train or retrain an OCR model.
+  humanURL: https://docs.nanonets.com/reference/overview
+  tags:
+  - OCR Train
+  properties:
+  - type: OpenAPI
+    url: openapi/nanonets-ocr-train-api-openapi.yml
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/overview
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellabelfilebymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellabelfileasyncbymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellabelurlsbymodelidpost
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellabelurlsasyncbymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodelgetpredictionfilebyfileid
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodelgetpredictionfilebypageid
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodellistpredictionfiles
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodeluploadfilebymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodeluploadurlsbymodelidpost-1
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/ocrmodeltrainbymodelidpost-1
+  - type: JSONSchema
+    url: json-schema/nanonets-prediction-schema.json
+  - type: JSONLD
+    url: json-ld/nanonets-context.jsonld
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/imagecategorizationlabelfilepost
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/imagecategorizationlabelurlspost2
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/file-review-api
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/assign-files-via-api
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/delete-files-via-api
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/export-files-via-api
+  - type: Documentation
+    url: https://docs.nanonets.com/reference/update-fields-via-api
+  - type: Documentation
+    url: https://docs.nanonets.com/docs/retry-file-upload-via-api
 name: Nanonets
 description: >-
   Nanonets is a no-code document AI and OCR platform that combines a custom-model OCR API, pre-built document models
@@ -126,7 +497,20 @@ tags:
   - Computer Vision
   - No-Code
 kind: contract
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/nanonets.png
 access: 3rd-Party
 common:
   - type: AgenticAccess
