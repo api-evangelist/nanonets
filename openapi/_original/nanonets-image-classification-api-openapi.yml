@@ -1,0 +1,96 @@
+openapi: 3.0.3
+info:
+  title: Nanonets Image Classification API
+  description: |
+    Predict against a Nanonets image classification model. Submit images either
+    as multipart file uploads or as a batch of publicly accessible URLs.
+  version: 2.0.0
+  contact:
+    name: Nanonets
+    url: https://nanonets.com
+    email: support@nanonets.com
+servers:
+  - url: https://app.nanonets.com/api/v2
+security:
+  - BasicAuth: []
+tags:
+  - name: Image Classification Predict
+    description: Predict on uploaded images or image URLs against a classification model.
+paths:
+  /ImageCategorization/LabelFile/:
+    post:
+      tags: [Image Classification Predict]
+      summary: Prediction For Image File
+      description: Upload a file from the local filesystem to an image classification model.
+      operationId: imageCategorizationLabelFilePost
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [file, modelId]
+              properties:
+                file:
+                  type: string
+                  format: binary
+                modelId:
+                  type: string
+                  description: Unique identifier of the classification model.
+      responses:
+        '200':
+          description: Classification result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClassificationResponse'
+  /ImageCategorization/LabelUrls/:
+    post:
+      tags: [Image Classification Predict]
+      summary: Prediction For Image URLs
+      description: Submit one or more publicly accessible image URLs for classification.
+      operationId: imageCategorizationLabelUrlsPost
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required: [urls, modelId]
+              properties:
+                urls:
+                  type: array
+                  items: { type: string, format: uri }
+                modelId:
+                  type: string
+      responses:
+        '200':
+          description: Classification result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClassificationResponse'
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+  schemas:
+    ClassificationResponse:
+      type: object
+      properties:
+        message: { type: string }
+        result:
+          type: array
+          items:
+            type: object
+            properties:
+              message: { type: string }
+              prediction:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    label: { type: string }
+                    probability: { type: number, minimum: 0, maximum: 1 }
+              input: { type: string }

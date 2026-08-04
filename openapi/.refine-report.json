@@ -1,0 +1,32 @@
+{
+  "provider": "nanonets",
+  "sources": [
+    "nanonets-external-integrations-api-openapi.yml",
+    "nanonets-file-assignment-api-openapi.yml",
+    "nanonets-file-delete-api-openapi.yml",
+    "nanonets-file-export-api-openapi.yml",
+    "nanonets-file-review-api-openapi.yml",
+    "nanonets-file-update-api-openapi.yml",
+    "nanonets-image-classification-predict-api-openapi.yml",
+    "nanonets-ocr-predict-api-openapi.yml",
+    "nanonets-ocr-retrieve-api-openapi.yml",
+    "nanonets-ocr-train-api-openapi.yml"
+  ],
+  "outputs": [
+    "nanonets-external-integrations-api-openapi.yml",
+    "nanonets-file-assignment-api-openapi.yml",
+    "nanonets-file-delete-api-openapi.yml",
+    "nanonets-file-export-api-openapi.yml",
+    "nanonets-file-review-api-openapi.yml",
+    "nanonets-file-update-api-openapi.yml",
+    "nanonets-image-classification-predict-api-openapi.yml",
+    "nanonets-ocr-predict-api-openapi.yml",
+    "nanonets-ocr-retrieve-api-openapi.yml",
+    "nanonets-ocr-train-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
