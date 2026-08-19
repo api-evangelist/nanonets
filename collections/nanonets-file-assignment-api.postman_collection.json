@@ -1,0 +1,166 @@
+{
+  "item": [
+    {
+      "id": "d4dc4d57-4b08-4a7c-83e0-3cafcc5dee2c",
+      "name": "File Assignment",
+      "description": {
+        "content": "Assign files to reviewers.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "20118b1b-c3fb-4062-be79-1170f22d7ca2",
+          "name": "Assign Files To A Team Member",
+          "request": {
+            "name": "Assign Files To A Team Member",
+            "description": {
+              "content": "Assign one or more files in a model to a specific reviewer by email.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "team",
+                "members",
+                "model",
+                ":model_id",
+                "assign",
+                "files"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "model_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"member\": \"<email>\",\n  \"file_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "00e28b55-0a65-49e9-86b3-57b27e4eb359",
+              "name": "Files assigned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "team",
+                    "members",
+                    "model",
+                    ":model_id",
+                    "assign",
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"member\": \"<email>\",\n  \"file_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.nanonets.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "150565db-df51-42c4-81da-7a6bcce236f8",
+    "name": "Nanonets External Integrations File Assignment API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Manage external database integrations linked to a Nanonets account and\nexecute generic SQL-style queries against them inside a Nanonets workflow.\nUsed by the Database Matching Conditions and database lookup workflow blocks.\n\n\nContact Support:\n Name: Nanonets\n Email: support@nanonets.com",
+      "type": "text/plain"
+    }
+  }
+}

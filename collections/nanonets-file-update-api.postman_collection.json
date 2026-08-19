@@ -1,0 +1,174 @@
+{
+  "item": [
+    {
+      "id": "110536b6-3336-416a-b1ac-bf1a313b5401",
+      "name": "File Update",
+      "description": {
+        "content": "Update or add extracted field values on a file.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7db81bef-be52-4991-a355-e5b556c66b4a",
+          "name": "Update Fields On A File",
+          "request": {
+            "name": "Update Fields On A File",
+            "description": {
+              "content": "Update existing fields or add new fields on a file. Payload is derived\nfrom the prior GET prediction response; `use_ui_version=true` is required.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "Inferences",
+                "Model",
+                ":model_id",
+                "ImageLevelInference"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "use_ui_version",
+                  "value": "true",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "model_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c02b6068-4991-460d-8935-d9c16f1c6422",
+              "name": "Field update applied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "Inferences",
+                    "Model",
+                    ":model_id",
+                    "ImageLevelInference"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "use_ui_version",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.nanonets.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9d0b124c-35f5-48d2-bdce-74ea2e98ff1e",
+    "name": "Nanonets External Integrations File Update API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Manage external database integrations linked to a Nanonets account and\nexecute generic SQL-style queries against them inside a Nanonets workflow.\nUsed by the Database Matching Conditions and database lookup workflow blocks.\n\n\nContact Support:\n Name: Nanonets\n Email: support@nanonets.com",
+      "type": "text/plain"
+    }
+  }
+}

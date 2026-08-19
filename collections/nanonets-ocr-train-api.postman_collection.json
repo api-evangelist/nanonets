@@ -1,0 +1,389 @@
+{
+  "item": [
+    {
+      "id": "02c0f7ed-f625-42a3-b305-75ada9160c0a",
+      "name": "OCR Train",
+      "description": {
+        "content": "Upload training images and train or retrain an OCR model.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7e474887-ef3f-4e9d-8532-00fa745314ad",
+          "name": "Upload Training Images By File",
+          "request": {
+            "name": "Upload Training Images By File",
+            "description": {
+              "content": "Upload locally-stored training images for a model.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "OCR",
+                "Model",
+                ":model_id",
+                "UploadFile",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "model_id",
+                  "description": "(Required) Unique identifier for the Nanonets model."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "value": "[\"<binary>\",\"<binary>\"]",
+                  "type": "text",
+                  "description": "(Required) "
+                },
+                {
+                  "key": "data",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) JSON describing the annotation for each uploaded file."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "49553383-cfb2-4447-91b1-62ff9bd1f79a",
+              "name": "Upload acknowledged with totals per category.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "OCR",
+                    "Model",
+                    ":model_id",
+                    "UploadFile",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model_id",
+                      "description": "(Required) Unique identifier for the Nanonets model."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "[\"<binary>\",\"<binary>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) JSON describing the annotation for each uploaded file.",
+                        "type": "text/plain"
+                      },
+                      "key": "data",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c0cfd111-b583-404c-b8e0-29dc6b7d55c9",
+          "name": "Upload Training Images By URL",
+          "request": {
+            "name": "Upload Training Images By URL",
+            "description": {
+              "content": "Upload training images for a model via publicly accessible URLs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "OCR",
+                "Model",
+                ":model_id",
+                "UploadUrls",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "model_id",
+                  "description": "(Required) Unique identifier for the Nanonets model."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"urls\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"data\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fd4c941e-cff8-46bf-bf34-365acd5874e8",
+              "name": "Upload acknowledged.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "OCR",
+                    "Model",
+                    ":model_id",
+                    "UploadUrls",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model_id",
+                      "description": "(Required) Unique identifier for the Nanonets model."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"urls\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"data\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c1b8b048-b9ac-496d-8cb1-aa7072f7ddd0",
+          "name": "Train Model",
+          "request": {
+            "name": "Train Model",
+            "description": {
+              "content": "Train or retrain a Nanonets OCR model after training data has been uploaded.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "OCR",
+                "Model",
+                ":model_id",
+                "Train",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "model_id",
+                  "description": "(Required) Unique identifier for the Nanonets model."
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3a74e7d9-6a6a-4e2c-928e-053e144c5a2d",
+              "name": "Training job queued or running.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "OCR",
+                    "Model",
+                    ":model_id",
+                    "Train",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model_id",
+                      "description": "(Required) Unique identifier for the Nanonets model."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.nanonets.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a1f3ab2e-4c60-4f43-bfd2-5aa6e4bce41f",
+    "name": "Nanonets External Integrations OCR Train API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Manage external database integrations linked to a Nanonets account and\nexecute generic SQL-style queries against them inside a Nanonets workflow.\nUsed by the Database Matching Conditions and database lookup workflow blocks.\n\n\nContact Support:\n Name: Nanonets\n Email: support@nanonets.com",
+      "type": "text/plain"
+    }
+  }
+}

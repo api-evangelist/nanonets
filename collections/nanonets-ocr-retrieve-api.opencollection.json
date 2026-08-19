@@ -1,0 +1,109 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nanonets External Integrations OCR Retrieve API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OCR Retrieve",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Prediction File By File ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.nanonets.com/Inferences/Model/:model_id/InferenceRequest/:request_file_id",
+            "params": [
+              {
+                "name": "model_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the Nanonets model."
+              },
+              {
+                "name": "request_file_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve prediction results for a single file by `model_id` and\n`request_file_id`. Includes the model prediction, modifications, and the\nfinal processed outcome plus signed URLs to download the source file.\n"
+        },
+        {
+          "info": {
+            "name": "Get Prediction File By Page ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.nanonets.com/Inferences/Model/:model_id/InferenceRequest/:request_file_id/page/:page_id",
+            "params": [
+              {
+                "name": "model_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the Nanonets model."
+              },
+              {
+                "name": "request_file_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve prediction results for a specific page by unique page id."
+        },
+        {
+          "info": {
+            "name": "Get All Prediction Files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.nanonets.com/Inferences/Model/:model_id/InferenceRequest/",
+            "params": [
+              {
+                "name": "model_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the Nanonets model."
+              },
+              {
+                "name": "start_day_interval",
+                "value": "",
+                "type": "query",
+                "description": "Number of days back from the current batch day (days since epoch)."
+              },
+              {
+                "name": "current_batch_day",
+                "value": "",
+                "type": "query",
+                "description": "Most recent day-since-epoch boundary for the window."
+              }
+            ]
+          },
+          "docs": "Get prediction results for all files uploaded to a model within a specified\ntimeframe. Pages are bucketed into `moderated_images` (approved) and\n`unmoderated_images` (rejected or not yet approved).\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

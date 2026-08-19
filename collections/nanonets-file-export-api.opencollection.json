@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nanonets External Integrations File Export API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "File Export",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retry All Exports",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.nanonets.com/api/v2/Inferences/Model/:model_id/ImageLevelInferences/retryallexports",
+            "params": [
+              {
+                "name": "model_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Re-trigger downstream export for one or more files whose initial export failed."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

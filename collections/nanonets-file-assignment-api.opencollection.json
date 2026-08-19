@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nanonets External Integrations File Assignment API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "File Assignment",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Assign Files To A Team Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.nanonets.com/api/v2/team/members/model/:model_id/assign/files",
+            "params": [
+              {
+                "name": "model_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assign one or more files in a model to a specific reviewer by email."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

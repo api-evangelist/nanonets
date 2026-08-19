@@ -1,0 +1,674 @@
+{
+  "item": [
+    {
+      "id": "178d8326-bfbe-491e-9926-c26b879251f5",
+      "name": "OCR Predict",
+      "description": {
+        "content": "Predict on uploaded files or file URLs against a Nanonets OCR model.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d1b8a6c7-5535-4de2-88d7-bfcf8fafe9b0",
+          "name": "Prediction For Image File",
+          "request": {
+            "name": "Prediction For Image File",
+            "description": {
+              "content": "Upload one or more files from the local filesystem to a Nanonets OCR model\nin sync mode. Optimized for files of 3 pages or fewer.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "OCR",
+                "Model",
+                ":model_id",
+                "LabelFile",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "model_id",
+                  "description": "(Required) Unique identifier for the Nanonets model."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "value": "[\"<binary>\",\"<binary>\"]",
+                  "type": "text",
+                  "description": "(Required) "
+                },
+                {
+                  "key": "request_metadata",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Free-form identifier echoed in the response."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "27069fa0-e07d-41bf-a31e-fd35b3b019f0",
+              "name": "Prediction result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "OCR",
+                    "Model",
+                    ":model_id",
+                    "LabelFile",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model_id",
+                      "description": "(Required) Unique identifier for the Nanonets model."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "[\"<binary>\",\"<binary>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Free-form identifier echoed in the response.",
+                        "type": "text/plain"
+                      },
+                      "key": "request_metadata",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"result\": [\n    {\n      \"message\": \"string\",\n      \"input\": \"string\",\n      \"prediction\": [\n        {\n          \"id\": \"string\",\n          \"label\": \"string\",\n          \"xmin\": 2365.479849916028,\n          \"ymin\": 3354.958645102705,\n          \"xmax\": 8547.841736897364,\n          \"ymax\": 427.28005625156885,\n          \"score\": 0.31416587264271867,\n          \"ocr_text\": \"string\",\n          \"type\": \"field\",\n          \"status\": \"string\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"string\",\n          \"page_no\": 3240,\n          \"label_id\": \"string\",\n          \"cells\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"row\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"col\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"xmin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ymin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"xmax\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ymax\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"score\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"text\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"failed_validation\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"row\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"col\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"xmin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ymin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"xmax\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ymax\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"score\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"text\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"failed_validation\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"label\": \"string\",\n          \"xmin\": 3584.7982400995115,\n          \"ymin\": 4504.3442058155415,\n          \"xmax\": 7186.291219211741,\n          \"ymax\": 3925.1676572103142,\n          \"score\": 0.18094550628985406,\n          \"ocr_text\": \"string\",\n          \"type\": \"field\",\n          \"status\": \"string\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"string\",\n          \"page_no\": 8297,\n          \"label_id\": \"string\",\n          \"cells\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"row\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"col\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"xmin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ymin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"xmax\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ymax\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"score\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"text\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"failed_validation\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"row\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"col\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"xmin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ymin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"xmax\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ymax\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"score\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"text\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"failed_validation\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"page\": 1536,\n      \"request_file_id\": \"string\",\n      \"id\": \"string\",\n      \"request_metadata\": \"string\",\n      \"processing_type\": \"\",\n      \"size\": {\n        \"width\": 5464.553984594163,\n        \"height\": 5698.709306821727\n      }\n    },\n    {\n      \"message\": \"string\",\n      \"input\": \"string\",\n      \"prediction\": [\n        {\n          \"id\": \"string\",\n          \"label\": \"string\",\n          \"xmin\": 8261.127203305123,\n          \"ymin\": 8514.591624587254,\n          \"xmax\": 6604.821908373251,\n          \"ymax\": 9718.388785907546,\n          \"score\": 0.2877160739371679,\n          \"ocr_text\": \"string\",\n          \"type\": \"field\",\n          \"status\": \"string\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"string\",\n          \"page_no\": 8493,\n          \"label_id\": \"string\",\n          \"cells\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"row\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"col\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"xmin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ymin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"xmax\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ymax\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"score\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"text\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"failed_validation\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"row\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"col\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"xmin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ymin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"xmax\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ymax\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"score\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"text\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"failed_validation\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"label\": \"string\",\n          \"xmin\": 966.9035642791191,\n          \"ymin\": 9541.919923199983,\n          \"xmax\": 586.9923882402973,\n          \"ymax\": 4141.203812135741,\n          \"score\": 0.16796856319857423,\n          \"ocr_text\": \"string\",\n          \"type\": \"table\",\n          \"status\": \"string\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"string\",\n          \"page_no\": 4914,\n          \"label_id\": \"string\",\n          \"cells\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"row\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"col\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"xmin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ymin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"xmax\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ymax\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"score\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"text\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"failed_validation\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"row\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"col\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"xmin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ymin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"xmax\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ymax\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"score\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"text\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"failed_validation\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"page\": 1585,\n      \"request_file_id\": \"string\",\n      \"id\": \"string\",\n      \"request_metadata\": \"string\",\n      \"processing_type\": \"async\",\n      \"size\": {\n        \"width\": 3521.936645584135,\n        \"height\": 968.1077549215977\n      }\n    }\n  ],\n  \"signed_urls\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "773936bd-8022-406b-b886-056ca7aa6c58",
+          "name": "Async Prediction For Image File",
+          "request": {
+            "name": "Async Prediction For Image File",
+            "description": {
+              "content": "Upload one or more files from the local filesystem to a Nanonets OCR model\nin async mode. Recommended for files larger than 3 pages.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "OCR",
+                "Model",
+                ":model_id",
+                "LabelFile",
+                "Async",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "model_id",
+                  "description": "(Required) Unique identifier for the Nanonets model."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "value": "[\"<binary>\",\"<binary>\"]",
+                  "type": "text",
+                  "description": "(Required) "
+                },
+                {
+                  "key": "async",
+                  "value": "true",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "request_metadata",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": ""
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0739ebdb-1f99-4c11-adf9-fceab2f23169",
+              "name": "Async prediction accepted with `request_file_id` for polling.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "OCR",
+                    "Model",
+                    ":model_id",
+                    "LabelFile",
+                    "Async",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model_id",
+                      "description": "(Required) Unique identifier for the Nanonets model."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "[\"<binary>\",\"<binary>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "async",
+                      "value": "true",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "request_metadata",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"result\": [\n    {\n      \"message\": \"string\",\n      \"request_file_id\": \"string\",\n      \"filepath\": \"string\",\n      \"status\": \"string\"\n    },\n    {\n      \"message\": \"string\",\n      \"request_file_id\": \"string\",\n      \"filepath\": \"string\",\n      \"status\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a1083ddd-1601-4a4f-8441-df44f6186cc6",
+          "name": "Prediction For Image URL",
+          "request": {
+            "name": "Prediction For Image URL",
+            "description": {
+              "content": "Send one or more publicly accessible URLs to a Nanonets OCR model in sync mode.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "OCR",
+                "Model",
+                ":model_id",
+                "LabelUrls",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "model_id",
+                  "description": "(Required) Unique identifier for the Nanonets model."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "urls",
+                  "value": "<uri>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "urls",
+                  "value": "<uri>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "request_metadata",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "745ab4ad-4720-483d-a154-5fe9578a5999",
+              "name": "Prediction result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "OCR",
+                    "Model",
+                    ":model_id",
+                    "LabelUrls",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model_id",
+                      "description": "(Required) Unique identifier for the Nanonets model."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "urls",
+                      "value": "<uri>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "urls",
+                      "value": "<uri>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "request_metadata",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"result\": [\n    {\n      \"message\": \"string\",\n      \"input\": \"string\",\n      \"prediction\": [\n        {\n          \"id\": \"string\",\n          \"label\": \"string\",\n          \"xmin\": 6265.7876641005305,\n          \"ymin\": 8284.904820310836,\n          \"xmax\": 2865.7866004922885,\n          \"ymax\": 2423.9668727585195,\n          \"score\": 0.6330389793348055,\n          \"ocr_text\": \"string\",\n          \"type\": \"field\",\n          \"status\": \"string\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"string\",\n          \"page_no\": 1198,\n          \"label_id\": \"string\",\n          \"cells\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"row\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"col\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"xmin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ymin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"xmax\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ymax\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"score\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"text\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"failed_validation\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"row\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"col\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"xmin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ymin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"xmax\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ymax\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"score\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"text\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"failed_validation\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"label\": \"string\",\n          \"xmin\": 8265.939666383993,\n          \"ymin\": 3029.5191637033136,\n          \"xmax\": 8765.91648104735,\n          \"ymax\": 8153.655014957213,\n          \"score\": 0.4446510272534103,\n          \"ocr_text\": \"string\",\n          \"type\": \"table\",\n          \"status\": \"string\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"string\",\n          \"page_no\": 4755,\n          \"label_id\": \"string\",\n          \"cells\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"row\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"col\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"xmin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ymin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"xmax\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ymax\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"score\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"text\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"failed_validation\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"row\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"col\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"xmin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ymin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"xmax\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ymax\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"score\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"text\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"failed_validation\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"page\": 9206,\n      \"request_file_id\": \"string\",\n      \"id\": \"string\",\n      \"request_metadata\": \"string\",\n      \"processing_type\": \"async\",\n      \"size\": {\n        \"width\": 8746.9186080991,\n        \"height\": 7179.310043048149\n      }\n    },\n    {\n      \"message\": \"string\",\n      \"input\": \"string\",\n      \"prediction\": [\n        {\n          \"id\": \"string\",\n          \"label\": \"string\",\n          \"xmin\": 2548.735742218313,\n          \"ymin\": 5565.443143886611,\n          \"xmax\": 6122.709005530233,\n          \"ymax\": 3018.8835802910385,\n          \"score\": 0.2742755286595041,\n          \"ocr_text\": \"string\",\n          \"type\": \"field\",\n          \"status\": \"string\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"string\",\n          \"page_no\": 1856,\n          \"label_id\": \"string\",\n          \"cells\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"row\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"col\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"xmin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ymin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"xmax\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ymax\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"score\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"text\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"failed_validation\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"row\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"col\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"xmin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ymin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"xmax\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ymax\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"score\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"text\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"failed_validation\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"label\": \"string\",\n          \"xmin\": 2006.292528908975,\n          \"ymin\": 2959.20045011295,\n          \"xmax\": 67.9912752491163,\n          \"ymax\": 9399.813840447056,\n          \"score\": 0.4689008155029045,\n          \"ocr_text\": \"string\",\n          \"type\": \"field\",\n          \"status\": \"string\",\n          \"validation_status\": \"failed\",\n          \"validation_message\": \"string\",\n          \"page_no\": 5043,\n          \"label_id\": \"string\",\n          \"cells\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"row\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"col\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"xmin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ymin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"xmax\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ymax\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"score\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"text\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"failed_validation\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"row\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"col\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"xmin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ymin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"xmax\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ymax\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"score\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"text\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"failed_validation\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"page\": 6594,\n      \"request_file_id\": \"string\",\n      \"id\": \"string\",\n      \"request_metadata\": \"string\",\n      \"processing_type\": \"\",\n      \"size\": {\n        \"width\": 2900.3533078570067,\n        \"height\": 4168.437542993526\n      }\n    }\n  ],\n  \"signed_urls\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "183dae12-bc12-4da6-bda8-61738edc8ff7",
+          "name": "Async Prediction For Image URL",
+          "request": {
+            "name": "Async Prediction For Image URL",
+            "description": {
+              "content": "Send one or more publicly accessible URLs to a Nanonets OCR model in async mode.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "OCR",
+                "Model",
+                ":model_id",
+                "LabelUrls",
+                "Async",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "model_id",
+                  "description": "(Required) Unique identifier for the Nanonets model."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "urls",
+                  "value": "<uri>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "urls",
+                  "value": "<uri>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "async",
+                  "value": "true"
+                },
+                {
+                  "disabled": false,
+                  "key": "request_metadata",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "311c4245-2e36-406a-8c1f-c1dadbf68e4b",
+              "name": "Async prediction accepted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "OCR",
+                    "Model",
+                    ":model_id",
+                    "LabelUrls",
+                    "Async",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model_id",
+                      "description": "(Required) Unique identifier for the Nanonets model."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "urls",
+                      "value": "<uri>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "urls",
+                      "value": "<uri>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "async",
+                      "value": "true"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "request_metadata",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"result\": [\n    {\n      \"message\": \"string\",\n      \"request_file_id\": \"string\",\n      \"filepath\": \"string\",\n      \"status\": \"string\"\n    },\n    {\n      \"message\": \"string\",\n      \"request_file_id\": \"string\",\n      \"filepath\": \"string\",\n      \"status\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.nanonets.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0976f044-06a5-49b8-9bf9-914e0a5d608b",
+    "name": "Nanonets External Integrations OCR Predict API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Manage external database integrations linked to a Nanonets account and\nexecute generic SQL-style queries against them inside a Nanonets workflow.\nUsed by the Database Matching Conditions and database lookup workflow blocks.\n\n\nContact Support:\n Name: Nanonets\n Email: support@nanonets.com",
+      "type": "text/plain"
+    }
+  }
+}

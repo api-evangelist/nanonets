@@ -1,0 +1,166 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nanonets External Integrations OCR Predict API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OCR Predict",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Prediction For Image File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.nanonets.com/OCR/Model/:model_id/LabelFile/",
+            "params": [
+              {
+                "name": "model_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the Nanonets model."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "request_metadata",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Upload one or more files from the local filesystem to a Nanonets OCR model\nin sync mode. Optimized for files of 3 pages or fewer.\n"
+        },
+        {
+          "info": {
+            "name": "Async Prediction For Image File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.nanonets.com/OCR/Model/:model_id/LabelFile/Async/",
+            "params": [
+              {
+                "name": "model_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the Nanonets model."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "async",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "request_metadata",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Upload one or more files from the local filesystem to a Nanonets OCR model\nin async mode. Recommended for files larger than 3 pages.\n"
+        },
+        {
+          "info": {
+            "name": "Prediction For Image URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.nanonets.com/OCR/Model/:model_id/LabelUrls/",
+            "params": [
+              {
+                "name": "model_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the Nanonets model."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "urls",
+                  "value": ""
+                },
+                {
+                  "name": "request_metadata",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Send one or more publicly accessible URLs to a Nanonets OCR model in sync mode."
+        },
+        {
+          "info": {
+            "name": "Async Prediction For Image URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.nanonets.com/OCR/Model/:model_id/LabelUrls/Async/",
+            "params": [
+              {
+                "name": "model_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the Nanonets model."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "urls",
+                  "value": ""
+                },
+                {
+                  "name": "async",
+                  "value": ""
+                },
+                {
+                  "name": "request_metadata",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Send one or more publicly accessible URLs to a Nanonets OCR model in async mode."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

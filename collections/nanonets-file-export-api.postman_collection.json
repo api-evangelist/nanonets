@@ -1,0 +1,164 @@
+{
+  "item": [
+    {
+      "id": "6841b981-d8e7-4eb5-ad34-d37ff7f1efc5",
+      "name": "File Export",
+      "description": {
+        "content": "Retry exports to configured downstream destinations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dfcad169-856b-4dcb-8295-bd0ed57ccd64",
+          "name": "Retry All Exports",
+          "request": {
+            "name": "Retry All Exports",
+            "description": {
+              "content": "Re-trigger downstream export for one or more files whose initial export failed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "Inferences",
+                "Model",
+                ":model_id",
+                "ImageLevelInferences",
+                "retryallexports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "model_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"file_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "248a2e0d-3685-4822-a5c8-406584c2aba5",
+              "name": "Export retried.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "Inferences",
+                    "Model",
+                    ":model_id",
+                    "ImageLevelInferences",
+                    "retryallexports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"file_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.nanonets.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2e624097-911b-4a9e-b602-2f6918df3618",
+    "name": "Nanonets External Integrations File Export API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Manage external database integrations linked to a Nanonets account and\nexecute generic SQL-style queries against them inside a Nanonets workflow.\nUsed by the Database Matching Conditions and database lookup workflow blocks.\n\n\nContact Support:\n Name: Nanonets\n Email: support@nanonets.com",
+      "type": "text/plain"
+    }
+  }
+}

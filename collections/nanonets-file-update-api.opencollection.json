@@ -1,0 +1,52 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nanonets External Integrations File Update API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "File Update",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update Fields On A File",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.nanonets.com/api/v2/Inferences/Model/:model_id/ImageLevelInference",
+            "params": [
+              {
+                "name": "model_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "use_ui_version",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update existing fields or add new fields on a file. Payload is derived\nfrom the prior GET prediction response; `use_ui_version=true` is required.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
