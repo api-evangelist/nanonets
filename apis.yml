@@ -1,5 +1,6 @@
 aid: nanonets
 url: https://raw.githubusercontent.com/api-evangelist/nanonets/refs/heads/main/apis.yml
+specificationVersion: '0.23'
 apis:
 - aid: nanonets:nanonets-external-integrations-api
   name: Nanonets External Integrations API
