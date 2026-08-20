@@ -5,6 +5,10 @@ apis:
 - aid: nanonets:nanonets-external-integrations-api
   name: Nanonets External Integrations API
   tags:
+  - Integration
+  - Database
+  - Lookups
+  tags_raw:
   - Integrations
   - Database
   - Lookups
@@ -488,6 +492,15 @@ description: >-
   Enterprise tier adds SAML SSO, SCIM, role-based access, on-prem and private-cloud deployment, HIPAA, SOC 2 Type II,
   and ISO 27001.
 tags:
+  - Artificial Intelligence
+  - OCR
+  - Document AI
+  - Intelligent Document Processing
+  - Data Extraction
+  - Workflow-Automation
+  - Computer-Vision
+  - No-Code
+tags_raw:
   - AI
   - Artificial Intelligence
   - OCR
