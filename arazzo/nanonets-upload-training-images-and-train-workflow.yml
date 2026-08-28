@@ -10,8 +10,8 @@ info:
     underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: ocrApi
-  url: ../openapi/nanonets-ocr-api-openapi.yml
+- name: ocrTrainApi
+  url: ../openapi/nanonets-ocr-train-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: upload-training-images-and-train

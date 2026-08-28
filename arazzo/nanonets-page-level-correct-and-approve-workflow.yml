@@ -10,11 +10,14 @@ info:
     the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: ocrApi
-  url: ../openapi/nanonets-ocr-api-openapi.yml
+- name: fileReviewApi
+  url: ../openapi/nanonets-file-review-api-openapi.yml
   type: openapi
-- name: fileManagementApi
-  url: ../openapi/nanonets-file-management-api-openapi.yml
+- name: fileUpdateApi
+  url: ../openapi/nanonets-file-update-api-openapi.yml
+  type: openapi
+- name: ocrRetrieveApi
+  url: ../openapi/nanonets-ocr-retrieve-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: page-level-correct-and-approve

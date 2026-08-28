@@ -12,11 +12,11 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: ocrApi
-  url: ../openapi/nanonets-ocr-api-openapi.yml
-  type: openapi
 - name: externalIntegrationsApi
   url: ../openapi/nanonets-external-integrations-api-openapi.yml
+  type: openapi
+- name: ocrPredictApi
+  url: ../openapi/nanonets-ocr-predict-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: predict-and-enrich-with-database

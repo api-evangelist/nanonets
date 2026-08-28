@@ -11,11 +11,14 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: ocrApi
-  url: ../openapi/nanonets-ocr-api-openapi.yml
+- name: fileAssignmentApi
+  url: ../openapi/nanonets-file-assignment-api-openapi.yml
   type: openapi
-- name: fileManagementApi
-  url: ../openapi/nanonets-file-management-api-openapi.yml
+- name: ocrPredictApi
+  url: ../openapi/nanonets-ocr-predict-api-openapi.yml
+  type: openapi
+- name: ocrRetrieveApi
+  url: ../openapi/nanonets-ocr-retrieve-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: predict-and-assign-reviewer

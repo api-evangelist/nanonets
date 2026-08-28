@@ -11,11 +11,14 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: ocrApi
-  url: ../openapi/nanonets-ocr-api-openapi.yml
+- name: fileExportApi
+  url: ../openapi/nanonets-file-export-api-openapi.yml
   type: openapi
-- name: fileManagementApi
-  url: ../openapi/nanonets-file-management-api-openapi.yml
+- name: fileUpdateApi
+  url: ../openapi/nanonets-file-update-api-openapi.yml
+  type: openapi
+- name: ocrPredictApi
+  url: ../openapi/nanonets-ocr-predict-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: predict-correct-and-reexport
