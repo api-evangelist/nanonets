@@ -1,0 +1,1 @@
+{"resource":"https://mcp.nanonets.com/mcp","authorization_servers":["https://mcp.nanonets.com/"],"scopes_supported":["openid","email"],"bearer_methods_supported":["header"]}

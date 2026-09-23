@@ -1,19 +1,12 @@
 {
   "provider": "nanonets",
   "sources": [
-    "nanonets-external-integrations-api-openapi.yml",
-    "nanonets-file-assignment-api-openapi.yml",
-    "nanonets-file-delete-api-openapi.yml",
-    "nanonets-file-export-api-openapi.yml",
-    "nanonets-file-review-api-openapi.yml",
-    "nanonets-file-update-api-openapi.yml",
-    "nanonets-image-classification-predict-api-openapi.yml",
-    "nanonets-ocr-predict-api-openapi.yml",
-    "nanonets-ocr-retrieve-api-openapi.yml",
-    "nanonets-ocr-train-api-openapi.yml"
+    "_original/nanonets-file-management-api-openapi.yml",
+    "_original/nanonets-image-classification-api-openapi.yml",
+    "_original/nanonets-ocr-api-openapi.yml",
+    "nanonets-external-integrations-api-openapi.yml"
   ],
   "outputs": [
-    "nanonets-external-integrations-api-openapi.yml",
     "nanonets-file-assignment-api-openapi.yml",
     "nanonets-file-delete-api-openapi.yml",
     "nanonets-file-export-api-openapi.yml",
@@ -22,11 +15,30 @@
     "nanonets-image-classification-predict-api-openapi.yml",
     "nanonets-ocr-predict-api-openapi.yml",
     "nanonets-ocr-retrieve-api-openapi.yml",
-    "nanonets-ocr-train-api-openapi.yml"
+    "nanonets-ocr-train-api-openapi.yml",
+    "nanonets-external-integrations-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
-  "warnings": [],
-  "notes": [],
-  "skipped": []
+  "warnings": [
+    "nanonets-external-integrations-api-openapi.yml: previously refined output kept for 2 operation(s) no archived document covers (e.g. /api/v2/externalIntegrations get, /api/v2/externalIntegrations/{external_integration_id}/executequery post); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth."
+  ],
+  "notes": [
+    "sourced from openapi/_original/ (3 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "nanonets-file-management-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "nanonets-image-classification-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "nanonets-ocr-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "nanonets-file-assignment-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nanonets-file-delete-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nanonets-file-export-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nanonets-file-review-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nanonets-file-update-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nanonets-image-classification-predict-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nanonets-ocr-predict-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nanonets-ocr-retrieve-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nanonets-ocr-train-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

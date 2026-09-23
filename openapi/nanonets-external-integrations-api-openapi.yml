@@ -1,13 +1,11 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Nanonets External Integrations API
   description: 'Manage external database integrations linked to a Nanonets account and
 
     execute generic SQL-style queries against them inside a Nanonets workflow.
 
-    Used by the Database Matching Conditions and database lookup workflow blocks.
-
-    '
+    Used by the Database Matching Conditions and database lookup workflow blocks.'
   version: 1.0.0
   contact:
     name: Nanonets

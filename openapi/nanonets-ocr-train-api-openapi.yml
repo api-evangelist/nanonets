@@ -1,20 +1,27 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Nanonets External Integrations OCR Train API
-  description: 'Manage external database integrations linked to a Nanonets account and
+  title: Nanonets OCR OCR Train API
+  description: 'Synchronous and asynchronous OCR prediction and training endpoints for Nanonets
 
-    execute generic SQL-style queries against them inside a Nanonets workflow.
+    custom OCR models. Upload files by local path (multipart) or by public URL,
 
-    Used by the Database Matching Conditions and database lookup workflow blocks.
+    retrieve predictions for a file, a page, or a batch within a time window, and
 
-    '
-  version: 1.0.0
+    train or retrain a model. Sync endpoints are optimized for files of 3 pages or
+
+    fewer; async endpoints handle larger documents.
+
+
+    Authentication uses HTTP Basic with the API key as the username and an empty
+
+    password. All traffic must be HTTPS.'
+  version: 2.0.0
   contact:
     name: Nanonets
     url: https://nanonets.com
     email: support@nanonets.com
 servers:
-- url: https://app.nanonets.com
+- url: https://app.nanonets.com/api/v2
 security:
 - BasicAuth: []
 tags:
@@ -104,3 +111,8 @@ components:
     BasicAuth:
       type: http
       scheme: basic
+      description: 'HTTP Basic Auth where the API key is sent as the username and the password
+
+        is left empty. Generate keys at https://app.nanonets.com/#keys.
+
+        '
