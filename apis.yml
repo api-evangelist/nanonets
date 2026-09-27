@@ -1,17 +1,22 @@
 aid: nanonets
 url: https://raw.githubusercontent.com/api-evangelist/nanonets/refs/heads/main/apis.yml
 deliveryModel:
-  model: unknown
+  model: saas
+  license_evidence:
+    not_product:
+    - nanonets/docext
+    - nanonets/docstrange
+    - nanonets/nanoindex
   open_source: unknown
   commercial: true
   callable_host: true
-  label: Delivery model not determined — needs a product licence on record
+  label: Hosted service · you call their endpoint
   confidence: low
   source:
   - openapi
   - pricing
-  - repository-unlicensed
-  generated: '2026-08-28'
+  - repository-not-product
+  generated: '2026-09-25'
   method: derived
 specificationVersion: '0.23'
 apis:
@@ -510,8 +515,8 @@ tags:
   - Document AI
   - Intelligent Document Processing
   - Data Extraction
-  - Workflow-Automation
-  - Computer-Vision
+  - Workflow Automation
+  - Computer Vision
   - No-Code
 tags_raw:
   - AI
@@ -523,6 +528,8 @@ tags_raw:
   - Workflow Automation
   - Computer Vision
   - No-Code
+  - Workflow-Automation
+  - Computer-Vision
 kind: contract
 accessModel:
   pricing: paid
