@@ -113,6 +113,23 @@ paths:
                 $ref: '#/components/schemas/ModeratedFileResponse'
 components:
   schemas:
+    ModeratedFileResponse:
+      type: object
+      properties:
+        moderated_images_count:
+          type: integer
+        unmoderated_images_count:
+          type: integer
+        moderated_images:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModeratedPage'
+        unmoderated_images:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModeratedPage'
+        signed_urls:
+          type: object
     TableCell:
       type: object
       properties:
@@ -144,23 +161,6 @@ components:
           type: string
         label_id:
           type: string
-    ModeratedFileResponse:
-      type: object
-      properties:
-        moderated_images_count:
-          type: integer
-        unmoderated_images_count:
-          type: integer
-        moderated_images:
-          type: array
-          items:
-            $ref: '#/components/schemas/ModeratedPage'
-        unmoderated_images:
-          type: array
-          items:
-            $ref: '#/components/schemas/ModeratedPage'
-        signed_urls:
-          type: object
     Prediction:
       type: object
       properties:

@@ -169,6 +169,68 @@ paths:
                 $ref: '#/components/schemas/AsyncAcceptedResponse'
 components:
   schemas:
+    AsyncAcceptedResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        result:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+              request_file_id:
+                type: string
+              filepath:
+                type: string
+              status:
+                type: string
+    PredictionResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Overall success status.
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/PredictionPage'
+        signed_urls:
+          type: object
+          description: Signed URLs to original and processed file artifacts.
+    TableCell:
+      type: object
+      properties:
+        id:
+          type: string
+        row:
+          type: integer
+        col:
+          type: integer
+        label:
+          type: string
+        xmin:
+          type: number
+        ymin:
+          type: number
+        xmax:
+          type: number
+        ymax:
+          type: number
+        score:
+          type: number
+        text:
+          type: string
+        verification_status:
+          type: string
+        status:
+          type: string
+        failed_validation:
+          type: string
+        label_id:
+          type: string
     PredictionPage:
       type: object
       properties:
@@ -201,68 +263,6 @@ components:
               type: number
             height:
               type: number
-    TableCell:
-      type: object
-      properties:
-        id:
-          type: string
-        row:
-          type: integer
-        col:
-          type: integer
-        label:
-          type: string
-        xmin:
-          type: number
-        ymin:
-          type: number
-        xmax:
-          type: number
-        ymax:
-          type: number
-        score:
-          type: number
-        text:
-          type: string
-        verification_status:
-          type: string
-        status:
-          type: string
-        failed_validation:
-          type: string
-        label_id:
-          type: string
-    PredictionResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Overall success status.
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/PredictionPage'
-        signed_urls:
-          type: object
-          description: Signed URLs to original and processed file artifacts.
-    AsyncAcceptedResponse:
-      type: object
-      properties:
-        message:
-          type: string
-        result:
-          type: array
-          items:
-            type: object
-            properties:
-              message:
-                type: string
-              request_file_id:
-                type: string
-              filepath:
-                type: string
-              status:
-                type: string
     Prediction:
       type: object
       properties:
