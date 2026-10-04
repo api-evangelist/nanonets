@@ -47,14 +47,14 @@ paths:
           description: File unapproved.
 components:
   parameters:
-    ModelId:
-      name: model_id
+    RequestFileId:
+      name: request_file_id
       in: path
       required: true
       schema:
         type: string
-    RequestFileId:
-      name: request_file_id
+    ModelId:
+      name: model_id
       in: path
       required: true
       schema:
