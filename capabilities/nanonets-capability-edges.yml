@@ -1,0 +1,46 @@
+slug: nanonets
+provider: Nanonets
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: OCR Train
+  spec_file: nanonets-ocr-train-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.78
+  evidence: POST /OCR/Model/{model_id}/Train/ — 'Train Model'; 'Upload Training Images By File'
+  reason: Operations upload training data and train/retrain a named model — plainly ML model lifecycle
+    (training, retraining) which maps to Artificial Intelligence Management. Not a document-business capability;
+    it is model ops.
+- tag: OCR Predict
+  spec_file: nanonets-ocr-predict-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.72
+  evidence: '''Synchronous and asynchronous OCR prediction and training endpoints for Nanonets custom
+    OCR models ... train or retrain a model.'''
+  reason: Beyond inference, the surface explicitly covers training/retraining of custom OCR models, which
+    is AI/ML model lifecycle management under Information & Data Management.
+- tag: Image Classification Predict
+  spec_file: nanonets-image-classification-predict-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.7
+  evidence: '''Predict against a Nanonets image classification model. Submit images either as multipart
+    file uploads or as a batch of publicly accessible URLs.'''
+  reason: Operations serve ML model inference ('Prediction For Image File'), which falls under Artificial
+    Intelligence Management (AI/ML model lifecycle). Confidence moderate since inference-only endpoints
+    are arguably just runtime usage rather than model lifecycle management.
